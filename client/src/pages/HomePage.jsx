@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Wheat, Coffee, Cake } from 'lucide-react';
 import { ArtisanSeal } from '../components/brand/ArtisanSeal';
 import { FlourSackIllustration } from '../components/brand/FlourSackIllustration';
+import { BakeryMap } from '../components/BakeryMap';
 import { api } from '../services/api';
 
 export function HomePage() {
@@ -455,6 +456,41 @@ export function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 4. CUSTOM ARTISAN MAP SECTION */}
+      <section
+        id="localisation"
+        style={{
+          padding: '4.5rem 0 5rem',
+          backgroundColor: 'var(--color-ivory)'
+        }}
+      >
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.5rem' }}>
+            <div
+              style={{
+                color: 'var(--color-gold)',
+                fontSize: '0.88rem',
+                fontWeight: 700,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                marginBottom: '0.75rem'
+              }}
+            >
+              PLAN D'ACCÈS & LOCALISATION
+            </div>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', color: 'var(--color-burgundy)', marginBottom: '1rem' }}>
+              Venez nous rendre visite au fournil
+            </h2>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              Située au <strong>15 Rue Pasteur à Épinay-sur-Orge</strong>, notre boulangerie artisanale est facilement accessible en voiture comme en transports (RER C à 2 minutes à pied).
+            </p>
+          </div>
+
+          {/* Interactive Custom Styled Map */}
+          <BakeryMap />
         </div>
       </section>
 
