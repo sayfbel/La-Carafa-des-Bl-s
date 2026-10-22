@@ -5,9 +5,8 @@ import { MapPin, Phone, Compass, Lock } from 'lucide-react';
 export function Footer() {
   return (
     <footer style={{ marginTop: 'auto' }}>
-      {/* 1. Sleek 4-Part Burgundy Contact & Location Strip matching Reference */}
+      {/* 1. Sleek 3-Part Burgundy Contact Strip (No Map in Footer) */}
       <div
-        id="nous-trouver"
         style={{
           backgroundColor: '#4A0A14',
           color: '#F8F3E8',
@@ -19,7 +18,7 @@ export function Footer() {
           className="container footer-contact-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr 1.15fr',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             alignItems: 'stretch',
             padding: 0
           }}
@@ -103,8 +102,7 @@ export function Footer() {
               padding: '2.2rem 1.8rem',
               display: 'flex',
               alignItems: 'center',
-              gap: '1.1rem',
-              borderRight: '1px solid rgba(255, 255, 255, 0.08)'
+              gap: '1.1rem'
             }}
           >
             <div
@@ -144,67 +142,6 @@ export function Footer() {
               </a>
             </div>
           </div>
-
-          {/* Item 4: Stylized Map Thumbnail matching Reference */}
-          <a
-            href="https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              position: 'relative',
-              display: 'block',
-              overflow: 'hidden',
-              backgroundColor: '#ECE2D2',
-              backgroundImage: `
-                radial-gradient(circle at 50% 50%, rgba(248, 243, 232, 0.3) 0%, rgba(239, 228, 209, 0.8) 100%),
-                url("data:image/svg+xml,%3Csvg width='240' height='120' viewBox='0 0 240 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40 Q 60 45, 120 30 T 240 50' stroke='%23D4C4A8' stroke-width='4' fill='none'/%3E%3Cpath d='M30 0 L 80 120' stroke='%23DDD0B8' stroke-width='3' fill='none'/%3E%3Cpath d='M100 0 L 160 120' stroke='%23DDD0B8' stroke-width='5' fill='none'/%3E%3Cpath d='M0 80 Q 90 70, 180 90 T 240 85' stroke='%23D4C4A8' stroke-width='3' fill='none'/%3E%3Cpath d='M190 0 L 220 120' stroke='%23DDD0B8' stroke-width='2' fill='none'/%3E%3C/svg%3E")
-              `,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              cursor: 'pointer',
-              minHeight: '90px'
-            }}
-            title="Ouvrir 15 Rue Pasteur sur Google Maps"
-          >
-            {/* Center Burgundy Pin with Gold Wheat Ring */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -60%)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
-              }}
-            >
-              <div
-                style={{
-                  width: '32px',
-                  height: '32px',
-                  backgroundColor: 'var(--color-burgundy)',
-                  border: '2px solid var(--color-gold)',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(56, 7, 14, 0.35)'
-                }}
-              >
-                <MapPin size={16} color="#FFFFFF" />
-              </div>
-              <div
-                style={{
-                  width: 0,
-                  height: 0,
-                  borderLeft: '5px solid transparent',
-                  borderRight: '5px solid transparent',
-                  borderTop: '7px solid var(--color-burgundy)',
-                  marginTop: '-2px'
-                }}
-              />
-            </div>
-          </a>
         </div>
       </div>
 
@@ -258,18 +195,9 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Responsive layout rules for the 4-part strip */}
+      {/* Responsive layout rules */}
       <style>{`
-        @media (max-width: 992px) {
-          .footer-contact-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-          .footer-contact-grid > div,
-          .footer-contact-grid > a {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          }
-        }
-        @media (max-width: 600px) {
+        @media (max-width: 820px) {
           .footer-contact-grid {
             grid-template-columns: 1fr !important;
           }

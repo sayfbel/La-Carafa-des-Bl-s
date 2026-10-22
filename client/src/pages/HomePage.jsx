@@ -4,6 +4,7 @@ import { ArrowRight, Wheat, Coffee, Cake } from 'lucide-react';
 import { ArtisanSeal } from '../components/brand/ArtisanSeal';
 import { FlourSackIllustration } from '../components/brand/FlourSackIllustration';
 import { WheatDecoration } from '../components/brand/WheatDecoration';
+import { BakerySimpleMap } from '../components/BakerySimpleMap';
 import { api } from '../services/api';
 
 export function HomePage() {
@@ -510,6 +511,49 @@ export function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 4. DEDICATED STORE LOCATION & REACT-SIMPLE-MAPS SECTION */}
+      <section
+        id="localisation"
+        style={{
+          padding: '4.5rem 0 5rem',
+          backgroundColor: 'var(--color-ivory)'
+        }}
+      >
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.5rem' }}>
+            <div
+              style={{
+                color: 'var(--color-gold)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                marginBottom: '0.75rem'
+              }}
+            >
+              Plan d'accès & Localisation
+            </div>
+            <h2
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+                color: 'var(--color-burgundy)',
+                marginBottom: '1rem'
+              }}
+            >
+              Venez nous rendre visite au fournil
+            </h2>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              Située au <strong>15 Rue Pasteur à Épinay-sur-Orge</strong>, notre boulangerie artisanale vous accueille chaque jour pour savourer nos pains au levain et douceurs maison.
+            </p>
+          </div>
+
+          {/* Dedicated react-simple-maps Component */}
+          <BakerySimpleMap />
         </div>
       </section>
 
