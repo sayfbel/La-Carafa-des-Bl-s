@@ -59,9 +59,9 @@ export function Header() {
         {/* Right CTA : "NOUS TROUVER" */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <a
-            href="#localisation"
+            href="#nous-trouver"
             onClick={(e) => {
-              const el = document.getElementById('localisation');
+              const el = document.getElementById('nous-trouver');
               if (el) {
                 e.preventDefault();
                 el.scrollIntoView({ behavior: 'smooth' });
