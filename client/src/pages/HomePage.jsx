@@ -186,55 +186,97 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 2. THREE PRODUCT CATEGORY CARDS (SPLIT LAYOUT MATCHING REFERENCE) */}
-      <section style={{ padding: '2rem 0 4rem' }}>
+      {/* 2. THREE PRODUCT CATEGORY CARDS SECTION (BURGUNDY BACKGROUND) */}
+      <section
+        style={{
+          backgroundColor: 'var(--color-burgundy)',
+          color: '#F8F3E8',
+          padding: '4rem 0 4.5rem',
+          borderTop: '2px solid var(--color-gold)',
+          borderBottom: '2px solid var(--color-gold)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
         <div className="container">
+          {/* Section Editorial Header */}
+          <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 2.75rem' }}>
+            <div
+              style={{
+                color: 'var(--color-gold)',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                marginBottom: '0.65rem'
+              }}
+            >
+              Nos Créations Artisanales
+            </div>
+            <h2
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(2.2rem, 4vw, 3rem)',
+                color: '#FFFFFF',
+                marginBottom: '0.85rem'
+              }}
+            >
+              Le Savoir-Faire de Notre Fournil
+            </h2>
+            <p style={{ color: 'var(--color-cream)', fontSize: '0.98rem', lineHeight: 1.6, margin: 0 }}>
+              Découvrez nos trois gammes emblématiques, confectionnées chaque jour sur place avec passion et authenticité.
+            </p>
+          </div>
+
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '1.5rem'
+              gap: '1.75rem'
             }}
           >
             {/* Card 1: Pains de tradition */}
             <div
               style={{
-                backgroundColor: 'var(--color-card-bg)',
+                backgroundColor: '#FAF5EC',
                 borderRadius: 'var(--radius-md)',
                 overflow: 'hidden',
-                border: '1px solid var(--color-border)',
+                border: '1px solid var(--color-gold)',
                 display: 'flex',
-                boxShadow: 'var(--shadow-sm)',
+                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
                 transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
               className="category-card"
             >
-              <div style={{ width: '42%', flexShrink: 0 }}>
+              <div style={{ width: '44%', flexShrink: 0 }}>
                 <img
                   src={categoryImages['pains-de-tradition']}
-                  alt="Pains de tradition artisanale"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  alt="Pains de tradition au levain naturel"
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </div>
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ color: 'var(--color-gold)', marginBottom: '0.4rem' }}>
-                  <Wheat size={18} />
+              <div style={{ padding: '1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div style={{ color: 'var(--color-gold)', marginBottom: '0.45rem' }}>
+                  <Wheat size={20} />
                 </div>
-                <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.4rem' }}>
+                <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.45rem' }}>
                   Pains de tradition
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.2rem' }}>
+                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
                   Façonnés à la main, cuits sur place, avec des farines de qualité.
                 </p>
                 <Link
                   to="/produits?category=pains-de-tradition"
                   style={{
-                    fontSize: '0.88rem',
-                    fontWeight: 600,
+                    fontSize: '0.86rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
                     color: 'var(--color-burgundy)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.35rem'
+                    gap: '0.4rem'
                   }}
                 >
                   <span>Voir la sélection</span>
@@ -246,42 +288,45 @@ export function HomePage() {
             {/* Card 2: Viennoiseries */}
             <div
               style={{
-                backgroundColor: 'var(--color-card-bg)',
+                backgroundColor: '#FAF5EC',
                 borderRadius: 'var(--radius-md)',
                 overflow: 'hidden',
-                border: '1px solid var(--color-border)',
+                border: '1px solid var(--color-gold)',
                 display: 'flex',
-                boxShadow: 'var(--shadow-sm)',
+                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
                 transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
               className="category-card"
             >
-              <div style={{ width: '42%', flexShrink: 0 }}>
+              <div style={{ width: '44%', flexShrink: 0 }}>
                 <img
                   src={categoryImages['viennoiseries']}
                   alt="Viennoiseries pur beurre faites maison"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </div>
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ color: 'var(--color-gold)', marginBottom: '0.4rem' }}>
-                  <Coffee size={18} />
+              <div style={{ padding: '1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div style={{ color: 'var(--color-gold)', marginBottom: '0.45rem' }}>
+                  <Coffee size={20} />
                 </div>
-                <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.4rem' }}>
+                <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.45rem' }}>
                   Viennoiseries
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.2rem' }}>
+                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
                   Beurre de qualité, feuilletage pur beurre et dorure maison.
                 </p>
                 <Link
                   to="/produits?category=viennoiseries"
                   style={{
-                    fontSize: '0.88rem',
-                    fontWeight: 600,
+                    fontSize: '0.86rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
                     color: 'var(--color-burgundy)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.35rem'
+                    gap: '0.4rem'
                   }}
                 >
                   <span>Voir la sélection</span>
@@ -293,42 +338,45 @@ export function HomePage() {
             {/* Card 3: Pâtisseries maison */}
             <div
               style={{
-                backgroundColor: 'var(--color-card-bg)',
+                backgroundColor: '#FAF5EC',
                 borderRadius: 'var(--radius-md)',
                 overflow: 'hidden',
-                border: '1px solid var(--color-border)',
+                border: '1px solid var(--color-gold)',
                 display: 'flex',
-                boxShadow: 'var(--shadow-sm)',
+                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
                 transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
               className="category-card"
             >
-              <div style={{ width: '42%', flexShrink: 0 }}>
+              <div style={{ width: '44%', flexShrink: 0 }}>
                 <img
                   src={categoryImages['patisseries-maison']}
-                  alt="Pâtisseries artisanales fines"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  alt="Pâtisseries artisanales faites avec soin"
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </div>
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ color: 'var(--color-gold)', marginBottom: '0.4rem' }}>
-                  <Cake size={18} />
+              <div style={{ padding: '1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div style={{ color: 'var(--color-gold)', marginBottom: '0.45rem' }}>
+                  <Cake size={20} />
                 </div>
-                <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.4rem' }}>
+                <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.45rem' }}>
                   Pâtisseries maison
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.2rem' }}>
+                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
                   Des créations gourmandes élaborées chaque jour avec soin.
                 </p>
                 <Link
                   to="/produits?category=patisseries-maison"
                   style={{
-                    fontSize: '0.88rem',
-                    fontWeight: 600,
+                    fontSize: '0.86rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
                     color: 'var(--color-burgundy)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.35rem'
+                    gap: '0.4rem'
                   }}
                 >
                   <span>Voir la sélection</span>
