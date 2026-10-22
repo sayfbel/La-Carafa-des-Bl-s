@@ -1,0 +1,153 @@
+import React, { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { MapPin, Menu, X } from 'lucide-react';
+import { WheatLogo } from './brand/WheatLogo';
+
+export function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { to: '/', label: 'Accueil' },
+    { to: '/produits', label: 'Nos produits' },
+    { to: '/notre-histoire', label: 'Notre histoire' },
+    { to: '/contact', label: 'Contact' }
+  ];
+
+  return (
+    <header
+      style={{
+        backgroundColor: 'var(--color-ivory)',
+        borderBottom: '1px solid var(--color-border-subtle)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        padding: '1.1rem 0'
+      }}
+    >
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        {/* Brand Logo */}
+        <WheatLogo />
+
+        {/* Desktop Navigation */}
+        <nav
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '2.5rem'
+          }}
+          className="desktop-nav"
+        >
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              style={({ isActive }) => ({
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.95rem',
+                fontWeight: isActive ? 600 : 500,
+                color: isActive ? 'var(--color-burgundy)' : 'var(--color-text-main)',
+                position: 'relative',
+                paddingBottom: '4px',
+                borderBottom: isActive ? '2px solid var(--color-burgundy)' : '2px solid transparent'
+              })}
+            >
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Right CTA : "Nous trouver" */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <a
+            href="https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary find-us-btn"
+            style={{
+              padding: '0.65rem 1.4rem',
+              fontSize: '0.9rem',
+              borderRadius: 'var(--radius-full)'
+            }}
+          >
+            <MapPin size={16} />
+            <span>Nous trouver</span>
+          </a>
+
+          {/* Mobile Hamburger Button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="mobile-toggle"
+            aria-label="Ouvrir le menu de navigation"
+            style={{
+              display: 'none',
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-burgundy)',
+              cursor: 'pointer',
+              padding: '0.5rem'
+            }}
+          >
+            {mobileOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div
+          style={{
+            backgroundColor: 'var(--color-ivory)',
+            borderTop: '1px solid var(--color-border)',
+            padding: '1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.25rem',
+            boxShadow: 'var(--shadow-md)'
+          }}
+        >
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              onClick={() => setMobileOpen(false)}
+              style={({ isActive }) => ({
+                fontSize: '1.1rem',
+                fontWeight: isActive ? 600 : 500,
+                color: isActive ? 'var(--color-burgundy)' : 'var(--color-text-main)',
+                padding: '0.5rem 0',
+                borderBottom: '1px solid var(--color-border-subtle)'
+              })}
+            >
+              {link.label}
+            </NavLink>
+          ))}
+          <a
+            href="https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            style={{ marginTop: '0.5rem' }}
+          >
+            <MapPin size={18} />
+            <span>Nous trouver sur Google Maps</span>
+          </a>
+        </div>
+      )}
+
+      {/* Inline styles for responsive breakpoints */}
+      <style>{`
+        @media (max-width: 860px) {
+          .desktop-nav {
+            display: none !important;
+          }
+          .mobile-toggle {
+            display: block !important;
+          }
+          .find-us-btn {
+            display: none !important;
+          }
+        }
+      `}</style>
+    </header>
+  );
+}

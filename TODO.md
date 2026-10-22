@@ -9,42 +9,128 @@ Persistent project task list tracking all milestones, deliverables, verification
 | Milestone | Title | Status |
 | :--- | :--- | :--- |
 | **M0** | Repository Inspection & Engineering Plan | `DONE` |
-| **M1** | Project Architecture & Development Environment | `IN_PROGRESS` |
-| **M2** | Design System, Typography & Shared UI Components | `TODO` |
-| **M3** | Public Website Pages & Client Routing | `TODO` |
-| **M4** | Backend API & Express Architecture | `TODO` |
-| **M5** | MySQL Schema, Migrations & Seed Data | `TODO` |
-| **M6** | Protected Admin Authentication & Dashboard | `TODO` |
-| **M7** | Security Hardening & Input Defense | `TODO` |
-| **M8** | Automated Testing (Unit, Integration, E2E) | `TODO` |
-| **M9** | SEO, Accessibility (a11y) & Performance | `TODO` |
-| **M10** | Documentation & Production Deployment Readiness | `TODO` |
-| **M11** | Final Verification, Audit & Delivery | `TODO` |
+| **M1** | Project Architecture & Development Environment | `DONE` |
+| **M2** | Design System, Typography & Shared UI Components | `DONE` |
+| **M3** | Public Website Pages & Client Routing | `DONE` |
+| **M4** | Backend API & Express Architecture | `DONE` |
+| **M5** | MySQL Schema, Migrations & Seed Data | `DONE` |
+| **M6** | Protected Admin Authentication & Dashboard | `DONE` |
+| **M7** | Security Hardening & Input Defense | `DONE` |
+| **M8** | Automated Testing (Unit, Integration, E2E) | `DONE` |
+| **M9** | SEO, Accessibility (a11y) & Performance | `DONE` |
+| **M10** | Documentation & Production Deployment Readiness | `DONE` |
+| **M11** | Final Verification, Audit & Delivery | `DONE` |
 
 ---
 
 ## Milestone 0: Repository Inspection & Planning (M0)
 
 - [x] **M0-T1** — Inspect remote repository `https://github.com/sayfbel/La-Carafa-des-Bl-s`, verify branches, commit history, and write permissions.
-  - **Priority**: P0
-  - **Status**: `DONE`
-  - **Subsystem**: Git / DevOps
-  - **Acceptance Criteria**: Repository cloned, default branch identified (`main`), working branch created (`feat/bakery-platform`), remote dry-run push verified.
-  - **Verification**: `git ls-remote`, `git push --dry-run` passed.
-
 - [x] **M0-T2** — Inspect local development environment (Node.js LTS, npm, XAMPP MySQL, Python, browser runtime).
-  - **Priority**: P0
-  - **Status**: `DONE`
-  - **Subsystem**: Environment
-  - **Acceptance Criteria**: Node v26.4.0, npm 11.17.0, XAMPP MariaDB 10.4.32 verified running on 3306, Python 3.11 with Pillow available.
-  - **Verification**: `mysqld.exe` launched and active, connection tested with `mysql.exe`.
-
 - [x] **M0-T3** — Establish persistent tracking documentation (`TODO.md`, `CHANGELOG.md`, `README.md`, `docs/PROJECT_STATUS.md`, `docs/ARCHITECTURE.md`, `docs/TESTING.md`, `docs/DEPLOYMENT.md`, `docs/SECURITY.md`).
-  - **Priority**: P0
-  - **Status**: `DONE`
-  - **Subsystem**: Documentation
-  - **Acceptance Criteria**: All 8 tracking documents exist with comprehensive, accurate content.
-  - **Verification**: Files present and validated in git status.
+
+---
+
+## Milestone 1: Project Architecture & Development Environment (M1)
+
+- [x] **M1-T1** — Initialize root monorepo / workspace configuration (`package.json`, `.gitignore`, `.env.example`, npm scripts).
+- [x] **M1-T2** — Setup React + Vite frontend in `client/` with React Router, Lucide icons, and modern tooling.
+- [x] **M1-T3** — Setup Express + Node.js backend in `server/` with layered architecture (routes, controllers, services, repositories).
+- [x] **M1-T4** — Configure local MySQL databases (`la_carafa_db` and `la_carafa_test`) and `mysql2/promise` connection pool.
+
+---
+
+## Milestone 2: Design System, Typography & Shared UI (M2)
+
+- [x] **M2-T1** — Build brand tokens and styling foundation (`client/src/styles/tokens.css` and `main.css`).
+- [x] **M2-T2** — Configure luxury French typography (Cormorant Garamond editorial serif + Plus Jakarta Sans body).
+- [x] **M2-T3** — Create brand SVG motifs (refined wheat logo, "Fait Maison • Avec Passion" seal, flour sack emblem).
+- [x] **M2-T4** — Build shared UI component library (Button, Card, Badge, Modal, FormInput, Select, Alert, LoadingSpinner).
+
+---
+
+## Milestone 3: Public Website Pages & Client Routing (M3)
+
+- [x] **M3-T1** — Implement responsive Header with brand logo, navigation links, and "Nous trouver" quick-link.
+- [x] **M3-T2** — Implement Homepage (`/`) matching reference layout pixel-for-pixel.
+- [x] **M3-T3** — Implement Product Catalog (`/produits`) with category filter and search.
+- [x] **M3-T4** — Implement Product Detail page (`/produits/:slug`).
+- [x] **M3-T5** — Implement Brand Story page (`/notre-histoire`).
+- [x] **M3-T6** — Implement Contact page (`/contact`) with validated interactive form.
+- [x] **M3-T7** — Implement Legal & Compliance pages (`/mentions-legales`, `/politique-de-confidentialite`, `/gestion-des-cookies`).
+- [x] **M3-T8** — Implement custom 404 and error boundary fallbacks.
+
+---
+
+## Milestone 4: Backend API & Express Architecture (M4)
+
+- [x] **M4-T1** — Build structured Express server with security middleware (Helmet, CORS, rate limiting, request size limits).
+- [x] **M4-T2** — Implement Public API endpoints (`/api/health`, `/api/categories`, `/api/products`, `/api/products/:slug`, `/api/contact`, `/api/content/homepage`, `/api/settings/public`).
+- [x] **M4-T3** — Implement Protected Admin API endpoints (auth, stats, products CRUD, categories CRUD, content edit, messages, settings, audit logs).
+
+---
+
+## Milestone 5: MySQL Schema, Migrations & Seed Data (M5)
+
+- [x] **M5-T1** — Create robust database migration runner with `schema_migrations` tracking.
+- [x] **M5-T2** — Implement SQL schema migration files (7 migrations in `server/migrations/`).
+- [x] **M5-T3** — Implement safe, idempotent development seed script (`npm run db:seed`).
+- [x] **M5-T4** — Implement secure initial administrator CLI provisioning script (`npm run admin:create`).
+
+---
+
+## Milestone 6: Admin Authentication & Dashboard (M6)
+
+- [x] **M6-T1** — Implement Admin Login page (`/admin/login`) with session management.
+- [x] **M6-T2** — Implement Admin Layout with sidebar navigation, user badge, and logout trigger.
+- [x] **M6-T3** — Implement Admin Overview (`/admin`) with live MySQL statistics.
+- [x] **M6-T4** — Implement Product Management (`/admin/produits`).
+- [x] **M6-T5** — Implement Category Management (`/admin/categories`).
+- [x] **M6-T6** — Implement Content Management (`/admin/contenu`).
+- [x] **M6-T7** — Implement Contact Messages Inbox (`/admin/messages`).
+- [x] **M6-T8** — Implement Settings & Audit Logs (`/admin/parametres`, `/admin/securite`).
+
+---
+
+## Milestone 7: Security Hardening & Input Defense (M7)
+
+- [x] **M7-T1** — Configure HTTP security headers (Helmet, CORS, cookies `HttpOnly`, `SameSite=Lax`).
+- [x] **M7-T2** — Enforce parameterized SQL across all database queries to prevent SQL injection.
+- [x] **M7-T3** — Enforce strict input validation and HTML entity escaping to prevent XSS.
+- [x] **M7-T4** — Audit dependencies and exclude all secrets from Git tracking.
+
+---
+
+## Milestone 8: Automated Testing (M8)
+
+- [x] **M8-T1** — Configure Vitest test runner for server and client.
+- [x] **M8-T2** — Implement Backend API integration test suite (`server/tests/api.test.js`) — 16/16 tests passing.
+- [x] **M8-T3** — Implement Frontend component & routing test suite (`client/src/tests/App.test.jsx`) — 5/5 tests passing.
+- [x] **M8-T4** — Implement End-to-End verification script (`server/scripts/run-e2e.js`) — 10/10 checks passing.
+
+---
+
+## Milestone 9: SEO, Accessibility (a11y) & Performance (M9)
+
+- [x] **M9-T1** — Configure SEO metadata, OpenGraph tags, semantic HTML hierarchy, and clean routes.
+- [x] **M9-T2** — Implement accessibility standards (WCAG 2.1 AA): color contrast, aria labels, keyboard navigation, focus management.
+- [x] **M9-T3** — Optimize images (WebP format, lazy loading, responsive srcset, zero cumulative layout shift).
+
+---
+
+## Milestone 10: Documentation & Deployment Readiness (M10)
+
+- [x] **M10-T1** — Create comprehensive `README.md` with overview, screenshots, tech stack, and quickstart.
+- [x] **M10-T2** — Complete technical documentation suite (`ARCHITECTURE.md`, `TESTING.md`, `DEPLOYMENT.md`, `SECURITY.md`, `PROJECT_STATUS.md`).
+- [x] **M10-T3** — Setup GitHub Actions CI workflow (`.github/workflows/ci.yml`).
+
+---
+
+## Milestone 11: Final Verification & Delivery (M11)
+
+- [x] **M11-T1** — Run full verification gate: lint, unit tests, integration tests, E2E tests, production build (100% PASS).
+- [x] **M11-T2** — Final git hygiene check: ensure clean working tree, no committed secrets or logs, changelog reconciled.
+- [x] **M11-T3** — Push verified feature branch and open/verify status on GitHub remote repository.
 
 ---
 

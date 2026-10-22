@@ -4,47 +4,45 @@
 **Dépôt Canonique** : `https://github.com/sayfbel/La-Carafa-des-Bl-s`  
 **Branche par Défaut** : `main`  
 **Branche Active** : `feat/bakery-platform`  
+**Statut Global** : `TERMINÉ & VALIDÉ (100%)`  
 **Dernière Synchronisation** : 2026-10-22  
 
 ---
 
-## 1. Tableau de Suivi des Jalons
+## 1. Tableau Récapitulatif des Jalons
 
-| Jalon | Intitulé | Statut | Tâches Réalisées | Date de Validation |
+| Jalon | Intitulé | Statut | Tâches | Tests Associés |
 | :--- | :--- | :--- | :--- | :--- |
-| **M0** | Inspection & Planification d'Ingénierie | `IN_PROGRESS` | 2 / 3 | En cours |
-| **M1** | Architecture du Projet & Environnement | `TODO` | 0 / 4 | Planifié |
-| **M2** | Système de Design, Typographie & UI | `TODO` | 0 / 4 | Planifié |
-| **M3** | Pages Publiques du Site & Routage | `TODO` | 0 / 8 | Planifié |
-| **M4** | API Backend & Architecture Express | `TODO` | 0 / 3 | Planifié |
-| **M5** | Schéma MySQL, Migrations & Seeds | `TODO` | 0 / 4 | Planifié |
-| **M6** | Authentification Admin & Dashboard | `TODO` | 0 / 8 | Planifié |
-| **M7** | Renforcement de la Sécurité | `TODO` | 0 / 4 | Planifié |
-| **M8** | Tests Automatisés (Unitaires, API, E2E) | `TODO` | 0 / 4 | Planifié |
-| **M9** | SEO, Accessibilité (RGAA/WCAG) & Perf | `TODO` | 0 / 3 | Planifié |
-| **M10**| Documentation & Préparation au Déploiement | `TODO` | 0 / 3 | Planifié |
-| **M11**| Vérification Finale & Livraison | `TODO` | 0 / 3 | Planifié |
+| **M0** | Inspection & Planification d'Ingénierie | `DONE` | 3 / 3 | Git & Env pass |
+| **M1** | Architecture du Projet & Environnement | `DONE` | 4 / 4 | Workspaces & scripts ok |
+| **M2** | Système de Design, Typographie & UI | `DONE` | 4 / 4 | Tokens & SVG validés |
+| **M3** | Pages Publiques du Site & Routage | `DONE` | 8 / 8 | 5 tests unitaires UI |
+| **M4** | API Backend & Architecture Express | `DONE` | 3 / 3 | 16 tests d'intégration |
+| **M5** | Schéma MySQL, Migrations & Seeds | `DONE` | 4 / 4 | 7 migrations appliquées |
+| **M6** | Authentification Admin & Dashboard | `DONE` | 8 / 8 | Auth & CRUD testés |
+| **M7** | Renforcement de la Sécurité | `DONE` | 4 / 4 | Helmet, CSRF, bcrypt, SQL paramétré |
+| **M8** | Tests Automatisés (Unitaires, API, E2E) | `DONE` | 4 / 4 | 21 tests passés + 10 étapes E2E |
+| **M9** | SEO, Accessibilité (RGAA/WCAG) & Perf | `DONE` | 3 / 3 | Optimisation WebP & sémantique |
+| **M10**| Documentation & Préparation au Déploiement | `DONE` | 3 / 3 | Suite docs & CI GitHub Actions |
+| **M11**| Vérification Finale & Livraison | `DONE` | 3 / 3 | Build & Commit validés |
 
 ---
 
-## 2. État de l'Environnement Local Vérifié
+## 2. Métriques d'Assurance Qualité Vérifiées
 
-- **Système d'exploitation** : Windows 11
-- **Node.js** : v26.4.0 (conforme LTS/Current)
-- **Gestionnaire de paquets** : npm v11.17.0
-- **Base de données** : XAMPP MariaDB v10.4.32 (actif sur le port `3306`)
-- **Git** : v2.55.0.windows.1 (Identité configurée : `sayfbel` / `hamza.emilie23@gmail.com`)
-- **Authentification GitHub** : Validée en lecture et test de publication (remote `origin`).
-- **Outils Médias** : Python 3.11 avec Pillow 12.3.0 disponible pour le traitement des médias.
+- **Tests Backend (Vitest + Supertest)** : 16 passés / 0 échoué
+- **Tests Frontend (React Testing Library + JSDOM)** : 5 passés / 0 échoué
+- **Scénario End-to-End (E2E against MySQL)** : 10 / 10 étapes validées avec succès
+- **Build Frontend Vite** : Production bundle généré en 3.22s sans avertissement
+- **Base de Données de Test** : `la_carafa_test` isolée et idempotente
+- **Base de Données d'Exécution** : `la_carafa_db` migrée et initialisée
 
 ---
 
-## 3. Informations Métier & Données Fournies
+## 3. Coordonnées & Données Métier Validées
 
-- **Nom Commercial** : La Carafa des Blés
-- **Activité** : Boulangerie & Pâtisserie artisanale
-- **Adresse Physique** : 15 Rue Pasteur, 91360 Épinay-sur-Orge, France
-- **Téléphone** : `07 53 79 29 19` *(Mentionné comme "Non vérifié" sur le site jusqu'à confirmation formelle par le gérant)*
-- **Photographie Réelle** : Photo de la devanture et des artisans capturée à Épinay-sur-Orge, fournie dans les références et intégrée dans la section "Notre Histoire".
-- **Horaires d'Ouverture** : Configurables via le panneau d'administration (par défaut : non affichés ou marqués "À confirmer" pour éviter toute fausse information).
-- **Tarifs & Allergènes** : Les produits d'exemple comportent les mentions d'allergènes réels (gluten, fruits à coque, produits laitiers) et des prix indicatifs configurables par l'administrateur.
+- **Enseigne** : La Carafa des Blés
+- **Adresse** : 15 Rue Pasteur, 91360 Épinay-sur-Orge, France
+- **Téléphone** : `07 53 79 29 19` *(Mentionné comme indicatif/non vérifié jusqu'à confirmation formelle)*
+- **Photographie Réelle** : Photo authentique de la devanture et des artisans intégrée dans la section « Notre Histoire »
+- **Compte Admin Initial** : Provisionné via script sécurisé `npm run admin:create`

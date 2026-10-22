@@ -1,0 +1,89 @@
+name: CI — La Carafa des Blés Pipeline
+
+on:
+  push:
+    branches: [main, feat/*, fix/*]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-and-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_DATABASE: la_carafa_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Run Database Migrations on Test DB
+        env:
+          NODE_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: ''
+          DB_TEST_NAME: la_carafa_test
+        run: npm run db:migrate
+
+      - name: Run Database Seeds on Test DB
+        env:
+          NODE_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: ''
+          DB_TEST_NAME: la_carafa_test
+        run: npm run db:seed
+
+      - name: Provision Test Administrator
+        env:
+          NODE_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: ''
+          DB_NAME: la_carafa_test
+        run: npm run admin:create
+
+      - name: Execute Server & Client Tests
+        env:
+          NODE_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: ''
+          DB_TEST_NAME: la_carafa_test
+          SESSION_SECRET: test-github-actions-secret-key-2026
+        run: npm test
+
+      - name: Execute End-to-End QA Workflow
+        env:
+          NODE_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: root
+          DB_PASSWORD: ''
+          DB_TEST_NAME: la_carafa_test
+          SESSION_SECRET: test-github-actions-secret-key-2026
+        run: npm run test:e2e
+
+      - name: Build Frontend Production Artifact
+        run: npm run build
