@@ -8,6 +8,28 @@ import { WheatEarWatermark } from '../components/brand/WheatEarWatermark';
 import { BakerySimpleMap } from '../components/BakerySimpleMap';
 import { api } from '../services/api';
 
+function CroissantIcon({ size = 20, color = 'var(--color-gold)' }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 16C5 10 8 5.5 12 5.5C16 5.5 19 10 20 16" />
+      <path d="M4 16C6 14 8.5 13 12 13C15.5 13 18 14 20 16" />
+      <path d="M8.5 7.5C8 9.5 8 12.5 8.5 14" />
+      <path d="M12 5.5V13" />
+      <path d="M15.5 7.5C16 9.5 16 12.5 15.5 14" />
+    </svg>
+  );
+}
+
 export function HomePage() {
   const [content, setContent] = useState({
     settings: {
@@ -255,44 +277,43 @@ export function HomePage() {
             <div
               style={{
                 backgroundColor: '#FAF5EC',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 0,
+                border: 'none',
                 overflow: 'hidden',
-                border: '1px solid var(--color-gold)',
                 display: 'flex',
-                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.22)',
                 transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
               className="category-card"
             >
-              <div style={{ width: '44%', flexShrink: 0 }}>
+              <div style={{ width: '45%', flexShrink: 0 }}>
                 <img
                   src={categoryImages['pains-de-tradition']}
                   alt="Pains de tradition au levain naturel"
                   loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 0 }}
                 />
               </div>
-              <div style={{ padding: '1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ padding: '1.75rem 1.45rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ color: 'var(--color-gold)', marginBottom: '0.45rem' }}>
                   <Wheat size={20} />
                 </div>
                 <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.45rem' }}>
                   Pains de tradition
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.15rem' }}>
                   Façonnés à la main, cuits sur place, avec des farines de qualité.
                 </p>
                 <Link
                   to="/produits?category=pains-de-tradition"
                   style={{
                     fontSize: '0.86rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
+                    fontWeight: 600,
+                    letterSpacing: '0.01em',
                     color: 'var(--color-burgundy)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem'
+                    gap: '0.45rem'
                   }}
                 >
                   <span>Voir la sélection</span>
@@ -305,44 +326,43 @@ export function HomePage() {
             <div
               style={{
                 backgroundColor: '#FAF5EC',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 0,
+                border: 'none',
                 overflow: 'hidden',
-                border: '1px solid var(--color-gold)',
                 display: 'flex',
-                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.22)',
                 transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
               className="category-card"
             >
-              <div style={{ width: '44%', flexShrink: 0 }}>
+              <div style={{ width: '45%', flexShrink: 0 }}>
                 <img
                   src={categoryImages['viennoiseries']}
                   alt="Viennoiseries pur beurre faites maison"
                   loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 0 }}
                 />
               </div>
-              <div style={{ padding: '1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ padding: '1.75rem 1.45rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ color: 'var(--color-gold)', marginBottom: '0.45rem' }}>
-                  <Coffee size={20} />
+                  <CroissantIcon size={20} color="var(--color-gold)" />
                 </div>
                 <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.45rem' }}>
                   Viennoiseries
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.15rem' }}>
                   Beurre de qualité, feuilletage pur beurre et dorure maison.
                 </p>
                 <Link
                   to="/produits?category=viennoiseries"
                   style={{
                     fontSize: '0.86rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
+                    fontWeight: 600,
+                    letterSpacing: '0.01em',
                     color: 'var(--color-burgundy)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem'
+                    gap: '0.45rem'
                   }}
                 >
                   <span>Voir la sélection</span>
@@ -355,44 +375,43 @@ export function HomePage() {
             <div
               style={{
                 backgroundColor: '#FAF5EC',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 0,
+                border: 'none',
                 overflow: 'hidden',
-                border: '1px solid var(--color-gold)',
                 display: 'flex',
-                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.22)',
                 transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
               className="category-card"
             >
-              <div style={{ width: '44%', flexShrink: 0 }}>
+              <div style={{ width: '45%', flexShrink: 0 }}>
                 <img
                   src={categoryImages['patisseries-maison']}
                   alt="Pâtisseries artisanales faites avec soin"
                   loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 0 }}
                 />
               </div>
-              <div style={{ padding: '1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ padding: '1.75rem 1.45rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ color: 'var(--color-gold)', marginBottom: '0.45rem' }}>
                   <Cake size={20} />
                 </div>
                 <h3 style={{ fontSize: '1.45rem', color: 'var(--color-burgundy)', marginBottom: '0.45rem' }}>
                   Pâtisseries maison
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '1.15rem' }}>
                   Des créations gourmandes élaborées chaque jour avec soin.
                 </p>
                 <Link
                   to="/produits?category=patisseries-maison"
                   style={{
                     fontSize: '0.86rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
+                    fontWeight: 600,
+                    letterSpacing: '0.01em',
                     color: 'var(--color-burgundy)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem'
+                    gap: '0.45rem'
                   }}
                 >
                   <span>Voir la sélection</span>
