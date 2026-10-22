@@ -4,6 +4,7 @@ import { ArrowRight, Wheat, Coffee, Cake } from 'lucide-react';
 import { ArtisanSeal } from '../components/brand/ArtisanSeal';
 import { FlourSackIllustration } from '../components/brand/FlourSackIllustration';
 import { WheatDecoration } from '../components/brand/WheatDecoration';
+import { WheatEarWatermark } from '../components/brand/WheatEarWatermark';
 import { BakerySimpleMap } from '../components/BakerySimpleMap';
 import { api } from '../services/api';
 
@@ -186,10 +187,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 2. THREE PRODUCT CATEGORY CARDS SECTION (BURGUNDY BACKGROUND) */}
+      {/* 2. THREE PRODUCT CATEGORY CARDS SECTION (DARK NOBLE BURGUNDY BACKGROUND) */}
       <section
         style={{
-          backgroundColor: 'var(--color-burgundy)',
+          backgroundColor: '#2D0409',
+          backgroundImage: 'radial-gradient(ellipse at 50% 30%, #3D0711 0%, #250307 100%)',
           color: '#F8F3E8',
           padding: '4rem 0 4.5rem',
           borderTop: '2px solid var(--color-gold)',
@@ -198,7 +200,21 @@ export function HomePage() {
           overflow: 'hidden'
         }}
       >
-        <div className="container">
+        {/* Subtle OneShoot Noun Project Wheat Ears Watermarks in Background */}
+        <WheatEarWatermark
+          size={300}
+          opacity={0.09}
+          color="var(--color-gold)"
+          style={{ top: '-30px', left: '-25px', transform: 'rotate(-10deg)' }}
+        />
+        <WheatEarWatermark
+          size={300}
+          opacity={0.09}
+          color="var(--color-gold)"
+          style={{ bottom: '-40px', right: '-25px', transform: 'rotate(10deg)' }}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           {/* Section Editorial Header */}
           <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 2.75rem' }}>
             <div
