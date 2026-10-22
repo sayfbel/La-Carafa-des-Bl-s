@@ -66,138 +66,120 @@ export function HomePage() {
           width={140}
         />
 
-        <div className="container">
-          <div
+        {/* Right Background Image with smooth gradient fade to the left */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '56%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: 1,
+            overflow: 'hidden'
+          }}
+          className="hero-right-bg"
+        >
+          <img
+            src="/assets/images/hero-bread.webp"
+            alt="Pains de tradition au levain cuits sur sole de pierre — La Carafa des Blés"
+            loading="eager"
+            fetchpriority="high"
             style={{
-              display: 'grid',
-              gridTemplateColumns: '1.15fr 1.25fr',
-              gap: '2.5rem',
-              alignItems: 'center'
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 42%',
+              display: 'block',
+              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.4) 75%, transparent 100%)',
+              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.4) 75%, transparent 100%)'
             }}
-            className="hero-split-grid"
-          >
-            {/* Left Column: Brand Narrative & Editorial Typography */}
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              {/* Kicker */}
-              <div
-                style={{
-                  color: 'var(--color-gold)',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  marginBottom: '1.25rem'
-                }}
-              >
-                {settings.homepage_hero_kicker}
-              </div>
+          />
+        </div>
 
-              {/* Headline matching reference */}
-              <h1
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(2.75rem, 5vw, 4.4rem)',
-                  fontWeight: 600,
-                  color: 'var(--color-burgundy)',
-                  lineHeight: 1.05,
-                  letterSpacing: '-0.01em',
-                  margin: '0 0 1.25rem',
-                  maxWidth: '440px'
-                }}
-              >
-                {settings.homepage_hero_title || 'Le goût des bonnes choses.'}
-              </h1>
-
-              {/* Gold Accent Line */}
-              <div
-                style={{
-                  width: '48px',
-                  height: '2px',
-                  backgroundColor: 'var(--color-gold)',
-                  marginBottom: '1.5rem'
-                }}
-              />
-
-              {/* Subtitle */}
-              <p
-                style={{
-                  fontSize: '1.05rem',
-                  color: 'var(--color-text-main)',
-                  lineHeight: 1.6,
-                  maxWidth: '460px',
-                  marginBottom: '2.5rem'
-                }}
-              >
-                {settings.homepage_hero_subtitle}
-              </p>
-
-              {/* CTA Button and Floating Seal */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2rem',
-                  flexWrap: 'wrap'
-                }}
-              >
-                <Link
-                  to="/produits"
-                  className="btn btn-primary"
-                  style={{
-                    padding: '0.85rem 2.2rem',
-                    fontSize: '0.95rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.02em',
-                    boxShadow: 'var(--shadow-burgundy)',
-                    borderRadius: 'var(--radius-full)'
-                  }}
-                >
-                  <span>{settings.homepage_hero_cta || 'Découvrir nos créations'}</span>
-                  <ArrowRight size={16} />
-                </Link>
-
-                <div style={{ transform: 'rotate(-4deg)' }} className="hero-seal-wrapper">
-                  <ArtisanSeal size={105} />
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: High-Quality Warm Bread Photography blending into Ivory */}
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ maxWidth: '540px', padding: '4.5rem 0 4rem' }} className="hero-content-col">
+            {/* Kicker */}
             <div
               style={{
-                position: 'relative',
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center'
+                color: 'var(--color-gold)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                marginBottom: '1.25rem'
               }}
-              className="hero-image-wrapper"
             >
-              <div
+              {settings.homepage_hero_kicker}
+            </div>
+
+            {/* Headline */}
+            <h1
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(2.75rem, 5vw, 4.4rem)',
+                fontWeight: 600,
+                color: 'var(--color-burgundy)',
+                lineHeight: 1.05,
+                letterSpacing: '-0.01em',
+                margin: '0 0 1.25rem',
+                maxWidth: '460px'
+              }}
+            >
+              {settings.homepage_hero_title || 'Le goût des bonnes choses.'}
+            </h1>
+
+            {/* Gold Accent Line */}
+            <div
+              style={{
+                width: '48px',
+                height: '2px',
+                backgroundColor: 'var(--color-gold)',
+                marginBottom: '1.5rem'
+              }}
+            />
+
+            {/* Subtitle */}
+            <p
+              style={{
+                fontSize: '1.05rem',
+                color: 'var(--color-text-main)',
+                lineHeight: 1.6,
+                maxWidth: '460px',
+                marginBottom: '2.5rem'
+              }}
+            >
+              {settings.homepage_hero_subtitle}
+            </p>
+
+            {/* CTA Button and Floating Seal */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2rem',
+                flexWrap: 'wrap'
+              }}
+            >
+              <Link
+                to="/produits"
+                className="btn btn-primary"
                 style={{
-                  width: '100%',
-                  maxWidth: '680px',
-                  borderRadius: 'var(--radius-lg)',
-                  overflow: 'hidden',
-                  boxShadow: '0 18px 45px rgba(56, 7, 14, 0.09)',
-                  border: '1px solid var(--color-border-subtle)',
-                  backgroundColor: '#FAF5EC',
-                  position: 'relative'
+                  padding: '0.85rem 2.2rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  boxShadow: 'var(--shadow-burgundy)',
+                  borderRadius: 'var(--radius-full)'
                 }}
               >
-                <img
-                  src="/assets/images/hero-bread.webp"
-                  alt="Pains de tradition au levain cuits sur sole de pierre — La Carafa des Blés"
-                  loading="eager"
-                  fetchpriority="high"
-                  style={{
-                    width: '100%',
-                    height: '480px',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    display: 'block'
-                  }}
-                />
+                <span>{settings.homepage_hero_cta || 'Découvrir nos créations'}</span>
+                <ArrowRight size={16} />
+              </Link>
+
+              <div style={{ transform: 'rotate(-4deg)' }} className="hero-seal-wrapper">
+                <ArtisanSeal size={105} />
               </div>
             </div>
           </div>
@@ -564,15 +546,18 @@ export function HomePage() {
       {/* Responsive adjustments */}
       <style>{`
         @media (max-width: 900px) {
-          .hero-split-grid,
+          .hero-right-bg {
+            width: 100% !important;
+            opacity: 0.2 !important;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%) !important;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%) !important;
+          }
+          .hero-content-col {
+            padding: 3rem 0 2.5rem !important;
+          }
           .story-split-grid {
             grid-template-columns: 1fr !important;
             gap: 2.5rem !important;
-          }
-          .hero-image-wrapper img {
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-            height: 320px !important;
           }
         }
         @media (max-width: 480px) {
