@@ -7,16 +7,28 @@ export function AuthProvider({ children }) {
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check existing session on load
+  // Check existing session on load only if on admin path or admin flag is set
   useEffect(() => {
     async function checkAuth() {
+      const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
+      const hasSessionFlag = typeof localStorage !== 'undefined' && localStorage.getItem('admin_session') === '1';
+
+      if (!isAdminRoute && !hasSessionFlag) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await api.admin.me();
         if (res?.success && res.admin) {
           setAdmin(res.admin);
+          localStorage.setItem('admin_session', '1');
+        } else {
+          localStorage.removeItem('admin_session');
         }
       } catch (err) {
         setAdmin(null);
+        localStorage.removeItem('admin_session');
       } finally {
         setLoading(false);
       }
@@ -28,6 +40,7 @@ export function AuthProvider({ children }) {
     const res = await api.admin.login({ email, password });
     if (res?.success && res.admin) {
       setAdmin(res.admin);
+      localStorage.setItem('admin_session', '1');
     }
     return res;
   };
@@ -37,6 +50,7 @@ export function AuthProvider({ children }) {
       await api.admin.logout();
     } finally {
       setAdmin(null);
+      localStorage.removeItem('admin_session');
     }
   };
 

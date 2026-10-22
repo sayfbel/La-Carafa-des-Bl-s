@@ -56,20 +56,35 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Right CTA : "Nous trouver" */}
+        {/* Right CTA : "NOUS TROUVER" */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <a
-            href="https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary find-us-btn"
+            href="#localisation"
+            onClick={(e) => {
+              const el = document.getElementById('localisation');
+              if (el) {
+                e.preventDefault();
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="find-us-btn"
             style={{
-              padding: '0.65rem 1.4rem',
-              fontSize: '0.9rem',
-              borderRadius: 'var(--radius-full)'
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              backgroundColor: 'var(--color-burgundy-dark)',
+              color: 'var(--color-white)',
+              padding: '0.6rem 1.4rem',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '0.82rem',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              transition: 'background-color var(--transition-fast), transform var(--transition-fast)'
             }}
           >
-            <MapPin size={16} />
+            <MapPin size={14} />
             <span>Nous trouver</span>
           </a>
 

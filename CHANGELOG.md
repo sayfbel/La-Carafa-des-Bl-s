@@ -5,6 +5,29 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 
 ---
 
+## [1.1.0] - 2026-10-22
+
+### Modifié & Amélioré (Refonte Visuelle UI/UX Haute Fidélité)
+- **Refonte Asymétrique du Hero** :
+  - Composition éditoriale en 3 colonnes : typographie noble à gauche, photographie artisanale de pains au centre, et plan d'accès avec carte interactive à droite.
+  - Sceau artisanal « Fait maison • Avec passion » et brins de blé botaniques vectoriels en filigrane sans débordement horizontal.
+- **Réparation Intégrale de la Carte Interactive Leaflet** :
+  - Élimination définitive de l'erreur « API KEY REQUIRED » en migrant vers les tuiles officielles OpenStreetMap libres de droit avec filtre CSS parchemin chaud.
+  - Marqueur bordeaux et or personnalisé aux coordonnées exactes de la boulangerie (`15 Rue Pasteur, 91360 Épinay-sur-Orge`).
+  - Deux cartes d'informations côte-à-côte sous la carte : « Notre Emplacement » (avec boutons Itinéraire et Recentrer) et « Accès » (RER C à 2 min, stationnement aisé, et lien Google Maps direct).
+- **Cartes Catégories de Produits Réalignées** :
+  - Alignement split horizontal 42% / 58% rigoureux pour « Pains de tradition », « Viennoiseries » et « Pâtisseries maison ».
+  - Chaque carte dispose de sa propre photographie dédiée et de son lien « VOIR LA SÉLECTION → » relié au catalogue en direct.
+- **Section « Notre Histoire » Sublimée** :
+  - Mise en valeur de la véritable photographie de la façade de la boulangerie à Épinay-sur-Orge.
+  - Titre en italique raffiné, signature calligraphiée « La Carafa des Blés » et illustration gravée du sac de farine.
+- **Pied de Page (Footer) 5 Colonnes Prestige** :
+  - Fond bordeaux profond (`#4A0A14`), logo doré, liens rapides, coordonnées, horaires d'ouverture, réseaux sociaux et art végétal en arrière-plan.
+- **Optimisation Console & Sécurité** :
+  - Suppression des requêtes 401 intempestives sur les pages publiques via un contrôle ciblé dans `AuthContext`.
+
+---
+
 ## [1.0.0] - 2026-10-22
 
 ### Ajouté

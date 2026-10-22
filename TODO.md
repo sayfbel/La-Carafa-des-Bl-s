@@ -20,6 +20,32 @@ Persistent project task list tracking all milestones, deliverables, verification
 | **M9** | SEO, Accessibility (a11y) & Performance | `DONE` |
 | **M10** | Documentation & Production Deployment Readiness | `DONE` |
 | **M11** | Final Verification, Audit & Delivery | `DONE` |
+| **M-UI** | Critical UI/UX Visual Rework & High-Fidelity Alignment | `DONE` |
+
+---
+
+## Milestone UI: Critical UI/UX Visual Rework (fix/premium-visual-design)
+
+- [x] **UI-T1** — Logo refinement: exact typographic proportions, stacked brand name, gold wheat emblem.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Branding
+- [x] **UI-T2** — Paper texture and delicate botanical wheat background decorations.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Styling / CSS
+- [x] **UI-T3** — Hero section redesign: headline typography, bread photo blend, circular seal, secondary CTA "Notre histoire".
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Pages / Home
+- [x] **UI-T4** — Hero map integration: OpenStreetMap tiles, custom pin, side-by-side cards (Emplacement + Accès).
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Components / Map
+- [x] **UI-T5** — Product category cards precision alignment: consistent proportions, dedicated photography, "VOIR LA SÉLECTION →".
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Pages / Home
+- [x] **UI-T6** — "Notre histoire" editorial section: real storefront photo, italic headline, cursive signature, flour sack illustration.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Pages / Home
+- [x] **UI-T7** — Multi-column luxury burgundy footer: Logo, Liens rapides, Informations, Horaires, Réseaux, corner wheat art.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Components / Footer
+- [x] **UI-T8** — Leaflet / OpenStreetMap verification: ensure tiles load smoothly, no API key error, perfect responsive sizing.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Components / Map
+- [x] **UI-T9** — Console & Authentication audit: suppress unnecessary 401 calls on public pages in AuthContext.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: Client / Auth
+- [x] **UI-T10** — Responsive QA across 320px, 375px, 768px, 1024px, 1440px.
+  - **Priority**: P0 | **Status**: `DONE` | **Subsystem**: QA / Responsive
 
 ---
 
