@@ -176,22 +176,26 @@ export function HomePage() {
               <div
                 style={{
                   width: '100%',
-                  maxWidth: '650px',
-                  borderRadius: 'var(--radius-md)',
+                  maxWidth: '680px',
+                  borderRadius: 'var(--radius-lg)',
                   overflow: 'hidden',
+                  boxShadow: '0 18px 45px rgba(56, 7, 14, 0.09)',
+                  border: '1px solid var(--color-border-subtle)',
+                  backgroundColor: '#FAF5EC',
                   position: 'relative'
                 }}
               >
                 <img
                   src="/assets/images/hero-bread.webp"
-                  alt="Pains de tradition au levain cuits sur sole de pierre"
+                  alt="Pains de tradition au levain cuits sur sole de pierre — La Carafa des Blés"
+                  loading="eager"
+                  fetchpriority="high"
                   style={{
                     width: '100%',
-                    height: '460px',
+                    height: '480px',
                     objectFit: 'cover',
-                    display: 'block',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.8) 10%, black 22%)',
-                    maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.8) 10%, black 22%)'
+                    objectPosition: 'center',
+                    display: 'block'
                   }}
                 />
               </div>
