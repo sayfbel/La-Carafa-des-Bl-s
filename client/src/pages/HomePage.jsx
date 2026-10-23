@@ -883,8 +883,8 @@ export function HomePage() {
             </p>
           </div>
 
-          {/* FlightAirport-Style Interactive Map & Fournil Hub */}
-          <BakeryMap />
+          {/* Official Google Maps & Fournil Visitor Hub */}
+          <BakeryMap settings={settings} />
         </div>
       </section>
 

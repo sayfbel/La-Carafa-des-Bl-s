@@ -132,7 +132,8 @@ export async function getPublicSettings(req, res, next) {
       WHERE setting_key IN (
         'business_name', 'business_address', 'business_phone', 
         'business_phone_verified', 'business_email', 'google_maps_url',
-        'opening_hours_note', 'story_signature'
+        'opening_hours_note', 'story_signature',
+        'store_status_mode', 'store_status_custom_message'
       )
     `);
     const settings = Object.fromEntries(rows.map(r => [r.setting_key, r.setting_value]));

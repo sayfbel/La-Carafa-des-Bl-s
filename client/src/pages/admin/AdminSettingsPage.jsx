@@ -97,6 +97,77 @@ export function AdminSettingsPage() {
               </span>
             </label>
           </div>
+
+          {/* Statut d'Ouverture du Fournil en Temps Réel & Paramétrage Admin */}
+          <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--color-border-subtle)' }}>
+            <h3 style={{ fontSize: '1.15rem', color: 'var(--color-burgundy)', margin: '0 0 0.4rem' }}>
+              Statut d'Ouverture du Fournil en Direct
+            </h3>
+            <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', margin: '0 0 1.25rem' }}>
+              Contrôlez l'affichage du statut (Ouvert / Fermé) visible par les visiteurs sur la page d'accueil.
+            </p>
+
+            <div className="form-group">
+              <label className="form-label">Mode d'affichage du statut</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="store_status_mode"
+                    value="auto"
+                    checked={!settings.store_status_mode || settings.store_status_mode === 'auto'}
+                    onChange={() => setSettings({ ...settings, store_status_mode: 'auto' })}
+                    style={{ marginTop: '3px' }}
+                  />
+                  <span style={{ fontSize: '0.9rem' }}>
+                    <strong>Automatique (Recommandé)</strong> — Calcule l'ouverture et la fermeture en temps réel selon les horaires réels du fournil (Lundi fermé, mar-ven 06h30-19h30, sam 07h00-19h30, dim 07h00-13h00).
+                  </span>
+                </label>
+
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="store_status_mode"
+                    value="forced_closed"
+                    checked={settings.store_status_mode === 'forced_closed'}
+                    onChange={() => setSettings({ ...settings, store_status_mode: 'forced_closed' })}
+                    style={{ marginTop: '3px' }}
+                  />
+                  <span style={{ fontSize: '0.9rem', color: '#991B1B' }}>
+                    <strong>Forcer la Fermeture (Fermé manuellement)</strong> — Affiche immédiatement le badge rouge <em>Fermé</em> sur le site (congés, inventaire, fermeture exceptionnelle).
+                  </span>
+                </label>
+
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="store_status_mode"
+                    value="forced_open"
+                    checked={settings.store_status_mode === 'forced_open'}
+                    onChange={() => setSettings({ ...settings, store_status_mode: 'forced_open' })}
+                    style={{ marginTop: '3px' }}
+                  />
+                  <span style={{ fontSize: '0.9rem', color: '#065F46' }}>
+                    <strong>Forcer l'Ouverture (Ouvert manuellement)</strong> — Affiche immédiatement le badge vert <em>Ouvert</em> (fête, jour férié travaillé).
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div className="form-group" style={{ marginTop: '1rem' }}>
+              <label className="form-label" htmlFor="custom-status-msg">
+                Message personnalisé aux clients (Optionnel)
+              </label>
+              <input
+                id="custom-status-msg"
+                type="text"
+                value={settings.store_status_custom_message || ''}
+                onChange={(e) => setSettings({ ...settings, store_status_custom_message: e.target.value })}
+                className="form-input"
+                placeholder="Ex : Fermeture annuelle du 1er au 15 août / Fournée spéciale de Pâques..."
+              />
+            </div>
+          </div>
         </div>
 
         <button type="submit" disabled={saving} className="btn btn-primary" style={{ padding: '0.8rem 1.75rem' }}>

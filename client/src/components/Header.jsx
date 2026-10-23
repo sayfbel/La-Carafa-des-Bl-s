@@ -20,7 +20,7 @@ export function Header() {
         borderBottom: '1px solid var(--color-border-subtle)',
         position: 'sticky',
         top: 0,
-        zIndex: 100,
+        zIndex: 1100,
         padding: '1.1rem 0'
       }}
     >

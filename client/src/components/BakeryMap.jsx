@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useState } from 'react';
 import {
   MapPin,
   Navigation,
@@ -9,252 +7,130 @@ import {
   Phone,
   Maximize2,
   Minimize2,
-  Compass,
-  RotateCcw,
-  Check,
+  ExternalLink,
   Copy,
-  Info,
+  Check,
   Calendar,
+  Layers,
   Sparkles
 } from 'lucide-react';
+import { getStoreLiveStatus } from '../utils/storeStatus';
 
-// Exact coordinates for 15 Rue Pasteur, 91360 Épinay-sur-Orge
-const BAKERY_COORDS = [48.668527, 2.3295643];
-
-export function BakeryMap() {
-  const mapContainerRef = useRef(null);
-  const mapWrapperRef = useRef(null);
-  const mapInstanceRef = useRef(null);
-
+export function BakeryMap({ settings = {} }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const [bearing, setBearing] = useState(0);
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !mapContainerRef.current) return;
+  // Compute live dynamic status (open/closed) based on time + admin override
+  const status = getStoreLiveStatus(settings);
 
-    // Prevent double initialization
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.remove();
-      mapInstanceRef.current = null;
-    }
+  // Google Maps official embed URL for 15 Rue Pasteur, 91360 Épinay-sur-Orge
+  const googleMapsEmbedUrl =
+    'https://maps.google.com/maps?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France&t=&z=16&ie=UTF8&iwloc=&output=embed';
 
-    try {
-      // Initialize Leaflet Map
-      const map = L.map(mapContainerRef.current, {
-        center: BAKERY_COORDS,
-        zoom: 16,
-        zoomControl: false,
-        scrollWheelZoom: false,
-        attributionControl: false
-      });
-
-      mapInstanceRef.current = map;
-
-      // CartoDB Positron light tiles with warm project filter
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 20,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-      }).addTo(map);
-
-      // Custom Airport-style Pin Marker matching flightcn screenshot
-      const customPinIcon = L.divIcon({
-        className: 'flight-airport-marker',
-        html: `
-          <div class="marker-wrapper">
-            <div class="marker-label">
-              <span class="marker-code">LA CARAFA</span>
-              <span class="marker-sub">Fournil</span>
-            </div>
-            <div class="marker-pin-dot">
-              <div class="marker-pulse-ring"></div>
-              <div class="marker-core-dot"></div>
-            </div>
-          </div>
-        `,
-        iconSize: [120, 60],
-        iconAnchor: [60, 50],
-        popupAnchor: [0, -50]
-      });
-
-      const popupContent = `
-        <div class="flight-popup">
-          <div class="flight-popup-badge">MAISON ARTISANALE</div>
-          <h4 class="flight-popup-title">La Carafa des Blés</h4>
-          <p class="flight-popup-address">15 Rue Pasteur, 91360 Épinay-sur-Orge</p>
-          <div class="flight-popup-meta">
-            <span>🌾 100% Artisanal</span>
-            <span>🚆 RER C (180m)</span>
-          </div>
-        </div>
-      `;
-
-      const marker = L.marker(BAKERY_COORDS, { icon: customPinIcon }).addTo(map);
-      marker.bindPopup(popupContent, {
-        className: 'flight-custom-popup',
-        closeButton: false
-      });
-
-      // Invalidate size on load
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 300);
-    } catch (err) {
-      console.warn('Map initialization warning:', err.message);
-    }
-
-    return () => {
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
-        mapInstanceRef.current = null;
-      }
-    };
-  }, []);
-
-  const handleRecenter = () => {
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.flyTo(BAKERY_COORDS, 16, { duration: 1.2 });
-    }
-  };
-
-  const handleRotate = () => {
-    const nextBearing = (bearing + 90) % 360;
-    setBearing(nextBearing);
-    // Visual orientation feedback
-  };
-
-  const toggleFullscreen = () => {
-    if (!mapWrapperRef.current) return;
-
-    if (!isFullscreen) {
-      if (mapWrapperRef.current.requestFullscreen) {
-        mapWrapperRef.current.requestFullscreen().catch(() => {});
-      }
-      setIsFullscreen(true);
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {});
-      }
-      setIsFullscreen(false);
-    }
-
-    setTimeout(() => {
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.invalidateSize();
-      }
-    }, 250);
-  };
+  const googleMapsExternalUrl =
+    'https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France';
 
   const handleCopyAddress = () => {
-    const text = '15 Rue Pasteur, 91360 Épinay-sur-Orge, France';
-    navigator.clipboard.writeText(text).then(() => {
+    navigator.clipboard.writeText('15 Rue Pasteur, 91360 Épinay-sur-Orge, France').then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     }).catch(() => {});
   };
 
   return (
-    <div className="flightcn-location-hub">
-      {/* 2-Column Dedicated Layout: Interactive Map on Left, Fournil Information on Right */}
-      <div className="location-grid-layout">
+    <div className="google-map-hub-root" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
+      <div className="google-map-grid">
         
-        {/* COLUMN 1: The FlightAirport-Style Interactive Map */}
-        <div
-          ref={mapWrapperRef}
-          className={`flight-map-container ${isFullscreen ? 'is-fullscreen' : ''}`}
-        >
-          {/* Top-Left Floating Controls Group (Direct flightcn style) */}
-          <div className="flight-controls-group">
-            <button
-              onClick={toggleFullscreen}
-              type="button"
-              className="flight-ctrl-btn"
-              title={isFullscreen ? 'Quitter le plein écran' : 'Plein écran'}
-              aria-label="Plein écran"
-            >
-              {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            </button>
+        {/* COLUMN 1: Official Standard Google Maps with Architectural Header */}
+        <div className={`google-map-frame ${isFullscreen ? 'map-fullscreen-mode' : ''}`}>
+          
+          {/* Map Top Bar */}
+          <div className="google-map-topbar">
+            <div className="topbar-location">
+              <MapPin size={15} color="var(--color-gold)" style={{ flexShrink: 0 }} />
+              <span className="topbar-address">15 Rue Pasteur · Épinay-sur-Orge</span>
+              <span className="topbar-badge">Google Maps</span>
+            </div>
 
-            <button
-              onClick={handleRotate}
-              type="button"
-              className="flight-ctrl-btn"
-              title="Orientation de la carte"
-              aria-label="Orientation"
-            >
-              <Compass
-                size={16}
-                style={{
-                  transform: `rotate(${bearing}deg)`,
-                  transition: 'transform 0.3s ease'
-                }}
-              />
-            </button>
+            <div className="topbar-actions">
+              <a
+                href={googleMapsExternalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="topbar-btn"
+                title="Ouvrir dans l'application Google Maps"
+              >
+                <ExternalLink size={13} />
+                <span>Ouvrir dans l'App</span>
+              </a>
 
-            <button
-              onClick={handleRecenter}
-              type="button"
-              className="flight-ctrl-btn"
-              title="Recentrer sur le fournil"
-              aria-label="Recentrer"
-            >
-              <RotateCcw size={16} />
-            </button>
+              <button
+                onClick={() => setIsFullscreen(prev => !prev)}
+                type="button"
+                className="topbar-btn"
+                title={isFullscreen ? 'Quitter le mode agrandi' : 'Agrandir la carte'}
+              >
+                {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+                <span>{isFullscreen ? 'Réduire' : 'Plein écran'}</span>
+              </button>
+            </div>
           </div>
 
-          {/* Bottom-Right Floating Info / Attribution Button */}
-          <div className="flight-info-container">
-            <button
-              onClick={() => setShowInfo(prev => !prev)}
-              type="button"
-              className="flight-info-btn"
-              title="Informations cartographiques"
-              aria-label="Informations"
-            >
-              <Info size={14} />
-            </button>
-            {showInfo && (
-              <div className="flight-info-popover">
-                <p><strong>La Carafa des Blés</strong></p>
-                <p>15 Rue Pasteur, 91360 Épinay-sur-Orge</p>
-                <p style={{ fontSize: '0.72rem', opacity: 0.8, marginTop: '0.25rem' }}>
-                  Données cartographiques © OpenStreetMap & CARTO
-                </p>
-              </div>
-            )}
+          {/* Standard Official Google Maps Iframe */}
+          <div className="google-map-viewport">
+            <iframe
+              title="Localisation Google Maps — La Carafa des Blés à Épinay-sur-Orge"
+              src={googleMapsEmbedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: 'block', minHeight: isFullscreen ? '100%' : '480px' }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
 
-          {/* Leaflet Map Target */}
-          <div
-            ref={mapContainerRef}
-            className="flight-leaflet-viewport"
-            style={{ width: '100%', height: '100%', minHeight: '480px' }}
-          />
+          {/* Bottom Bar: Live Transport Notice */}
+          <div className="google-map-footer-bar">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Train size={14} color="var(--color-gold)" />
+              <span>Gare RER C Épinay-sur-Orge à 200m</span>
+            </div>
+            <a
+              href={googleMapsExternalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'var(--color-gold-light)', textDecoration: 'underline', fontSize: '0.74rem' }}
+            >
+              Calculer l'itinéraire →
+            </a>
+          </div>
         </div>
 
-        {/* COLUMN 2: Fournil Visitor Panel (Fresh, Functional, NOT 01/02/03) */}
+        {/* COLUMN 2: Fournil Visitor Panel with Dynamic Live Status & Horaires */}
         <div className="visitor-panel">
           
-          {/* Header & Real-Time Status Badge */}
+          {/* Header & Dynamic Real-Time Status Badge */}
           <div className="visitor-header">
-            <div className="status-live-chip">
-              <span className="live-dot"></span>
-              <span>Fournil Ouvert · Fournées du jour</span>
+            <div className={`status-chip ${status.chipVariant}`}>
+              <span className="status-dot"></span>
+              <span className="status-main-text">{status.badgeText}</span>
             </div>
-            <h3 className="visitor-title">Votre Boulangerie de Quartier</h3>
+            <p className="status-sub-text">{status.subtext}</p>
+
+            <h3 className="visitor-title">Votre Fournil Artisanal</h3>
             <p className="visitor-lead">
-              Pains au levain naturel cuits sur sole, viennoiseries dorées maison et pâtisseries fraîches façonnées chaque matin à Épinay-sur-Orge.
+              Pains de tradition française cuits sur sole tout au long du jour, viennoiseries pur beurre faites maison et pâtisseries du chef boulanger.
             </p>
           </div>
 
-          {/* Schedule / Horaires Card */}
+          {/* Schedule / Horaires du Fournil */}
           <div className="horaires-block">
             <div className="block-eyebrow">
               <Calendar size={14} color="var(--color-gold)" />
               <span>Horaires d'Ouverture du Fournil</span>
             </div>
+
             <div className="schedule-rows">
               <div className="schedule-row">
                 <span className="day-name">Mardi au Vendredi</span>
@@ -275,35 +151,35 @@ export function BakeryMap() {
             </div>
           </div>
 
-          {/* Practical Access & Transport Highlights */}
-          <div className="mobility-block">
-            <div className="mobility-item">
+          {/* Practical Mobility Cards */}
+          <div className="mobility-grid">
+            <div className="mobility-card">
               <Train size={18} className="mobility-icon" />
               <div>
-                <div className="mobility-title">Accès RER C</div>
-                <div className="mobility-desc">Gare d'Épinay-sur-Orge à 2 min à pied (180 mètres).</div>
+                <div className="mobility-card-title">RER C — Gare d'Épinay</div>
+                <div className="mobility-card-desc">À 2 min à pied (180 mètres) via la sortie Rue Pasteur.</div>
               </div>
             </div>
 
-            <div className="mobility-item">
+            <div className="mobility-card">
               <MapPin size={18} className="mobility-icon" />
               <div>
-                <div className="mobility-title">Stationnement Aisé</div>
-                <div className="mobility-desc">Places gratuites et dépose-minute devant le 15 Rue Pasteur.</div>
+                <div className="mobility-card-title">Stationnement Gratuit</div>
+                <div className="mobility-card-desc">Places gratuites et dépose-minute devant la boutique.</div>
               </div>
             </div>
           </div>
 
-          {/* Action Row: GPS Navigation, Phone & Copy Address */}
+          {/* Action Row: Direct GPS Navigation, Phone & Copy Address */}
           <div className="action-buttons-row">
             <a
-              href="https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France"
+              href={googleMapsExternalUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="action-btn-primary"
             >
               <Navigation size={16} />
-              <span>Itinéraire Google Maps</span>
+              <span>Lancer le GPS (Google Maps)</span>
             </a>
 
             <a
@@ -311,277 +187,148 @@ export function BakeryMap() {
               className="action-btn-secondary"
             >
               <Phone size={15} />
-              <span>Appeler le Fournil</span>
+              <span>07 53 79 29 19</span>
             </a>
 
             <button
               onClick={handleCopyAddress}
               type="button"
               className="action-btn-copy"
-              title="Copier l'adresse"
+              title="Copier l'adresse exacte"
             >
               {copied ? <Check size={15} color="#166534" /> : <Copy size={15} />}
-              <span>{copied ? 'Adresse copiée !' : 'Copier'}</span>
+              <span>{copied ? 'Copié !' : 'Copier'}</span>
             </button>
           </div>
 
         </div>
       </div>
 
-      {/* Scoped CSS for FlightAirport Map & Visitor Hub */}
+      {/* Scoped CSS for Google Map Hub */}
       <style>{`
-        .flightcn-location-hub {
+        .google-map-hub-root {
           width: 100%;
-          position: relative;
         }
 
-        .location-grid-layout {
+        .google-map-grid {
           display: grid;
-          grid-template-columns: minmax(320px, 1.35fr) minmax(320px, 1fr);
+          grid-template-columns: minmax(320px, 1.3fr) minmax(320px, 1fr);
           gap: 3.5rem;
           align-items: stretch;
         }
 
-        /* 1. Map Container (FlightAirport-styled) */
-        .flight-map-container {
+        /* Map Container Frame */
+        .google-map-frame {
           position: relative;
-          background-color: #FAF5EC;
+          background-color: #FAF5EA;
           border: 1px solid rgba(183, 138, 61, 0.35);
           box-shadow: 0 20px 45px -10px rgba(56, 7, 14, 0.12);
-          overflow: hidden;
-          min-height: 520px;
-          display: flex;
-        }
-
-        .flight-map-container.is-fullscreen {
-          position: fixed !important;
-          inset: 0 !important;
-          z-index: 99999 !important;
-          width: 100vw !important;
-          height: 100vh !important;
-          border: none !important;
-        }
-
-        /* Leaflet Project Theming (Warm Ivory/Gold/Bordeaux Filter) */
-        .flight-leaflet-viewport .leaflet-tile {
-          filter: sepia(0.38) saturate(0.85) hue-rotate(-20deg) contrast(1.06) brightness(0.98);
-        }
-
-        /* Top-Left Floating Controls Group (flightcn exact style) */
-        .flight-controls-group {
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
-          z-index: 999;
-          display: flex;
-          align-items: center;
-          gap: 0;
-          background-color: #FFFFFF;
-          border: 1px solid rgba(183, 138, 61, 0.35);
-          box-shadow: 0 4px 14px rgba(41, 34, 30, 0.1);
-        }
-
-        .flight-ctrl-btn {
-          width: 38px;
-          height: 38px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: transparent;
-          border: none;
-          border-right: 1px solid rgba(183, 138, 61, 0.2);
-          color: var(--color-burgundy);
-          cursor: pointer;
-          transition: all 0.18s ease;
-        }
-
-        .flight-ctrl-btn:last-child {
-          border-right: none;
-        }
-
-        .flight-ctrl-btn:hover {
-          background-color: #FAF5EA;
-          color: var(--color-gold);
-        }
-
-        /* Bottom-Right Floating Info / Attribution */
-        .flight-info-container {
-          position: absolute;
-          bottom: 1rem;
-          right: 1rem;
-          z-index: 999;
-        }
-
-        .flight-info-btn {
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: #FFFFFF;
-          border: 1px solid rgba(183, 138, 61, 0.35);
-          color: var(--color-burgundy);
-          cursor: pointer;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-          transition: all 0.2s ease;
-        }
-
-        .flight-info-btn:hover {
-          background-color: var(--color-burgundy);
-          color: #FFF;
-        }
-
-        .flight-info-popover {
-          position: absolute;
-          bottom: 34px;
-          right: 0;
-          background-color: #FFFFFF;
-          border: 1px solid rgba(183, 138, 61, 0.35);
-          box-shadow: 0 8px 24px rgba(41, 34, 30, 0.15);
-          padding: 0.75rem 1rem;
-          min-width: 220px;
-          font-size: 0.78rem;
-          color: var(--color-text-main);
-          z-index: 1000;
-        }
-
-        /* FlightAirport Pin Marker */
-        .flight-airport-marker {
-          background: transparent;
-          border: none;
-        }
-
-        .marker-wrapper {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          position: relative;
+          overflow: hidden;
+          min-height: 520px;
         }
 
-        .marker-label {
-          background-color: var(--color-burgundy);
+        .google-map-frame.map-fullscreen-mode {
+          position: fixed !important;
+          inset: 4rem 2rem 2rem 2rem !important;
+          z-index: 9999 !important;
+          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* Top Bar */
+        .google-map-topbar {
+          background-color: rgba(42, 6, 11, 0.95);
           color: #FFFFFF;
-          padding: 0.25rem 0.65rem;
-          font-family: var(--font-sans);
-          font-size: 0.74rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          box-shadow: 0 4px 14px rgba(56, 7, 14, 0.35);
-          border: 1px solid var(--color-gold);
+          padding: 0.65rem 1rem;
           display: flex;
           align-items: center;
-          gap: 0.35rem;
-          white-space: nowrap;
-          margin-bottom: 6px;
+          justify-content: space-between;
+          border-bottom: 1px solid rgba(212, 171, 101, 0.35);
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
-        .marker-code {
-          color: #FFFFFF;
-        }
-
-        .marker-sub {
-          color: var(--color-gold-light);
-          font-size: 0.68rem;
-          font-weight: 500;
-        }
-
-        .marker-pin-dot {
-          position: relative;
-          width: 14px;
-          height: 14px;
+        .topbar-location {
           display: flex;
           align-items: center;
-          justify-content: center;
-        }
-
-        .marker-core-dot {
-          width: 10px;
-          height: 10px;
-          background-color: var(--color-burgundy);
-          border: 2px solid var(--color-gold);
-          border-radius: 50%;
-          z-index: 2;
-        }
-
-        .marker-pulse-ring {
-          position: absolute;
-          width: 26px;
-          height: 26px;
-          border-radius: 50%;
-          background-color: rgba(183, 138, 61, 0.4);
-          animation: pulseRing 2.2s infinite cubic-bezier(0.2, 1, 0.4, 1);
-          z-index: 1;
-        }
-
-        @keyframes pulseRing {
-          0% { transform: scale(0.6); opacity: 0.9; }
-          75% { transform: scale(1.6); opacity: 0; }
-          100% { transform: scale(1.8); opacity: 0; }
-        }
-
-        /* Custom Popup */
-        .flight-custom-popup .leaflet-popup-content-wrapper {
-          background-color: #FAF5EA !important;
-          border: 1px solid rgba(183, 138, 61, 0.4) !important;
-          box-shadow: 0 10px 30px rgba(56, 7, 14, 0.2) !important;
-          border-radius: 0 !important;
-          padding: 0 !important;
-        }
-
-        .flight-custom-popup .leaflet-popup-tip {
-          background-color: #FAF5EA !important;
-          border: 1px solid rgba(183, 138, 61, 0.4) !important;
-        }
-
-        .flight-popup {
-          padding: 0.9rem 1.1rem;
-          font-family: var(--font-sans);
-        }
-
-        .flight-popup-badge {
-          color: var(--color-gold);
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.16em;
-          margin-bottom: 0.25rem;
-        }
-
-        .flight-popup-title {
-          font-family: var(--font-serif);
-          font-size: 1.15rem;
-          color: var(--color-burgundy);
-          margin: 0 0 0.25rem;
-        }
-
-        .flight-popup-address {
-          font-size: 0.82rem;
-          color: #554840;
-          margin: 0 0 0.5rem;
-        }
-
-        .flight-popup-meta {
-          display: flex;
-          gap: 0.75rem;
-          font-size: 0.75rem;
-          color: var(--color-burgundy);
+          gap: 0.5rem;
+          font-size: 0.78rem;
           font-weight: 600;
         }
 
-        /* 2. Column 2: Visitor Panel */
+        .topbar-badge {
+          background-color: rgba(212, 171, 101, 0.25);
+          color: var(--color-gold-light);
+          border: 1px solid var(--color-gold);
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          padding: 0.15rem 0.45rem;
+          text-transform: uppercase;
+        }
+
+        .topbar-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .topbar-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          background: rgba(255, 255, 255, 0.1);
+          color: #FFFFFF;
+          border: 1px solid rgba(212, 171, 101, 0.3);
+          padding: 0.3rem 0.65rem;
+          font-size: 0.74rem;
+          cursor: pointer;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .topbar-btn:hover {
+          background-color: var(--color-burgundy-hover);
+          border-color: var(--color-gold);
+          color: var(--color-gold-light);
+        }
+
+        /* Map Viewport */
+        .google-map-viewport {
+          flex: 1;
+          width: 100%;
+          min-height: 440px;
+          position: relative;
+        }
+
+        .google-map-footer-bar {
+          background-color: rgba(42, 6, 11, 0.92);
+          color: #FFFFFF;
+          padding: 0.55rem 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 0.76rem;
+          border-top: 1px solid rgba(212, 171, 101, 0.25);
+        }
+
+        /* Column 2: Visitor Panel */
         .visitor-panel {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          gap: 1.75rem;
+          gap: 1.6rem;
         }
 
         .visitor-header {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.45rem;
         }
 
-        .status-live-chip {
+        /* Dynamic Status Chip */
+        .status-chip {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
@@ -589,19 +336,43 @@ export function BakeryMap() {
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: #065F46;
-          background-color: rgba(16, 185, 129, 0.12);
           padding: 0.35rem 0.8rem;
-          border: 1px solid rgba(16, 185, 129, 0.3);
           width: fit-content;
         }
 
-        .live-dot {
+        .status-chip.open {
+          color: #065F46;
+          background-color: rgba(16, 185, 129, 0.12);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-chip.closed {
+          color: #991B1B;
+          background-color: rgba(239, 68, 68, 0.12);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .status-dot {
           width: 7px;
           height: 7px;
           border-radius: 50%;
+        }
+
+        .status-chip.open .status-dot {
           background-color: #10B981;
-          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.35);
+        }
+
+        .status-chip.closed .status-dot {
+          background-color: #EF4444;
+          box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.35);
+        }
+
+        .status-sub-text {
+          font-size: 0.8rem;
+          color: #8C7B70;
+          margin: 0;
+          font-style: italic;
         }
 
         .visitor-title {
@@ -609,13 +380,13 @@ export function BakeryMap() {
           font-size: 2.1rem;
           color: var(--color-burgundy);
           line-height: 1.15;
-          margin: 0;
+          margin: 0.25rem 0 0;
         }
 
         .visitor-lead {
-          font-size: 0.98rem;
+          font-size: 0.95rem;
           color: #63554D;
-          line-height: 1.65;
+          line-height: 1.6;
           margin: 0;
         }
 
@@ -623,7 +394,7 @@ export function BakeryMap() {
         .horaires-block {
           background-color: #FFFFFF;
           border: 1px solid rgba(183, 138, 61, 0.28);
-          padding: 1.4rem 1.6rem;
+          padding: 1.3rem 1.5rem;
         }
 
         .block-eyebrow {
@@ -635,13 +406,13 @@ export function BakeryMap() {
           letter-spacing: 0.16em;
           text-transform: uppercase;
           color: var(--color-gold);
-          margin-bottom: 1rem;
+          margin-bottom: 0.9rem;
         }
 
         .schedule-rows {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.55rem;
         }
 
         .schedule-row {
@@ -659,11 +430,7 @@ export function BakeryMap() {
           padding-bottom: 0;
         }
 
-        .schedule-row.highlight .day-name {
-          font-weight: 700;
-          color: var(--color-burgundy);
-        }
-
+        .schedule-row.highlight .day-name,
         .schedule-row.highlight .day-hours {
           font-weight: 700;
           color: var(--color-burgundy);
@@ -674,18 +441,18 @@ export function BakeryMap() {
           font-style: italic;
         }
 
-        /* Mobility Block */
-        .mobility-block {
+        /* Mobility Grid */
+        .mobility-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.25rem;
+          gap: 1.1rem;
         }
 
-        .mobility-item {
+        .mobility-card {
           display: flex;
           gap: 0.75rem;
           align-items: flex-start;
-          padding: 0.9rem 1.1rem;
+          padding: 0.9rem 1rem;
           background-color: #FFFFFF;
           border: 1px solid rgba(183, 138, 61, 0.22);
         }
@@ -696,14 +463,14 @@ export function BakeryMap() {
           margin-top: 2px;
         }
 
-        .mobility-title {
+        .mobility-card-title {
           font-size: 0.82rem;
           font-weight: 700;
           color: var(--color-burgundy);
           margin-bottom: 0.2rem;
         }
 
-        .mobility-desc {
+        .mobility-card-desc {
           font-size: 0.78rem;
           color: #63554D;
           line-height: 1.45;
@@ -712,7 +479,7 @@ export function BakeryMap() {
         /* Action Buttons Row */
         .action-buttons-row {
           display: flex;
-          gap: 0.85rem;
+          gap: 0.75rem;
           flex-wrap: wrap;
           align-items: center;
         }
@@ -726,7 +493,6 @@ export function BakeryMap() {
           padding: 0.75rem 1.4rem;
           font-size: 0.86rem;
           font-weight: 600;
-          letter-spacing: 0.04em;
           border: 1px solid var(--color-burgundy);
           transition: all 0.2s ease;
           text-decoration: none;
@@ -779,15 +545,15 @@ export function BakeryMap() {
         }
 
         @media (max-width: 960px) {
-          .location-grid-layout {
+          .google-map-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
           }
-          .mobility-block {
+          .mobility-grid {
             grid-template-columns: 1fr;
           }
-          .flight-map-container {
-            min-height: 400px;
+          .google-map-viewport iframe {
+            min-height: 380px !important;
           }
         }
       `}</style>

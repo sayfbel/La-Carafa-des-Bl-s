@@ -81,3 +81,27 @@ describe('Frontend Components Test Suite', () => {
     expect(screen.getByText(/Cette fournée n'existe pas/i)).toBeInTheDocument();
   });
 });
+
+describe('Store Live Status Utility', () => {
+  it('correctly handles admin force closed override', async () => {
+    const { getStoreLiveStatus } = await import('../utils/storeStatus');
+    const status = getStoreLiveStatus({ store_status_mode: 'forced_closed', store_status_custom_message: 'Congés annuels' });
+    expect(status.isOpen).toBe(false);
+    expect(status.badgeText).toBe('Fermé Exceptionnellement');
+    expect(status.subtext).toBe('Congés annuels');
+  });
+
+  it('correctly handles admin force open override', async () => {
+    const { getStoreLiveStatus } = await import('../utils/storeStatus');
+    const status = getStoreLiveStatus({ store_status_mode: 'forced_open' });
+    expect(status.isOpen).toBe(true);
+    expect(status.badgeText).toBe('Fournil Ouvert');
+  });
+
+  it('calculates auto schedule without throwing error', async () => {
+    const { getStoreLiveStatus } = await import('../utils/storeStatus');
+    const status = getStoreLiveStatus({ store_status_mode: 'auto' });
+    expect(typeof status.isOpen).toBe('boolean');
+    expect(status.badgeText).toBeTruthy();
+  });
+});
