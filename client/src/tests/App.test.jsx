@@ -70,6 +70,19 @@ describe('Frontend Components Test Suite', () => {
     expect(screen.getByText(/Découvrir nos créations/i)).toBeInTheDocument();
   });
 
+  it('App renders Notre Histoire page with monumental artisan headline and timeline', () => {
+    render(
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={['/notre-histoire']}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getAllByText(/Maison Artisanale Fondée sur la Tradition/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/Le temps ne respecte rien de ce qui se fait sans lui/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pourquoi Nous Avons Choisi le Levain Naturel/i)).toBeInTheDocument();
+    expect(screen.getByText(/24 Heures dans le Secret du Fournil/i)).toBeInTheDocument();
+  });
+
   it('Navigating to invalid route renders 404 page', () => {
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={['/une-fournee-qui-nexiste-pas']}>
