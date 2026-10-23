@@ -24,10 +24,12 @@ import { AdminMessagesPage } from '../pages/admin/AdminMessagesPage';
 import { AdminContentPage } from '../pages/admin/AdminContentPage';
 import { AdminSettingsPage } from '../pages/admin/AdminSettingsPage';
 import { AdminSecurityPage } from '../pages/admin/AdminSecurityPage';
+import { ScrollToTop } from '../components/ScrollToTop';
 
 export function App() {
   return (
     <AuthProvider>
+      <ScrollToTop />
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
