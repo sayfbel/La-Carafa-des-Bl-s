@@ -5,7 +5,7 @@ import { ArtisanSeal } from '../components/brand/ArtisanSeal';
 import { FlourSackIllustration } from '../components/brand/FlourSackIllustration';
 import { WheatDecoration } from '../components/brand/WheatDecoration';
 import { WheatEarWatermark } from '../components/brand/WheatEarWatermark';
-import { BakerySimpleMap } from '../components/BakerySimpleMap';
+import { BakeryMap } from '../components/BakeryMap';
 import { api } from '../services/api';
 
 function CroissantIcon({ size = 20, color = 'var(--color-gold)' }) {
@@ -883,8 +883,8 @@ export function HomePage() {
             </p>
           </div>
 
-          {/* Dedicated react-simple-maps Component (Editorial & Container-Free) */}
-          <BakerySimpleMap />
+          {/* FlightAirport-Style Interactive Map & Fournil Hub */}
+          <BakeryMap />
         </div>
       </section>
 
