@@ -51,7 +51,21 @@ export const api = {
     me: () => fetchJson('/admin/auth/me'),
     getStats: () => fetchJson('/admin/stats'),
 
-    // Products
+    // Products & Uploads
+    uploadImage: async (file) => {
+      const formData = new FormData();
+      formData.append('image', file);
+      const response = await fetch(`${API_BASE}/admin/upload`, {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        throw new Error(data?.error?.message || `Erreur d'upload (${response.status})`);
+      }
+      return data;
+    },
     getProducts: () => fetchJson('/admin/products'),
     createProduct: (data) => fetchJson('/admin/products', {
       method: 'POST',

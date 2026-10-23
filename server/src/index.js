@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { config } from './config/env.js';
 import { logger } from './utils/logger.js';
@@ -35,8 +36,11 @@ app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 app.use(cookieParser());
 
-// Static Uploads & Public Assets
-const uploadsDir = path.resolve(__dirname, '../../uploads');
+// Static Uploads & Public Assets (Stored in server/uploads)
+const uploadsDir = path.resolve(__dirname, '../uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 app.use('/uploads', express.static(uploadsDir));
 
 // Request Logger (Development & Debug)

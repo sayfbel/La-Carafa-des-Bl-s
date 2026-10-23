@@ -441,3 +441,33 @@ export async function getAuditLogs(req, res, next) {
     next(err);
   }
 }
+
+// 10. Image Upload
+export async function uploadImage(req, res, next) {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        error: { message: 'Aucun fichier image sélectionné.' }
+      });
+    }
+
+    const fileUrl = `/uploads/${req.file.filename}`;
+    await recordAudit(req.admin.id, 'IMAGE_UPLOAD', 'file', req.file.filename, {
+      originalname: req.file.originalname,
+      size: req.file.size
+    });
+
+    res.status(201).json({
+      success: true,
+      data: {
+        url: fileUrl,
+        filename: req.file.filename,
+        mimetype: req.file.mimetype,
+        size: req.file.size
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+}

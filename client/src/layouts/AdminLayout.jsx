@@ -9,8 +9,7 @@ import {
   Settings,
   ShieldAlert,
   LogOut,
-  ExternalLink,
-  Wheat
+  ExternalLink
 } from 'lucide-react';
 import { useAuth } from '../features/auth/AuthContext';
 
@@ -20,8 +19,27 @@ export function AdminLayout() {
 
   if (loading) {
     return (
-      <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Wheat size={40} className="spin-slow" style={{ color: 'var(--color-gold)' }} />
+      <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F4EFE6' }}>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--color-gold)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="spin-slow"
+        >
+          <path d="M2 22 16 8" />
+          <path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" />
+          <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" />
+          <path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" />
+          <path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z" />
+          <path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" />
+          <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" />
+          <path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" />
+        </svg>
       </div>
     );
   }
@@ -46,42 +64,47 @@ export function AdminLayout() {
   ];
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#F4EFE6' }}>
-      {/* Sidebar */}
-      <aside
-        style={{
-          width: '280px',
-          backgroundColor: 'var(--color-burgundy-dark)',
-          color: '#FFF',
-          display: 'flex',
-          flexDirection: 'column',
-          flexShrink: 0
-        }}
-      >
+    <div className="admin-root-layout">
+      {/* Sidebar with sticky 100vh height, scrollable nav, and fixed bottom actions */}
+      <aside className="admin-sidebar" aria-label="Navigation Administration">
         {/* Brand Header */}
-        <div style={{ padding: '1.75rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <Wheat color="var(--color-gold)" size={28} />
-            <div>
-              <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 700, letterSpacing: '0.1em' }}>
-                LA CARAFA
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-gold)', letterSpacing: '0.15em' }}>
-                ADMINISTRATION
-              </div>
-            </div>
+        <div className="admin-brand-header">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--color-gold)"
+            strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ flexShrink: 0 }}
+            aria-hidden="true"
+          >
+            <path d="M2 22 16 8" />
+            <path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" />
+            <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" />
+            <path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" />
+            <path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z" />
+            <path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" />
+            <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" />
+            <path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" />
+          </svg>
+          <div className="admin-brand-text">
+            <div className="admin-brand-title">LA CARAFA</div>
+            <div className="admin-brand-sub">ADMINISTRATION</div>
           </div>
         </div>
 
-        {/* User Info Card */}
-        <div style={{ padding: '1.25rem 1.5rem', backgroundColor: 'rgba(0,0,0,0.15)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ fontSize: '0.82rem', color: 'var(--color-cream)' }}>Connecté en tant que :</div>
-          <div style={{ fontWeight: 600, fontSize: '0.95rem', color: '#FFF' }}>{admin.full_name}</div>
-          <div style={{ fontSize: '0.78rem', color: 'var(--color-gold)' }}>{admin.email}</div>
+        {/* User Info Card (Compact on desktop, hidden on compact rail) */}
+        <div className="admin-user-card">
+          <div className="admin-user-label">Connecté en tant que :</div>
+          <div className="admin-user-name">{admin.full_name}</div>
+          <div className="admin-user-email">{admin.email}</div>
         </div>
 
-        {/* Nav Links */}
-        <nav style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.35rem', flex: 1 }}>
+        {/* Scrollable Nav Links: middle area scrolls if viewport height is small */}
+        <nav className="admin-nav-scroll" aria-label="Pages d'administration">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -89,72 +112,254 @@ export function AdminLayout() {
                 key={item.to}
                 to={item.to}
                 end={item.end}
-                style={({ isActive }) => ({
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.85rem',
-                  padding: '0.75rem 1rem',
-                  borderRadius: 0,
-                  color: isActive ? '#FFF' : '#E8DDD0',
-                  backgroundColor: isActive ? 'var(--color-burgundy)' : 'transparent',
-                  fontWeight: isActive ? 600 : 500,
-                  fontSize: '0.92rem',
-                  transition: 'background var(--transition-fast)'
-                })}
+                title={item.label}
+                className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
               >
-                <Icon size={18} color="var(--color-gold)" />
-                <span>{item.label}</span>
+                <Icon size={19} color="var(--color-gold)" style={{ flexShrink: 0 }} />
+                <span className="admin-nav-label">{item.label}</span>
               </NavLink>
             );
           })}
         </nav>
 
-        {/* Bottom Actions: View Site & Logout */}
-        <div style={{ padding: '1.25rem 1rem', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {/* Fixed Bottom Actions: Logout is ALWAYS visible */}
+        <div className="admin-bottom-actions">
           <Link
             to="/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              color: 'var(--color-cream)',
-              padding: '0.6rem 1rem',
-              borderRadius: 0,
-              fontSize: '0.88rem'
-            }}
+            title="Voir le site public"
+            className="admin-action-link"
           >
-            <ExternalLink size={16} />
-            <span>Voir le site public</span>
+            <ExternalLink size={18} style={{ flexShrink: 0 }} />
+            <span className="admin-action-label">Voir le site public</span>
           </Link>
 
           <button
             onClick={handleLogout}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              color: '#FCA5A5',
-              background: 'none',
-              border: 'none',
-              padding: '0.6rem 1rem',
-              borderRadius: 0,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              textAlign: 'left'
-            }}
+            title="Se déconnecter"
+            className="admin-logout-btn"
           >
-            <LogOut size={16} />
-            <span>Se déconnecter</span>
+            <LogOut size={18} style={{ flexShrink: 0 }} />
+            <span className="admin-action-label">Se déconnecter</span>
           </button>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, padding: '2.5rem', overflowY: 'auto' }}>
+      <main className="admin-main-viewport">
         <Outlet />
       </main>
+
+      <style>{`
+        .admin-root-layout {
+          display: flex;
+          min-height: 100vh;
+          background-color: #F4EFE6;
+          position: relative;
+        }
+
+        .admin-sidebar {
+          width: 270px;
+          height: 100vh;
+          position: sticky;
+          top: 0;
+          background-color: var(--color-burgundy-dark);
+          color: #FFF;
+          display: flex;
+          flex-direction: column;
+          flex-shrink: 0;
+          z-index: 90;
+          border-right: 1px solid rgba(255, 255, 255, 0.08);
+          transition: width 0.25s ease;
+          overflow: hidden;
+        }
+
+        .admin-brand-header {
+          padding: 1.5rem 1.25rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-shrink: 0;
+        }
+
+        .admin-brand-text {
+          display: flex;
+          flex-direction: column;
+          white-space: nowrap;
+        }
+
+        .admin-brand-title {
+          font-family: var(--font-serif);
+          font-size: 1.15rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #FFF;
+        }
+
+        .admin-brand-sub {
+          font-size: 0.72rem;
+          color: var(--color-gold);
+          letter-spacing: 0.16em;
+          font-weight: 600;
+        }
+
+        .admin-user-card {
+          padding: 1rem 1.25rem;
+          background-color: rgba(0, 0, 0, 0.18);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          flex-shrink: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .admin-user-label {
+          font-size: 0.78rem;
+          color: var(--color-cream);
+          opacity: 0.85;
+        }
+
+        .admin-user-name {
+          font-weight: 600;
+          font-size: 0.92rem;
+          color: #FFF;
+          margin-top: 0.15rem;
+        }
+
+        .admin-user-email {
+          font-size: 0.75rem;
+          color: var(--color-gold);
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .admin-nav-scroll {
+          padding: 1rem 0.75rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          flex: 1;
+          overflow-y: auto;
+          overflow-x: hidden;
+          min-height: 0;
+        }
+
+        .admin-nav-scroll::-webkit-scrollbar {
+          width: 4px;
+        }
+        .admin-nav-scroll::-webkit-scrollbar-thumb {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .admin-nav-item {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 0.7rem 0.9rem;
+          border-radius: 0;
+          color: #E8DDD0;
+          background-color: transparent;
+          font-weight: 500;
+          font-size: 0.9rem;
+          text-decoration: none;
+          transition: background-color 0.15s ease, color 0.15s ease;
+          white-space: nowrap;
+        }
+
+        .admin-nav-item:hover {
+          background-color: rgba(255, 255, 255, 0.07);
+          color: #FFF;
+        }
+
+        .admin-nav-item.active {
+          background-color: var(--color-burgundy);
+          color: #FFF;
+          font-weight: 600;
+          box-shadow: inset 3px 0 0 var(--color-gold);
+        }
+
+        .admin-bottom-actions {
+          padding: 1rem 0.75rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          background-color: var(--color-burgundy-dark);
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          flex-shrink: 0;
+        }
+
+        .admin-action-link, .admin-logout-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          padding: 0.65rem 0.9rem;
+          border-radius: 0;
+          font-size: 0.88rem;
+          text-decoration: none;
+          white-space: nowrap;
+          border: none;
+          background: none;
+          cursor: pointer;
+          width: 100%;
+          text-align: left;
+          transition: background-color 0.15s ease;
+        }
+
+        .admin-action-link {
+          color: var(--color-cream);
+        }
+        .admin-action-link:hover {
+          background-color: rgba(255, 255, 255, 0.06);
+          color: #FFF;
+        }
+
+        .admin-logout-btn {
+          color: #FCA5A5;
+        }
+        .admin-logout-btn:hover {
+          background-color: rgba(239, 68, 68, 0.15);
+          color: #FECACA;
+        }
+
+        .admin-main-viewport {
+          flex: 1;
+          min-width: 0;
+          padding: 2.25rem 2.5rem;
+          overflow-y: auto;
+        }
+
+        /* Responsive Compact Rail Mode: when screen is narrow */
+        @media (max-width: 900px) {
+          .admin-sidebar {
+            width: 70px;
+          }
+
+          .admin-brand-header {
+            justify-content: center;
+            padding: 1.25rem 0.5rem;
+          }
+
+          .admin-brand-text,
+          .admin-user-card,
+          .admin-nav-label,
+          .admin-action-label {
+            display: none !important;
+          }
+
+          .admin-nav-item,
+          .admin-action-link,
+          .admin-logout-btn {
+            justify-content: center !important;
+            padding: 0.75rem 0 !important;
+          }
+
+          .admin-main-viewport {
+            padding: 1.5rem 1rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }

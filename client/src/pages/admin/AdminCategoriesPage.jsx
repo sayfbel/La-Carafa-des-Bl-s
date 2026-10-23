@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Edit, Trash2, AlertCircle, Check } from 'lucide-react';
+import { Plus, Edit, Trash2, AlertCircle, Check, X } from 'lucide-react';
 import { api } from '../../services/api';
 
 export function AdminCategoriesPage() {
@@ -141,7 +141,7 @@ export function AdminCategoriesPage() {
       <div
         style={{
           backgroundColor: '#FFFFFF',
-          borderRadius: 'var(--radius-lg)',
+          borderRadius: 0,
           border: '1px solid var(--color-border)',
           overflow: 'hidden',
           boxShadow: 'var(--shadow-sm)'
@@ -174,7 +174,7 @@ export function AdminCategoriesPage() {
                   {c.description || '—'}
                 </td>
                 <td style={{ padding: '1rem 1.25rem' }}>
-                  <span style={{ backgroundColor: 'var(--color-ivory)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', fontWeight: 600 }}>
+                  <span style={{ backgroundColor: 'var(--color-ivory)', padding: '0.2rem 0.6rem', borderRadius: 0, fontWeight: 600 }}>
                     {c.products_count || 0} produit(s)
                   </span>
                 </td>
@@ -202,13 +202,13 @@ export function AdminCategoriesPage() {
         </table>
       </div>
 
-      {/* Modal */}
+      {/* Modal with Fixed Header, Scrollable Content, and Fixed Footer */}
       {modalOpen && (
         <div
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backgroundColor: 'rgba(0,0,0,0.55)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -219,73 +219,138 @@ export function AdminCategoriesPage() {
           <div
             style={{
               backgroundColor: '#FFF',
-              borderRadius: 'var(--radius-lg)',
-              padding: '2rem',
-              maxWidth: '520px',
-              width: '100%'
+              borderRadius: 0,
+              maxWidth: '540px',
+              width: '100%',
+              maxHeight: '85vh',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: 'var(--shadow-lg)',
+              border: '1px solid var(--color-border)',
+              overflow: 'hidden'
             }}
           >
-            <h2 style={{ fontSize: '1.5rem', color: 'var(--color-burgundy)', marginBottom: '1.5rem' }}>
-              {editingCategory ? 'Modifier la catégorie' : 'Créer une catégorie'}
-            </h2>
+            {/* Modal Header: Fixed */}
+            <div
+              style={{
+                padding: '1.25rem 1.75rem',
+                borderBottom: '1px solid var(--color-border)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                backgroundColor: '#FAF7F2',
+                flexShrink: 0
+              }}
+            >
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-burgundy)', margin: 0 }}>
+                {editingCategory ? 'Modifier la catégorie' : 'Créer une catégorie'}
+              </h2>
+              <button
+                type="button"
+                onClick={() => setModalOpen(false)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', padding: '0.25rem' }}
+                title="Fermer"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
-            <form onSubmit={handleSave}>
-              <div className="form-group">
-                <label className="form-label" htmlFor="cat-name">Nom de la catégorie *</label>
-                <input
-                  id="cat-name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  onBlur={handleNameBlur}
-                  className="form-input"
-                  placeholder="Ex: Viennoiseries"
-                />
+            {/* Form wrapping body and fixed footer */}
+            <form
+              onSubmit={handleSave}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                minHeight: 0,
+                overflow: 'hidden'
+              }}
+            >
+              {/* Modal Body: Scrollable fields */}
+              <div
+                style={{
+                  flex: 1,
+                  overflowY: 'auto',
+                  padding: '1.5rem 1.75rem'
+                }}
+              >
+                <div className="form-group">
+                  <label className="form-label" htmlFor="cat-name">Nom de la catégorie *</label>
+                  <input
+                    id="cat-name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onBlur={handleNameBlur}
+                    className="form-input"
+                    placeholder="Ex: Viennoiseries"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="cat-slug">Identifiant URL (slug) *</label>
+                  <input
+                    id="cat-slug"
+                    type="text"
+                    required
+                    value={formData.slug}
+                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                    className="form-input"
+                    placeholder="viennoiseries"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="cat-order">Ordre d'affichage</label>
+                  <input
+                    id="cat-order"
+                    type="number"
+                    min="1"
+                    value={formData.display_order}
+                    onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
+                    className="form-input"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="cat-desc">Description</label>
+                  <textarea
+                    id="cat-desc"
+                    rows={3}
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="form-textarea"
+                    placeholder="Courte phrase mise en valeur sur les cartes d'accueil..."
+                  />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="cat-slug">Identifiant URL (slug) *</label>
-                <input
-                  id="cat-slug"
-                  type="text"
-                  required
-                  value={formData.slug}
-                  onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                  className="form-input"
-                  placeholder="viennoiseries"
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label" htmlFor="cat-order">Ordre d'affichage</label>
-                <input
-                  id="cat-order"
-                  type="number"
-                  min="1"
-                  value={formData.display_order}
-                  onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
-                  className="form-input"
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label" htmlFor="cat-desc">Description</label>
-                <textarea
-                  id="cat-desc"
-                  rows={3}
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="form-textarea"
-                  placeholder="Courte phrase mise en valeur sur les cartes d'accueil..."
-                />
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1.5rem' }}>
-                <button type="button" onClick={() => setModalOpen(false)} className="btn btn-outline" style={{ padding: '0.6rem 1.25rem' }}>
+              {/* Modal Footer: Fixed Confirmation Buttons ALWAYS Visible */}
+              <div
+                style={{
+                  padding: '1rem 1.75rem',
+                  borderTop: '1px solid var(--color-border)',
+                  backgroundColor: '#FAF7F2',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  gap: '1rem',
+                  flexShrink: 0
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(false)}
+                  className="btn btn-outline"
+                  style={{ padding: '0.6rem 1.25rem' }}
+                >
                   Annuler
                 </button>
-                <button type="submit" className="btn btn-primary" style={{ padding: '0.6rem 1.5rem' }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ padding: '0.6rem 1.5rem' }}
+                >
                   Enregistrer
                 </button>
               </div>

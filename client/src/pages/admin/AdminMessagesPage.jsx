@@ -77,7 +77,7 @@ export function AdminMessagesPage() {
         <div
           style={{
             backgroundColor: '#FFFFFF',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             overflow: 'hidden',
             boxShadow: 'var(--shadow-sm)'
@@ -110,7 +110,7 @@ export function AdminMessagesPage() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.25rem' }}>
                       <strong style={{ color: 'var(--color-text-main)', fontSize: '1rem' }}>{m.name}</strong>
                       {m.status === 'unread' && (
-                        <span style={{ backgroundColor: 'var(--color-burgundy)', color: '#FFF', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-full)', fontWeight: 700 }}>
+                        <span style={{ backgroundColor: 'var(--color-burgundy)', color: '#FFF', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: 0, fontWeight: 700 }}>
                           NOUVEAU
                         </span>
                       )}
@@ -156,7 +156,7 @@ export function AdminMessagesPage() {
           <div
             style={{
               backgroundColor: '#FFFFFF',
-              borderRadius: 'var(--radius-lg)',
+              borderRadius: 0,
               border: '1px solid var(--color-border)',
               padding: '2rem',
               boxShadow: 'var(--shadow-sm)'

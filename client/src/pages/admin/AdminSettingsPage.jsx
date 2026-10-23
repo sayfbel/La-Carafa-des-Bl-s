@@ -55,7 +55,7 @@ export function AdminSettingsPage() {
         <div
           style={{
             backgroundColor: '#FFFFFF',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             padding: '2rem',
             marginBottom: '2rem',

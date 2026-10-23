@@ -31,5 +31,7 @@ Thumbs.db
 
 # Uploaded / Generated files
 uploads/
+server/uploads/*
+!server/uploads/.gitkeep
 temp/
 scratch/

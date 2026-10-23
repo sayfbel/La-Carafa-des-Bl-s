@@ -60,14 +60,14 @@ export function AdminDashboardPage() {
           style={{
             backgroundColor: '#FFFFFF',
             padding: '1.5rem',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             boxShadow: 'var(--shadow-sm)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>Produits au catalogue</span>
-            <div style={{ padding: '0.5rem', borderRadius: '50%', backgroundColor: 'rgba(183, 138, 61, 0.1)', color: 'var(--color-gold)' }}>
+            <div style={{ padding: '0.5rem', borderRadius: 0, backgroundColor: 'rgba(183, 138, 61, 0.1)', color: 'var(--color-gold)' }}>
               <Package size={20} />
             </div>
           </div>
@@ -84,14 +84,14 @@ export function AdminDashboardPage() {
           style={{
             backgroundColor: '#FFFFFF',
             padding: '1.5rem',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             boxShadow: 'var(--shadow-sm)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>Catégories actives</span>
-            <div style={{ padding: '0.5rem', borderRadius: '50%', backgroundColor: 'rgba(89, 11, 22, 0.1)', color: 'var(--color-burgundy)' }}>
+            <div style={{ padding: '0.5rem', borderRadius: 0, backgroundColor: 'rgba(89, 11, 22, 0.1)', color: 'var(--color-burgundy)' }}>
               <Layers size={20} />
             </div>
           </div>
@@ -108,14 +108,14 @@ export function AdminDashboardPage() {
           style={{
             backgroundColor: '#FFFFFF',
             padding: '1.5rem',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             boxShadow: 'var(--shadow-sm)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>Messages reçus</span>
-            <div style={{ padding: '0.5rem', borderRadius: '50%', backgroundColor: stats.unreadMessages > 0 ? '#FEF2F2' : '#F0FDF4', color: stats.unreadMessages > 0 ? '#DC2626' : '#16A34A' }}>
+            <div style={{ padding: '0.5rem', borderRadius: 0, backgroundColor: stats.unreadMessages > 0 ? '#FEF2F2' : '#F0FDF4', color: stats.unreadMessages > 0 ? '#DC2626' : '#16A34A' }}>
               <Inbox size={20} />
             </div>
           </div>
@@ -141,7 +141,7 @@ export function AdminDashboardPage() {
           style={{
             backgroundColor: '#FFFFFF',
             padding: '2rem',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             boxShadow: 'var(--shadow-sm)'
           }}
@@ -182,7 +182,7 @@ export function AdminDashboardPage() {
           style={{
             backgroundColor: '#FFFFFF',
             padding: '2rem',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             boxShadow: 'var(--shadow-sm)'
           }}

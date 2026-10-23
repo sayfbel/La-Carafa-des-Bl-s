@@ -40,7 +40,7 @@ export function AdminSecurityPage() {
           marginBottom: '2.5rem'
         }}
       >
-        <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
+        <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: 0, border: '1px solid var(--color-border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--color-success)', marginBottom: '0.5rem' }}>
             <ShieldCheck size={20} />
             <strong style={{ fontSize: '1rem' }}>Sessions Sécurisées</strong>
@@ -50,7 +50,7 @@ export function AdminSecurityPage() {
           </p>
         </div>
 
-        <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
+        <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: 0, border: '1px solid var(--color-border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--color-gold)', marginBottom: '0.5rem' }}>
             <Lock size={20} />
             <strong style={{ fontSize: '1rem' }}>Hachage des Passwords</strong>
@@ -60,7 +60,7 @@ export function AdminSecurityPage() {
           </p>
         </div>
 
-        <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
+        <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: 0, border: '1px solid var(--color-border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--color-success)', marginBottom: '0.5rem' }}>
             <ShieldCheck size={20} />
             <strong style={{ fontSize: '1rem' }}>Immunité Injection SQL</strong>
@@ -75,7 +75,7 @@ export function AdminSecurityPage() {
       <div
         style={{
           backgroundColor: '#FFFFFF',
-          borderRadius: 'var(--radius-lg)',
+          borderRadius: 0,
           border: '1px solid var(--color-border)',
           overflow: 'hidden',
           boxShadow: 'var(--shadow-sm)'
@@ -107,7 +107,7 @@ export function AdminSecurityPage() {
                   {log.admin_name || log.admin_email || 'Système'}
                 </td>
                 <td style={{ padding: '0.85rem 1.25rem' }}>
-                  <span style={{ backgroundColor: 'var(--color-ivory)', color: 'var(--color-burgundy)', padding: '0.2rem 0.5rem', borderRadius: 'var(--radius-sm)', fontWeight: 600 }}>
+                  <span style={{ backgroundColor: 'var(--color-ivory)', color: 'var(--color-burgundy)', padding: '0.2rem 0.5rem', borderRadius: 0, fontWeight: 600 }}>
                     {log.action}
                   </span>
                 </td>

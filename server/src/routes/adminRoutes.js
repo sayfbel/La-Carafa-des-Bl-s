@@ -17,10 +17,12 @@ import {
   getAllMessages,
   updateMessageStatus,
   deleteMessage,
-  getAuditLogs
+  getAuditLogs,
+  uploadImage
 } from '../controllers/adminController.js';
 import { requireAdminAuth } from '../middleware/authMiddleware.js';
 import { loginRateLimiter } from '../middleware/rateLimiter.js';
+import { uploadSingleImage } from '../middleware/uploadMiddleware.js';
 
 const router = Router();
 
@@ -33,6 +35,9 @@ router.use(requireAdminAuth);
 
 router.get('/auth/me', getCurrentAdmin);
 router.get('/stats', getDashboardStats);
+
+// Uploads
+router.post('/upload', uploadSingleImage, uploadImage);
 
 // Products
 router.get('/products', getAllProductsAdmin);
