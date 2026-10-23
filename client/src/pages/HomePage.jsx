@@ -93,7 +93,7 @@ export function HomePage() {
       <section
         style={{
           position: 'relative',
-          padding: '3rem 0 3.5rem',
+          padding: '0 0 3.5rem',
           backgroundColor: 'var(--color-ivory)',
           overflow: 'hidden'
         }}
