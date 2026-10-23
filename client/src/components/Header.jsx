@@ -75,7 +75,7 @@ export function Header() {
               backgroundColor: 'var(--color-burgundy-dark)',
               color: 'var(--color-white)',
               padding: '0.6rem 1.4rem',
-              borderRadius: 'var(--radius-full)',
+              borderRadius: 0,
               fontSize: '0.82rem',
               fontWeight: 700,
               letterSpacing: '0.12em',

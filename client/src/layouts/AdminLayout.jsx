@@ -94,7 +94,7 @@ export function AdminLayout() {
                   alignItems: 'center',
                   gap: '0.85rem',
                   padding: '0.75rem 1rem',
-                  borderRadius: 'var(--radius-md)',
+                  borderRadius: 0,
                   color: isActive ? '#FFF' : '#E8DDD0',
                   backgroundColor: isActive ? 'var(--color-burgundy)' : 'transparent',
                   fontWeight: isActive ? 600 : 500,
@@ -121,7 +121,7 @@ export function AdminLayout() {
               gap: '0.6rem',
               color: 'var(--color-cream)',
               padding: '0.6rem 1rem',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 0,
               fontSize: '0.88rem'
             }}
           >
@@ -139,7 +139,7 @@ export function AdminLayout() {
               background: 'none',
               border: 'none',
               padding: '0.6rem 1rem',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 0,
               fontSize: '0.88rem',
               cursor: 'pointer',
               textAlign: 'left'

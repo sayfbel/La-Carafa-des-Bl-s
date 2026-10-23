@@ -207,7 +207,7 @@ export function HomePage() {
                   fontWeight: 600,
                   letterSpacing: '0.02em',
                   boxShadow: 'var(--shadow-burgundy)',
-                  borderRadius: 'var(--radius-full)'
+                  borderRadius: 0
                 }}
               >
                 <span>{settings.homepage_hero_cta || 'Découvrir nos créations'}</span>
@@ -643,6 +643,7 @@ export function HomePage() {
           padding: 1rem 1.25rem;
           background-color: #FAF5EA;
           border: none;
+          border-radius: 0;
           text-align: left;
           cursor: pointer;
           transition: background-color 0.2s ease, transform 0.2s ease;

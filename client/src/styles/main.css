@@ -79,7 +79,17 @@ button, input, textarea, select {
   color: var(--color-text-muted);
 }
 
-/* Button Component Styles */
+/* Button Component Styles — Pure Architectural Square Corners (No Radius) */
+button,
+.btn,
+a.btn,
+.find-us-btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  border-radius: 0 !important;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -88,7 +98,7 @@ button, input, textarea, select {
   padding: 0.75rem 1.75rem;
   font-weight: 500;
   font-size: 0.95rem;
-  border-radius: var(--radius-full);
+  border-radius: 0;
   cursor: pointer;
   transition: all var(--transition-fast);
   border: 1px solid transparent;
