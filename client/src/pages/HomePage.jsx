@@ -4,6 +4,9 @@ import { ArrowRight, Clock, MapPin, Sparkles, ShieldCheck } from 'lucide-react';
 import { ArtisanSeal } from '../components/brand/ArtisanSeal';
 import { WheatDecoration } from '../components/brand/WheatDecoration';
 import { WheatEarWatermark } from '../components/brand/WheatEarWatermark';
+import { BreadWatermark } from '../components/brand/BreadWatermark';
+import { CroissantWatermark } from '../components/brand/CroissantWatermark';
+import { SectionWaveDivider } from '../components/brand/SectionWaveDivider';
 import { BakeryMap } from '../components/BakeryMap';
 import { api } from '../services/api';
 
@@ -90,7 +93,7 @@ export function HomePage() {
       <section
         style={{
           position: 'relative',
-          padding: '3rem 0 2rem',
+          padding: '3rem 0 3.5rem',
           backgroundColor: 'var(--color-ivory)',
           overflow: 'hidden'
         }}
@@ -100,6 +103,14 @@ export function HomePage() {
           style={{ bottom: '-20px', left: '-15px' }}
           opacity={0.35}
           width={140}
+        />
+
+        {/* Delicate background bread watermark */}
+        <BreadWatermark
+          size={240}
+          opacity={0.04}
+          color="var(--color-gold)"
+          style={{ top: '25px', left: '42%', transform: 'rotate(-6deg)' }}
         />
 
         {/* Right Background Image with smooth gradient fade to the left */}
@@ -220,17 +231,35 @@ export function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Organic Wave Divider transitioning into Section 2 (#FFFFFF) */}
+        <SectionWaveDivider fill="#FFFFFF" position="bottom" variant="primary" />
       </section>
 
       {/* 2. LIVE INTERACTIVE FEATURE: LES FOURNÉES DU JOUR (TASTESKILL "ONE LIVE THING") */}
       <section
         style={{
-          padding: '5rem 0',
+          padding: '5rem 0 5.5rem',
           backgroundColor: '#FFFFFF',
-          position: 'relative'
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div className="container">
+        {/* Delicate Bakery Watermarks: Artisan Sourdough Boule & Wheat Ear */}
+        <BreadWatermark
+          size={320}
+          opacity={0.05}
+          color="var(--color-gold)"
+          style={{ top: '20px', right: '-40px', transform: 'rotate(-8deg)' }}
+        />
+        <WheatEarWatermark
+          size={240}
+          opacity={0.04}
+          color="var(--color-gold)"
+          style={{ bottom: '40px', left: '-30px', transform: 'rotate(25deg)' }}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '780px', marginBottom: '2.5rem' }}>
             <h2
               style={{
@@ -319,6 +348,9 @@ export function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Organic Wave Divider transitioning into Section 3 (#2A060B) */}
+        <SectionWaveDivider fill="#2A060B" position="bottom" variant="reverse" />
       </section>
 
       {/* 3. SHOWCASE DES CRÉATIONS — CURATED ARTISAN EXHIBITION */}
@@ -326,16 +358,23 @@ export function HomePage() {
         style={{
           backgroundColor: '#2A060B',
           color: '#FAF5EA',
-          padding: '5.5rem 0',
+          padding: '5.5rem 0 6rem',
           position: 'relative',
           overflow: 'hidden'
         }}
       >
+        {/* Delicate Bakery Watermarks: Wheat Ear & Artisan Loaf */}
         <WheatEarWatermark
           size={320}
           opacity={0.06}
           color="var(--color-gold)"
           style={{ top: '-40px', right: '-40px', transform: 'rotate(15deg)' }}
+        />
+        <BreadWatermark
+          size={280}
+          opacity={0.045}
+          color="var(--color-gold)"
+          style={{ bottom: '30px', left: '-30px', transform: 'rotate(12deg)' }}
         />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -442,18 +481,36 @@ export function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Organic Wave Divider transitioning into Section 4 (#FAF5EA) */}
+        <SectionWaveDivider fill="#FAF5EA" position="bottom" variant="primary" />
       </section>
 
       {/* 4. NOTRE HISTOIRE & SAVOIR-FAIRE (NO 01/02/03 NUMBERS, PURE CRAFT PILLARS) */}
       <section
         id="notre-histoire"
         style={{
-          padding: '6rem 0',
+          padding: '6rem 0 6.5rem',
           backgroundColor: '#FAF5EA',
-          position: 'relative'
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div className="container">
+        {/* Delicate Bakery Watermarks: Viennoiserie / Ptiepan & Wheat Ear */}
+        <CroissantWatermark
+          size={320}
+          opacity={0.055}
+          color="var(--color-gold)"
+          style={{ top: '30px', right: '-30px', transform: 'rotate(12deg)' }}
+        />
+        <WheatEarWatermark
+          size={260}
+          opacity={0.045}
+          color="var(--color-gold)"
+          style={{ bottom: '35px', left: '-25px', transform: 'rotate(-18deg)' }}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '780px', marginBottom: '3.5rem' }}>
             <h2
               style={{
@@ -572,18 +629,36 @@ export function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Organic Wave Divider transitioning into Section 5 (#FFFFFF) */}
+        <SectionWaveDivider fill="#FFFFFF" position="bottom" variant="reverse" />
       </section>
 
       {/* 5. LOCALISATION & HORAIRES D'OUVERTURE AVEC GOOGLE MAPS OFFICIEL */}
       <section
         id="localisation"
         style={{
-          padding: '6rem 0',
+          padding: '6rem 0 6.5rem',
           backgroundColor: '#FFFFFF',
-          position: 'relative'
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div className="container">
+        {/* Delicate Bakery Watermarks: Artisan Bread & Croissant Viennoiserie */}
+        <BreadWatermark
+          size={300}
+          opacity={0.045}
+          color="var(--color-gold)"
+          style={{ top: '25px', left: '-35px', transform: 'rotate(-10deg)' }}
+        />
+        <CroissantWatermark
+          size={280}
+          opacity={0.045}
+          color="var(--color-gold)"
+          style={{ bottom: '40px', right: '-35px', transform: 'rotate(-15deg)' }}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '780px', marginBottom: '3.5rem' }}>
             <h2
               style={{
@@ -613,6 +688,9 @@ export function HomePage() {
           {/* Official Google Maps & Visitor Hub */}
           <BakeryMap settings={settings} />
         </div>
+
+        {/* Organic Wave Divider transitioning into Footer (#1A0205) */}
+        <SectionWaveDivider fill="#1A0205" position="bottom" variant="primary" />
       </section>
 
       {/* Tasteskill Pure CSS Stylesheet */}
