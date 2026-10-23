@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, MapPin, Sparkles, ShieldCheck } from 'lucide-react';
 import { ArtisanSeal } from '../components/brand/ArtisanSeal';
+import { WheatDecoration } from '../components/brand/WheatDecoration';
 import { WheatEarWatermark } from '../components/brand/WheatEarWatermark';
 import { BakeryMap } from '../components/BakeryMap';
 import { api } from '../services/api';
-import { getStoreLiveStatus } from '../utils/storeStatus';
 
 export function HomePage() {
   const [content, setContent] = useState({
     settings: {
+      homepage_hero_kicker: 'BOULANGERIE • PÂTISSERIE ARTISANALE',
       homepage_hero_title: 'Le goût des bonnes choses.',
-      homepage_hero_subtitle: 'Boulangerie et pâtisserie artisanale à Épinay-sur-Orge. Pains au levain naturel, viennoiseries pur beurre et créations du jour façonnées à la main.',
+      homepage_hero_subtitle: 'Des produits artisanaux, préparés chaque jour avec des ingrédients sélectionnés et beaucoup de passion.',
       homepage_hero_cta: 'Découvrir nos créations',
       story_title: 'Le savoir-faire, chaque jour.',
       story_text_1: 'Artisans boulangers-pâtissiers à Épinay-sur-Orge, nous mettons tout notre cœur dans la préparation de pains authentiques et de pâtisseries maison.',
@@ -41,7 +42,6 @@ export function HomePage() {
   }, []);
 
   const { settings } = content;
-  const storeStatus = getStoreLiveStatus(settings);
 
   const moments = [
     {
@@ -86,152 +86,136 @@ export function HomePage() {
 
   return (
     <div style={{ position: 'relative', overflowX: 'hidden' }}>
-      {/* 1. HERO SECTION — MONUMENTAL ARTISANAL EDITORIAL (TASTESKILL DIRECTION) */}
+      {/* 1. HERO SECTION (ORIGINAL 2-COLUMN EDITORIAL COMPOSITION) */}
       <section
         style={{
           position: 'relative',
-          padding: '4.5rem 0 3.5rem',
-          backgroundColor: '#F8F3EA',
+          padding: '3rem 0 2rem',
+          backgroundColor: 'var(--color-ivory)',
           overflow: 'hidden'
         }}
       >
+        {/* Subtle Botanical Wheat Stalk climbing from bottom-left corner */}
+        <WheatDecoration
+          style={{ bottom: '-20px', left: '-15px' }}
+          opacity={0.35}
+          width={140}
+        />
+
+        {/* Right Background Image with smooth gradient fade to the left */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '56%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: 1,
+            overflow: 'hidden'
+          }}
+          className="hero-right-bg"
+        >
+          <img
+            src="/assets/images/hero-bread.webp"
+            alt="Pains de tradition au levain cuits sur sole de pierre — La Carafa des Blés"
+            loading="eager"
+            fetchpriority="high"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 42%',
+              display: 'block',
+              WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.4) 75%, transparent 100%)',
+              maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.4) 75%, transparent 100%)'
+            }}
+          />
+        </div>
+
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="hero-editorial-grid">
-            {/* Left Content Column */}
-            <div className="hero-text-block">
-              {/* Fournil Live Status Badge */}
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                  padding: '0.4rem 0.95rem',
-                  backgroundColor: storeStatus.isOpen ? '#ECFDF5' : '#FEF2F2',
-                  border: storeStatus.isOpen ? '1px solid #10B981' : '1px solid #F87171',
-                  color: storeStatus.isOpen ? '#065F46' : '#991B1B',
-                  fontSize: '0.82rem',
-                  fontWeight: 600,
-                  marginBottom: '1.5rem'
-                }}
-              >
-                <span
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: storeStatus.isOpen ? '#10B981' : '#EF4444',
-                    display: 'inline-block'
-                  }}
-                />
-                <span>{storeStatus.badgeText}</span>
-                <span style={{ opacity: 0.6 }}>•</span>
-                <span style={{ fontSize: '0.78rem', fontWeight: 500 }}>Épinay-sur-Orge</span>
-              </div>
-
-              {/* Confident Headline — 2 lines max */}
-              <h1
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(2.5rem, 4.8vw, 4.2rem)',
-                  fontWeight: 600,
-                  color: 'var(--color-burgundy)',
-                  lineHeight: 1.08,
-                  letterSpacing: '-0.02em',
-                  margin: '0 0 1.35rem'
-                }}
-              >
-                {settings.homepage_hero_title || 'Le goût des bonnes choses.'}
-              </h1>
-
-              {/* Supporting Statement */}
-              <p
-                style={{
-                  fontSize: '1.08rem',
-                  color: '#4A3E39',
-                  lineHeight: 1.65,
-                  margin: '0 0 2.25rem',
-                  maxWidth: '520px'
-                }}
-              >
-                <span style={{ display: 'block', color: 'var(--color-burgundy)', fontWeight: 600, marginBottom: '0.35rem' }}>
-                  {settings.homepage_hero_kicker || 'Boulangerie • Pâtisserie Artisanale'}
-                </span>
-                {settings.homepage_hero_subtitle}
-              </p>
-
-              {/* Actions & Artisanal Seal */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2rem',
-                  flexWrap: 'wrap'
-                }}
-              >
-                <Link
-                  to="/produits"
-                  className="btn btn-primary"
-                  style={{
-                    padding: '0.9rem 2.25rem',
-                    fontSize: '0.95rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.02em',
-                    backgroundColor: 'var(--color-burgundy)',
-                    color: '#FFFFFF'
-                  }}
-                >
-                  <span>{settings.homepage_hero_cta || 'Découvrir nos créations'}</span>
-                  <ArrowRight size={16} />
-                </Link>
-
-                <a
-                  href="#localisation"
-                  style={{
-                    color: 'var(--color-burgundy)',
-                    fontSize: '0.92rem',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.4rem'
-                  }}
-                >
-                  <MapPin size={16} color="var(--color-gold)" />
-                  <span>15 Rue Pasteur, 91360</span>
-                </a>
-              </div>
-
-              {/* Quality Assurances */}
-              <div className="hero-quality-row">
-                <div className="quality-item">
-                  <ShieldCheck size={16} color="var(--color-gold)" />
-                  <span>Farines françaises Label Rouge</span>
-                </div>
-                <div className="quality-item">
-                  <Clock size={16} color="var(--color-gold)" />
-                  <span>Levain naturel & fermentation 24h</span>
-                </div>
-              </div>
+          <div style={{ maxWidth: '540px', padding: '4.5rem 0 4rem' }} className="hero-content-col">
+            {/* Kicker */}
+            <div
+              style={{
+                color: 'var(--color-gold)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                marginBottom: '1.25rem'
+              }}
+            >
+              {settings.homepage_hero_kicker}
             </div>
 
-            {/* Right Media Frame */}
-            <div className="hero-media-block">
-              <div className="hero-main-frame">
-                <img
-                  src="/assets/images/hero-bread.webp"
-                  alt="Pains de tradition au levain naturel cuits sur sole de pierre — La Carafa des Blés"
-                  loading="eager"
-                  fetchpriority="high"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
-                <div className="hero-badge-corner">
-                  <ArtisanSeal size={96} />
-                </div>
+            {/* Headline */}
+            <h1
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(2.75rem, 5vw, 4.4rem)',
+                fontWeight: 600,
+                color: 'var(--color-burgundy)',
+                lineHeight: 1.05,
+                letterSpacing: '-0.01em',
+                margin: '0 0 1.25rem',
+                maxWidth: '460px'
+              }}
+            >
+              {settings.homepage_hero_title || 'Le goût des bonnes choses.'}
+            </h1>
+
+            {/* Gold Accent Line */}
+            <div
+              style={{
+                width: '48px',
+                height: '2px',
+                backgroundColor: 'var(--color-gold)',
+                marginBottom: '1.5rem'
+              }}
+            />
+
+            {/* Subtitle */}
+            <p
+              style={{
+                fontSize: '1.05rem',
+                color: 'var(--color-text-main)',
+                lineHeight: 1.6,
+                maxWidth: '460px',
+                marginBottom: '2.5rem'
+              }}
+            >
+              {settings.homepage_hero_subtitle}
+            </p>
+
+            {/* CTA Button and Floating Seal */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2rem',
+                flexWrap: 'wrap'
+              }}
+            >
+              <Link
+                to="/produits"
+                className="btn btn-primary"
+                style={{
+                  padding: '0.85rem 2.2rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  boxShadow: 'var(--shadow-burgundy)',
+                  borderRadius: 'var(--radius-full)'
+                }}
+              >
+                <span>{settings.homepage_hero_cta || 'Découvrir nos créations'}</span>
+                <ArrowRight size={16} />
+              </Link>
+
+              <div style={{ transform: 'rotate(-4deg)' }} className="hero-seal-wrapper">
+                <ArtisanSeal size={105} />
               </div>
             </div>
           </div>
@@ -633,42 +617,16 @@ export function HomePage() {
 
       {/* Tasteskill Pure CSS Stylesheet */}
       <style>{`
-        /* Hero Grid */
-        .hero-editorial-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
-          align-items: center;
-        }
-
-        .hero-quality-row {
-          display: flex;
-          gap: 1.75rem;
-          margin-top: 2.25rem;
-          flex-wrap: wrap;
-        }
-
-        .quality-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: #5A4B44;
-        }
-
-        .hero-main-frame {
-          position: relative;
-          height: 480px;
-          background-color: #E6DBCF;
-          overflow: hidden;
-        }
-
-        .hero-badge-corner {
-          position: absolute;
-          bottom: 1.5rem;
-          right: 1.5rem;
-          transform: rotate(-6deg);
+        @media (max-width: 900px) {
+          .hero-right-bg {
+            width: 100% !important;
+            opacity: 0.2 !important;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%) !important;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%) !important;
+          }
+          .hero-content-col {
+            padding: 3rem 0 2.5rem !important;
+          }
         }
 
         /* Moments Interactive Bar */
@@ -930,13 +888,6 @@ export function HomePage() {
         }
 
         @media (max-width: 960px) {
-          .hero-editorial-grid {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-          }
-          .hero-main-frame {
-            height: 340px;
-          }
           .moment-detail-stage {
             grid-template-columns: 1fr;
             gap: 2rem;
