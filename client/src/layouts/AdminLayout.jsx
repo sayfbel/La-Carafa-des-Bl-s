@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet, Navigate, useNavigate, Link } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -9,13 +9,16 @@ import {
   Settings,
   ShieldAlert,
   LogOut,
-  ExternalLink
+  ExternalLink,
+  Menu,
+  X
 } from 'lucide-react';
 import { useAuth } from '../features/auth/AuthContext';
 
 export function AdminLayout() {
   const { admin, loading, logout } = useAuth();
   const navigate = useNavigate();
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   if (loading) {
     return (
@@ -53,6 +56,8 @@ export function AdminLayout() {
     navigate('/admin/login');
   };
 
+  const closeSidebar = () => setMobileSidebarOpen(false);
+
   const navItems = [
     { to: '/admin', label: 'Vue d\'ensemble', icon: LayoutDashboard, end: true },
     { to: '/admin/produits', label: 'Gestion des Produits', icon: Package },
@@ -65,8 +70,29 @@ export function AdminLayout() {
 
   return (
     <div className="admin-root-layout">
+      {/* Mobile Top Bar */}
+      <div className="admin-mobile-topbar">
+        <button
+          className="admin-mobile-menu-btn"
+          onClick={() => setMobileSidebarOpen(true)}
+          aria-label="Ouvrir le menu"
+        >
+          <Menu size={24} />
+        </button>
+        <div className="admin-mobile-brand">LA CARAFA — ADMIN</div>
+      </div>
+
+      {/* Backdrop */}
+      {mobileSidebarOpen && (
+        <div
+          className="admin-mobile-backdrop"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar with sticky 100vh height, scrollable nav, and fixed bottom actions */}
-      <aside className="admin-sidebar" aria-label="Navigation Administration">
+      <aside className={`admin-sidebar ${mobileSidebarOpen ? 'admin-sidebar--open' : ''}`} aria-label="Navigation Administration">
         {/* Brand Header */}
         <div className="admin-brand-header">
           <svg
@@ -113,6 +139,7 @@ export function AdminLayout() {
                 to={item.to}
                 end={item.end}
                 title={item.label}
+                onClick={closeSidebar}
                 className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
               >
                 <Icon size={19} color="var(--color-gold)" style={{ flexShrink: 0 }} />
@@ -130,6 +157,7 @@ export function AdminLayout() {
             rel="noopener noreferrer"
             title="Voir le site public"
             className="admin-action-link"
+            onClick={closeSidebar}
           >
             <ExternalLink size={18} style={{ flexShrink: 0 }} />
             <span className="admin-action-label">Voir le site public</span>
@@ -330,8 +358,8 @@ export function AdminLayout() {
           overflow-y: auto;
         }
 
-        /* Responsive Compact Rail Mode: when screen is narrow */
-        @media (max-width: 900px) {
+        /* Responsive: Icon rail 70px between 640px-900px, full mobile drawer < 640px */
+        @media (max-width: 900px) and (min-width: 641px) {
           .admin-sidebar {
             width: 70px;
           }
@@ -358,6 +386,108 @@ export function AdminLayout() {
           .admin-main-viewport {
             padding: 1.5rem 1rem;
           }
+        }
+
+        /* Full mobile — drawer mode */
+        @media (max-width: 640px) {
+          .admin-mobile-topbar {
+            display: flex !important;
+          }
+
+          .admin-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2000;
+            box-shadow: var(--shadow-lg);
+          }
+
+          .admin-sidebar--open {
+            transform: translateX(0);
+          }
+
+          .admin-mobile-backdrop {
+            display: block !important;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            animation: fadeIn 0.2s ease;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+          }
+
+          .admin-root-layout {
+            flex-direction: column;
+          }
+
+          .admin-main-viewport {
+            padding: 1rem;
+            padding-top: calc(1rem + 56px); /* account for topbar height */
+          }
+
+          /* Restore labels in full mobile drawer */
+          .admin-brand-text,
+          .admin-nav-label,
+          .admin-action-label {
+            display: flex !important;
+          }
+          .admin-user-card {
+            display: block !important;
+          }
+
+          .admin-nav-item,
+          .admin-action-link,
+          .admin-logout-btn {
+            justify-content: flex-start !important;
+            padding: 0.7rem 0.9rem !important;
+          }
+        }
+
+        /* Mobile top bar — hidden on desktop */
+        .admin-mobile-topbar {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 56px;
+          background-color: var(--color-burgundy-dark);
+          color: #FFF;
+          align-items: center;
+          padding: 0 1rem;
+          gap: 1rem;
+          z-index: 1100;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-mobile-menu-btn {
+          background: none;
+          border: none;
+          color: #FFF;
+          cursor: pointer;
+          padding: 0.5rem;
+          display: flex;
+          align-items: center;
+          min-height: 44px;
+          min-width: 44px;
+          justify-content: center;
+        }
+
+        .admin-mobile-brand {
+          font-family: var(--font-serif);
+          font-size: 1rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #FFF;
+        }
+
+        .admin-mobile-backdrop {
+          display: none;
         }
       `}</style>
     </div>

@@ -1214,10 +1214,43 @@ export function StoryPage() {
             border-bottom: none;
           }
           .story-manifesto-card {
-            padding: 1.75rem;
+            padding: 1.5rem 1.125rem;
           }
           .honour-seal-banner {
+            padding: 1.25rem;
+          }
+          .honour-seal-banner {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .story-main-frame img {
+            height: 260px !important;
+          }
+          .ingredients-showcase-grid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+          }
+          .ingredient-artisan-card {
+            padding: 1.5rem 1.25rem;
+          }
+          .invitation-aside-card {
             padding: 1.5rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .ledger-num {
+            font-size: 1.6rem;
+          }
+          .timeline-stage-card {
+            padding: 1.25rem !important;
+          }
+          .timeline-step-btn {
+            padding: 0.75rem !important;
+          }
+          .genesis-text-col h2,
+          .section-title-serif {
+            font-size: clamp(1.6rem, 6vw, 2.4rem) !important;
           }
         }
       `}</style>

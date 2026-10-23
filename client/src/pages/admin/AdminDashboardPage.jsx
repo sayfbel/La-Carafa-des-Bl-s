@@ -47,14 +47,7 @@ export function AdminDashboardPage() {
       </div>
 
       {/* KPI Stats Cards */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '1.5rem',
-          marginBottom: '3rem'
-        }}
-      >
+      <div className="dashboard-stats-grid" style={{ marginBottom: '3rem' }}>
         {/* Total Products */}
         <div
           style={{
@@ -129,13 +122,7 @@ export function AdminDashboardPage() {
       </div>
 
       {/* Quick Actions & Recent Activity */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem'
-        }}
-      >
+      <div className="dashboard-lower-grid">
         {/* Quick Actions */}
         <div
           style={{
@@ -228,6 +215,36 @@ export function AdminDashboardPage() {
           )}
         </div>
       </div>
+      <style>{`
+        .dashboard-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1.25rem;
+        }
+
+        .dashboard-lower-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+
+        @media (max-width: 640px) {
+          .dashboard-stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+          .dashboard-lower-grid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .dashboard-stats-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </div>
   );
 }

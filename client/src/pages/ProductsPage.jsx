@@ -65,10 +65,10 @@ export function ProductsPage() {
   };
 
   return (
-    <div style={{ padding: '3.5rem 0 5rem' }}>
+    <div style={{ padding: '3rem 0 4.5rem' }}>
       <div className="container">
         {/* Header Title */}
-        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 2.5rem' }}>
           <div
             style={{
               color: 'var(--color-gold)',
@@ -81,44 +81,31 @@ export function ProductsPage() {
           >
             NOS CRÉATIONS ARTISANALES
           </div>
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)', marginBottom: '1rem' }}>
+          <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.4rem)', marginBottom: '1rem' }}>
             Le comptoir des saveurs
           </h1>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.02rem', lineHeight: 1.6 }}>
             Tous nos produits sont façonnés à la main et cuits chaque jour sur place à Épinay-sur-Orge avec des farines de blé sélectionnées et du pur beurre français.
           </p>
         </div>
 
         {/* Filter and Search Bar */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '1.5rem',
-            backgroundColor: '#FAF5EC',
-            padding: '1.25rem 1.75rem',
-            borderRadius: 0,
-            border: '1px solid var(--color-border)',
-            marginBottom: '3rem'
-          }}
-        >
+        <div className="products-filter-bar">
           {/* Category Pills */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
+          <div className="products-category-pills">
             <button
               onClick={() => handleCategoryChange('')}
               className={`btn ${currentCategory === '' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ padding: '0.45rem 1.1rem', fontSize: '0.88rem' }}
+              style={{ padding: '0.45rem 1rem', fontSize: '0.86rem' }}
             >
-              Tous les délices ({products.length})
+              Tous ({products.length})
             </button>
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.slug)}
                 className={`btn ${currentCategory === cat.slug ? 'btn-primary' : 'btn-outline'}`}
-                style={{ padding: '0.45rem 1.1rem', fontSize: '0.88rem' }}
+                style={{ padding: '0.45rem 1rem', fontSize: '0.86rem' }}
               >
                 {cat.name}
               </button>
@@ -126,8 +113,8 @@ export function ProductsPage() {
           </div>
 
           {/* Search Form */}
-          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.5rem', minWidth: '260px' }}>
-            <div style={{ position: 'relative', width: '100%' }}>
+          <form onSubmit={handleSearchSubmit} className="products-search-form">
+            <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
               <input
                 type="text"
                 placeholder="Rechercher un pain, une douceur..."
@@ -143,11 +130,12 @@ export function ProductsPage() {
                   left: '1rem',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: 'var(--color-text-muted)'
+                  color: 'var(--color-text-muted)',
+                  pointerEvents: 'none'
                 }}
               />
             </div>
-            <button type="submit" className="btn btn-primary" style={{ padding: '0.65rem 1.25rem' }}>
+            <button type="submit" className="btn btn-primary" style={{ flexShrink: 0 }}>
               Filtrer
             </button>
           </form>
@@ -185,13 +173,7 @@ export function ProductsPage() {
 
         {/* Products Grid */}
         {!loading && products.length > 0 && (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-              gap: '2rem'
-            }}
-          >
+          <div className="products-grid">
             {products.map((product) => (
               <div
                 key={product.id}
@@ -293,9 +275,78 @@ export function ProductsPage() {
       </div>
 
       <style>{`
+        /* Products Filter Bar */
+        .products-filter-bar {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1.25rem;
+          background-color: #FAF5EC;
+          padding: 1.25rem 1.5rem;
+          border: 1px solid var(--color-border);
+          margin-bottom: 2.5rem;
+        }
+
+        .products-category-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .products-search-form {
+          display: flex;
+          gap: 0.5rem;
+          width: 100%;
+          max-width: 320px;
+        }
+
+        /* Products Grid */
+        .products-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .products-filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1rem;
+            padding: 1rem;
+          }
+          .products-search-form {
+            max-width: 100%;
+          }
+          .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+          }
+        }
+
+        @media (max-width: 500px) {
+          .products-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          .products-category-pills .btn {
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.82rem !important;
+          }
+        }
+
+        /* Product Card */
         .product-card:hover {
           transform: translateY(-5px);
           box-shadow: var(--shadow-md);
+        }
+
+        @media (hover: none) {
+          /* Disable hover lift on touch devices */
+          .product-card:hover {
+            transform: none;
+          }
         }
       `}</style>
     </div>

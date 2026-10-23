@@ -384,6 +384,7 @@ export function AdminProductsPage() {
           }}
         >
           <div
+            className="admin-modal-panel"
             style={{
               backgroundColor: '#FFF',
               borderRadius: 0,
@@ -441,7 +442,7 @@ export function AdminProductsPage() {
                   padding: '1.5rem 1.75rem'
                 }}
               >
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="admin-form-row-grid">
                   <div className="form-group">
                     <label className="form-label" htmlFor="prod-name">Nom du produit *</label>
                     <input
@@ -449,6 +450,7 @@ export function AdminProductsPage() {
                       name="name"
                       type="text"
                       required
+                      maxLength={150}
                       value={formData.name}
                       onChange={handleFormChange}
                       onBlur={handleNameBlur}
@@ -464,6 +466,7 @@ export function AdminProductsPage() {
                       name="slug"
                       type="text"
                       required
+                      maxLength={100}
                       value={formData.slug}
                       onChange={handleFormChange}
                       className="form-input"
@@ -472,7 +475,7 @@ export function AdminProductsPage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="admin-form-row-grid">
                   <div className="form-group">
                     <label className="form-label" htmlFor="prod-cat">Catégorie *</label>
                     <select
@@ -497,6 +500,7 @@ export function AdminProductsPage() {
                       type="number"
                       step="0.05"
                       min="0"
+                      max="9999.99"
                       value={formData.price}
                       onChange={handleFormChange}
                       className="form-input"
@@ -511,6 +515,7 @@ export function AdminProductsPage() {
                     id="prod-allergens"
                     name="allergens"
                     type="text"
+                    maxLength={255}
                     value={formData.allergens}
                     onChange={handleFormChange}
                     className="form-input"
@@ -634,6 +639,7 @@ export function AdminProductsPage() {
                     id="prod-short"
                     name="short_description"
                     type="text"
+                    maxLength={300}
                     value={formData.short_description}
                     onChange={handleFormChange}
                     className="form-input"
@@ -647,6 +653,7 @@ export function AdminProductsPage() {
                     id="prod-desc"
                     name="description"
                     rows={3}
+                    maxLength={3000}
                     value={formData.description}
                     onChange={handleFormChange}
                     className="form-textarea"
@@ -721,6 +728,28 @@ export function AdminProductsPage() {
           </div>
         </div>
       )}
+
+      <style>{`
+        /* Admin Products — Modal responsive */
+        @media (max-width: 680px) {
+          .admin-modal-panel {
+            max-height: 95vh !important;
+            margin: 0.5rem !important;
+          }
+        }
+
+        .admin-form-row-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+
+        @media (max-width: 500px) {
+          .admin-form-row-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </div>
   );
 }

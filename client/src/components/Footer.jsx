@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Compass, Lock, ArrowRight, Wheat, Clock, Award } from 'lucide-react';
+import { MapPin, Phone, Compass, Lock, ArrowRight, Wheat, Clock, Award, Code2 } from 'lucide-react';
 import { WheatLogo } from './brand/WheatLogo';
 import { WheatEarWatermark } from './brand/WheatEarWatermark';
 import { SectionWaveDivider } from './brand/SectionWaveDivider';
@@ -195,6 +195,10 @@ export function Footer() {
               </Link>
               <Link to="/gestion-des-cookies" className="legal-link">
                 Gestion des cookies
+              </Link>
+              <Link to="/developpeur" className="footer-dev-btn" title="Conception & Ingénierie Web par Saif Belfaquir">
+                <Code2 size={13} color="var(--color-gold)" />
+                <span>Conception &amp; Ingénierie Web</span>
               </Link>
               <Link to="/admin" className="admin-link">
                 <Lock size={12} />
@@ -425,6 +429,29 @@ export function Footer() {
           color: #FFFFFF;
         }
 
+        .footer-dev-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0.35rem 0.75rem;
+          background: rgba(212, 175, 55, 0.08);
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          color: var(--color-gold-light);
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          border-radius: 0;
+        }
+
+        .footer-dev-btn:hover {
+          background: var(--color-gold);
+          color: var(--color-burgundy-dark);
+          border-color: var(--color-gold);
+          transform: translateY(-1px);
+        }
+
         @media (max-width: 1024px) {
           .footer-columns-grid {
             grid-template-columns: 1fr 1fr;
@@ -435,7 +462,7 @@ export function Footer() {
         @media (max-width: 640px) {
           .footer-columns-grid {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 2.25rem;
           }
           .footer-monument-row {
             flex-direction: column;
@@ -444,6 +471,25 @@ export function Footer() {
           .footer-cta-btn {
             width: 100%;
             justify-content: center;
+          }
+          .footer-bottom-flex {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.875rem;
+          }
+          .footer-legal-links {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.65rem;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .footer-brand-monument {
+            font-size: clamp(1.5rem, 8vw, 2.4rem);
+          }
+          .footer-brand-tagline {
+            font-size: 0.78rem;
           }
         }
       `}</style>

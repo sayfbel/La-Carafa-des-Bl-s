@@ -21,10 +21,17 @@ export async function login(req, res, next) {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
+    if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
       return res.status(400).json({
         success: false,
         error: { code: 'INVALID_CREDENTIALS', message: 'Email et mot de passe requis.' }
+      });
+    }
+
+    if (email.length > 150 || password.length > 128) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'INVALID_CREDENTIALS', message: 'Identifiants invalides.' }
       });
     }
 
@@ -175,7 +182,19 @@ export async function createProduct(req, res, next) {
       });
     }
 
-    const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
+    const trimmedName = String(name).trim();
+    if (trimmedName.length > 150) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: 'Le nom du produit ne doit pas dépasser 150 caractères.' }
+      });
+    }
+
+    const cleanSlug = String(slug).toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').slice(0, 100);
+    const shortDesc = short_description ? String(short_description).trim().slice(0, 300) : null;
+    const fullDesc = description ? String(description).trim().slice(0, 3000) : null;
+    const allergenList = allergens ? String(allergens).trim().slice(0, 255) : null;
+    const numPrice = price ? Math.min(Math.max(0, Number(price)), 9999.99) : null;
 
     const result = await query(`
       INSERT INTO products (
@@ -183,9 +202,9 @@ export async function createProduct(req, res, next) {
         price, allergens, image_url, is_available, is_featured, is_published
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `, [
-      category_id, name.trim(), cleanSlug, short_description?.trim() || null,
-      description?.trim() || null, price ? Number(price) : null,
-      allergens?.trim() || null, image_url || null,
+      category_id, trimmedName, cleanSlug, shortDesc,
+      fullDesc, numPrice,
+      allergenList, image_url ? String(image_url).slice(0, 500) : null,
       is_available !== false, is_featured === true, is_published !== false
     ]);
 
@@ -293,11 +312,14 @@ export async function createCategory(req, res, next) {
       });
     }
 
-    const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+    const trimmedName = String(name).trim().slice(0, 100);
+    const cleanSlug = String(slug).toLowerCase().replace(/[^a-z0-9-]/g, '-').slice(0, 100);
+    const desc = description ? String(description).trim().slice(0, 1000) : null;
+
     const result = await query(`
       INSERT INTO categories (name, slug, description, display_order, is_active)
       VALUES (?, ?, ?, ?, ?)
-    `, [name.trim(), cleanSlug, description?.trim() || null, Number(display_order) || 0, is_active !== false]);
+    `, [trimmedName, cleanSlug, desc, Number(display_order) || 0, is_active !== false]);
 
     await recordAudit(req.admin.id, 'CATEGORY_CREATE', 'category', result.insertId, { name });
     res.status(201).json({ success: true, id: result.insertId, message: 'Catégorie créée avec succès.' });

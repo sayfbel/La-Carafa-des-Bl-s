@@ -43,4 +43,16 @@
 
   /* Max Widths */
   --max-width: 1240px;
+
+  /* Responsive Section Spacing — desktop */
+  --section-pad-y: 5.5rem;
+  --section-pad-y-lg: 4.5rem;
+  --section-pad-y-md: 3.5rem;
+  --section-pad-y-sm: 2.5rem;
+  --section-pad-y-xs: 2rem;
+
+  /* Container Horizontal Padding */
+  --container-px: 1.5rem;
+  --container-px-sm: 1.125rem;
+  --container-px-xs: 1rem;
 }

@@ -24,18 +24,18 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedExts = /\.(jpe?g|png|webp|avif|svg)$/i;
-  const isImageMime = file.mimetype.startsWith('image/');
+  const allowedExts = /\.(jpe?g|png|webp|avif)$/i;
+  const isImageMime = /^(image\/(jpeg|png|webp|avif))$/.test(file.mimetype);
 
-  if (isImageMime || allowedExts.test(file.originalname)) {
+  if (isImageMime && allowedExts.test(file.originalname)) {
     cb(null, true);
   } else {
-    cb(new Error('Format non supporté. Veuillez sélectionner une image (JPG, PNG, WebP, AVIF).'));
+    cb(new Error('Format non supporté. Veuillez sélectionner une image valide (JPG, PNG, WebP, AVIF).'));
   }
 };
 
 export const uploadSingleImage = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter
 }).single('image');

@@ -448,6 +448,7 @@ export function ContactPage() {
                       name="name"
                       type="text"
                       required
+                      maxLength={100}
                       value={formData.name}
                       onChange={handleChange}
                       className="field-input"
@@ -465,6 +466,7 @@ export function ContactPage() {
                       name="email"
                       type="email"
                       required
+                      maxLength={150}
                       value={formData.email}
                       onChange={handleChange}
                       className="field-input"
@@ -481,6 +483,7 @@ export function ContactPage() {
                       id="phone"
                       name="phone"
                       type="tel"
+                      maxLength={25}
                       value={formData.phone}
                       onChange={handleChange}
                       className="field-input"
@@ -498,6 +501,7 @@ export function ContactPage() {
                       name="subject"
                       type="text"
                       required
+                      maxLength={150}
                       value={formData.subject}
                       onChange={handleChange}
                       className="field-input"
@@ -516,6 +520,7 @@ export function ContactPage() {
                     name="message"
                     rows={6}
                     required
+                    maxLength={3000}
                     value={formData.message}
                     onChange={handleChange}
                     className="field-textarea"
@@ -1006,6 +1011,37 @@ export function ContactPage() {
           }
           .form-fields-grid {
             grid-template-columns: 1fr;
+          }
+          .artisan-form-card {
+            padding: 1.5rem 1.125rem;
+          }
+          .artisan-dossier-card {
+            padding: 1.5rem 1.125rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .faq-q-text {
+            font-size: 1rem;
+          }
+          .faq-question-btn {
+            padding: 1rem 1.125rem;
+          }
+          .field-input, .field-textarea {
+            font-size: 1rem;
+            min-height: 44px;
+          }
+          .quick-subjects-row {
+            flex-direction: column;
+          }
+          .quick-subject-btn {
+            width: 100%;
+            text-align: center;
+          }
+          .dossier-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
           }
         }
       `}</style>

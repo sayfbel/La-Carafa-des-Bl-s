@@ -107,7 +107,7 @@ export function AdminContentPage() {
             Section Hero (Haut de page d'accueil)
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="admin-form-row-grid">
             <div className="form-group">
               <label className="form-label" htmlFor="hero-kicker">Surtitre doré (Kicker)</label>
               <input
@@ -173,7 +173,7 @@ export function AdminContentPage() {
             Section « Notre Histoire »
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="admin-form-row-grid">
             <div className="form-group">
               <label className="form-label" htmlFor="story-kicker">Surtitre</label>
               <input
@@ -239,7 +239,7 @@ export function AdminContentPage() {
             Coordonnées de l'établissement
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="admin-form-row-grid">
             <div className="form-group">
               <label className="form-label" htmlFor="biz-phone">Numéro de téléphone</label>
               <input
@@ -300,6 +300,21 @@ export function AdminContentPage() {
           <span>{saving ? 'Enregistrement...' : 'Sauvegarder les modifications'}</span>
         </button>
       </form>
+
+      <style>{`
+        .admin-form-row-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+          .admin-form-row-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </div>
   );
 }

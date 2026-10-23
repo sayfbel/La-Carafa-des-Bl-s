@@ -91,6 +91,7 @@ export function HomePage() {
     <div style={{ position: 'relative', overflowX: 'hidden' }}>
       {/* 1. HERO SECTION (ORIGINAL 2-COLUMN EDITORIAL COMPOSITION) */}
       <section
+        className="hero-section"
         style={{
           position: 'relative',
           padding: '0 0 3.5rem',
@@ -238,6 +239,7 @@ export function HomePage() {
 
       {/* 2. LIVE INTERACTIVE FEATURE: LES FOURNÉES DU JOUR (TASTESKILL "ONE LIVE THING") */}
       <section
+        className="section-fournees"
         style={{
           padding: '5rem 0 5.5rem',
           backgroundColor: '#FFFFFF',
@@ -355,6 +357,7 @@ export function HomePage() {
 
       {/* 3. SHOWCASE DES CRÉATIONS — CURATED ARTISAN EXHIBITION */}
       <section
+        className="section-creations"
         style={{
           backgroundColor: '#2A060B',
           color: '#FAF5EA',
@@ -489,6 +492,7 @@ export function HomePage() {
       {/* 4. NOTRE HISTOIRE & SAVOIR-FAIRE (NO 01/02/03 NUMBERS, PURE CRAFT PILLARS) */}
       <section
         id="notre-histoire"
+        className="section-histoire"
         style={{
           padding: '6rem 0 6.5rem',
           backgroundColor: '#FAF5EA',
@@ -637,6 +641,7 @@ export function HomePage() {
       {/* 5. LOCALISATION & HORAIRES D'OUVERTURE AVEC GOOGLE MAPS OFFICIEL */}
       <section
         id="localisation"
+        className="section-localisation"
         style={{
           padding: '6rem 0',
           backgroundColor: '#FFFFFF',
@@ -692,29 +697,55 @@ export function HomePage() {
 
       {/* Tasteskill Pure CSS Stylesheet */}
       <style>{`
+        /* ── Hero Section ─────────────────────────────────────── */
         @media (max-width: 900px) {
           .hero-right-bg {
             width: 100% !important;
-            opacity: 0.2 !important;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%) !important;
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%) !important;
+            opacity: 0.15 !important;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%) !important;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%) !important;
           }
           .hero-content-col {
             padding: 3rem 0 2.5rem !important;
+            max-width: 100% !important;
           }
+        }
+
+        @media (max-width: 600px) {
+          .hero-content-col {
+            padding: 2.25rem 0 2rem !important;
+          }
+          .hero-seal-wrapper {
+            display: none;
+          }
+        }
+
+        /* ── Section Spacing — mobile ─────────────────────────── */
+        @media (max-width: 768px) {
+          .section-fournees   { padding: 3.5rem 0 4rem !important; }
+          .section-creations  { padding: 3.5rem 0 4rem !important; }
+          .section-histoire   { padding: 3.5rem 0 4rem !important; }
+          .section-localisation { padding: 3.5rem 0 !important; }
+        }
+
+        @media (max-width: 480px) {
+          .section-fournees   { padding: 2.5rem 0 3rem !important; }
+          .section-creations  { padding: 2.5rem 0 3rem !important; }
+          .section-histoire   { padding: 2.5rem 0 3rem !important; }
+          .section-localisation { padding: 2.5rem 0 !important; }
         }
 
         /* Moments Interactive Bar */
         .moments-nav-row {
           display: flex;
-          gap: 1rem;
+          gap: 0.75rem;
           flex-wrap: wrap;
           margin-bottom: 2rem;
         }
 
         .moment-tab-btn {
           flex: 1;
-          min-width: 180px;
+          min-width: 150px;
           padding: 1rem 1.25rem;
           background-color: #FAF5EA;
           border: none;
@@ -722,6 +753,23 @@ export function HomePage() {
           text-align: left;
           cursor: pointer;
           transition: background-color 0.2s ease, transform 0.2s ease;
+          min-height: 44px;
+        }
+
+        @media (max-width: 600px) {
+          .moments-nav-row {
+            gap: 0.5rem;
+          }
+          .moment-tab-btn {
+            min-width: calc(50% - 0.25rem);
+            padding: 0.75rem 0.875rem;
+          }
+          .moment-tab-time {
+            font-size: 0.7rem;
+          }
+          .moment-tab-title {
+            font-size: 0.82rem;
+          }
         }
 
         .moment-tab-btn:hover {
@@ -972,6 +1020,33 @@ export function HomePage() {
           .savoir-artisan-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
+          }
+          .creations-mosaic-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 600px) {
+          .moment-detail-stage {
+            padding: 1.25rem;
+            gap: 1.5rem;
+          }
+          .creations-mosaic-grid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+          }
+          .creation-mosaic-img {
+            height: 200px;
+          }
+          .creation-mosaic-body {
+            padding: 1.25rem 1rem;
+          }
+          .storefront-photo-frame img {
+            height: 260px !important;
+          }
+          .artisan-signature-row {
+            flex-direction: column;
+            align-items: flex-start;
           }
         }
       `}</style>

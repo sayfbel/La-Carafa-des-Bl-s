@@ -13,6 +13,7 @@ import { ContactPage } from '../pages/ContactPage';
 import { LegalPage } from '../pages/LegalPage';
 import { PrivacyPage } from '../pages/PrivacyPage';
 import { CookiePolicyPage } from '../pages/CookiePolicyPage';
+import { DeveloperPage } from '../pages/DeveloperPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 
 // Admin Pages
@@ -40,6 +41,8 @@ export function App() {
           <Route path="/produits/:slug" element={<ProductDetailPage />} />
           <Route path="/notre-histoire" element={<StoryPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/developpeur" element={<DeveloperPage />} />
+          <Route path="/credits" element={<DeveloperPage />} />
           <Route path="/mentions-legales" element={<LegalPage />} />
           <Route path="/politique-de-confidentialite" element={<PrivacyPage />} />
           <Route path="/gestion-des-cookies" element={<CookiePolicyPage />} />

@@ -25,6 +25,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 #root {
@@ -59,27 +60,32 @@ button, input, textarea, select {
   font-size: 1rem;
 }
 
-/* Utility Containers */
+/* ─── Utility Container ───────────────────────────────────────── */
 .container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--container-px);
 }
 
-.text-gold {
-  color: var(--color-gold);
+@media (max-width: 600px) {
+  .container {
+    padding: 0 var(--container-px-sm);
+  }
 }
 
-.text-burgundy {
-  color: var(--color-burgundy);
+@media (max-width: 400px) {
+  .container {
+    padding: 0 var(--container-px-xs);
+  }
 }
 
-.text-muted {
-  color: var(--color-text-muted);
-}
+/* ─── Color Utilities ─────────────────────────────────────────── */
+.text-gold     { color: var(--color-gold); }
+.text-burgundy { color: var(--color-burgundy); }
+.text-muted    { color: var(--color-text-muted); }
 
-/* Button Component Styles — Pure Architectural Square Corners (No Radius) */
+/* ─── Button Base — Square Corners ───────────────────────────── */
 button,
 .btn,
 a.btn,
@@ -104,6 +110,15 @@ input[type="reset"] {
   border: 1px solid transparent;
   text-decoration: none;
   white-space: nowrap;
+  /* Minimum 44px touch target */
+  min-height: 44px;
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+  }
 }
 
 .btn-primary {
@@ -138,7 +153,7 @@ input[type="reset"] {
   transform: translateY(-1px);
 }
 
-/* Form Styles */
+/* ─── Form Styles ─────────────────────────────────────────────── */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -160,6 +175,9 @@ input[type="reset"] {
   background-color: var(--color-white);
   color: var(--color-text-main);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  min-height: 44px;
+  /* Prevent iOS zoom on focus — needs font-size >= 16px */
+  font-size: 1rem;
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {
@@ -173,15 +191,22 @@ input[type="reset"] {
   color: var(--color-danger);
 }
 
-/* Alert Boxes */
+/* ─── Alert Boxes ─────────────────────────────────────────────── */
 .alert {
   padding: 1rem 1.25rem;
   border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .alert {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 .alert-success {
@@ -196,32 +221,32 @@ input[type="reset"] {
   border: 1px solid #FECACA;
 }
 
-/* Accessibility Focus Ring */
+/* ─── Accessibility Focus Ring ───────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--color-burgundy);
   outline-offset: 2px;
 }
 
-/* Artisanal Brand Animations */
+/* ─── Animations ─────────────────────────────────────────────── */
 @keyframes artisanSealSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 @keyframes wheatBreezeSway {
-  0% {
-    transform: rotate(0deg) skewX(0deg);
-  }
-  50% {
-    transform: rotate(1.8deg) skewX(0.8deg);
-  }
-  100% {
-    transform: rotate(-0.8deg) skewX(-0.4deg);
-  }
+  0%   { transform: rotate(0deg) skewX(0deg); }
+  50%  { transform: rotate(1.8deg) skewX(0.8deg); }
+  100% { transform: rotate(-0.8deg) skewX(-0.4deg); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .hero-seal-wrapper {
@@ -232,6 +257,7 @@ input[type="reset"] {
   transform: rotate(0deg) scale(1.05) !important;
 }
 
+/* ─── Reduced Motion ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -240,4 +266,3 @@ input[type="reset"] {
     scroll-behavior: auto !important;
   }
 }
-

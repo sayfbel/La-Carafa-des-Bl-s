@@ -96,6 +96,7 @@ export function AdminLoginPage() {
                 id="admin-email"
                 type="email"
                 required
+                maxLength={150}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-input"
@@ -115,6 +116,7 @@ export function AdminLoginPage() {
                 id="admin-password"
                 type="password"
                 required
+                maxLength={128}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-input"
@@ -136,9 +138,17 @@ export function AdminLoginPage() {
         </form>
 
         <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.82rem', color: 'var(--color-text-light)' }}>
-          Session sécurisée avec cookie HTTP-only & hachage bcrypt.
+          Session sécurisée avec cookie HTTP-only &amp; hachage bcrypt.
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 380px) {
+          .admin-login-card {
+            padding: 1.75rem 1.25rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

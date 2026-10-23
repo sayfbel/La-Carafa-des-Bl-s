@@ -280,6 +280,7 @@ export function AdminCategoriesPage() {
                     id="cat-name"
                     type="text"
                     required
+                    maxLength={100}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     onBlur={handleNameBlur}
@@ -294,6 +295,7 @@ export function AdminCategoriesPage() {
                     id="cat-slug"
                     type="text"
                     required
+                    maxLength={100}
                     value={formData.slug}
                     onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                     className="form-input"
@@ -307,6 +309,7 @@ export function AdminCategoriesPage() {
                     id="cat-order"
                     type="number"
                     min="1"
+                    max="999"
                     value={formData.display_order}
                     onChange={(e) => setFormData({ ...formData, display_order: Number(e.target.value) })}
                     className="form-input"
@@ -318,6 +321,7 @@ export function AdminCategoriesPage() {
                   <textarea
                     id="cat-desc"
                     rows={3}
+                    maxLength={1000}
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     className="form-textarea"

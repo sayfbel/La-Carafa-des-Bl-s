@@ -72,7 +72,7 @@ export function AdminMessagesPage() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: selectedMessage ? '1.2fr 1fr' : '1fr', gap: '2rem' }}>
+      <div className="messages-layout-grid">
         {/* Messages List */}
         <div
           style={{
@@ -204,6 +204,20 @@ export function AdminMessagesPage() {
           </div>
         )}
       </div>
+
+      <style>{`
+        .messages-layout-grid {
+          display: grid;
+          grid-template-columns: ${selectedMessage ? '1.2fr 1fr' : '1fr'};
+          gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .messages-layout-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

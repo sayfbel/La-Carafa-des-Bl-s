@@ -154,9 +154,50 @@ export async function submitContactMessage(req, res, next) {
       });
     }
 
+    const trimmedName = String(name).trim();
+    const trimmedEmail = String(email).trim().toLowerCase();
+    const trimmedSubject = String(subject).trim();
+    const trimmedMessage = String(message).trim();
+    const trimmedPhone = phone ? String(phone).trim() : null;
+
+    if (trimmedName.length > 100) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: 'Le nom ne doit pas dépasser 100 caractères.' }
+      });
+    }
+
+    if (trimmedEmail.length > 150) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: "L'adresse email ne doit pas dépasser 150 caractères." }
+      });
+    }
+
+    if (trimmedPhone && trimmedPhone.length > 25) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: 'Le numéro de téléphone ne doit pas dépasser 25 caractères.' }
+      });
+    }
+
+    if (trimmedSubject.length > 150) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: "L'objet ne doit pas dépasser 150 caractères." }
+      });
+    }
+
+    if (trimmedMessage.length < 5 || trimmedMessage.length > 3000) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: 'Le message doit contenir entre 5 et 3 000 caractères.' }
+      });
+    }
+
     // Basic email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(trimmedEmail)) {
       return res.status(400).json({
         success: false,
         error: { code: 'INVALID_EMAIL', message: 'Veuillez renseigner une adresse email valide.' }
@@ -166,7 +207,7 @@ export async function submitContactMessage(req, res, next) {
     const result = await query(`
       INSERT INTO contact_messages (name, email, phone, subject, message, status)
       VALUES (?, ?, ?, ?, ?, 'unread')
-    `, [name.trim(), email.trim().toLowerCase(), phone?.trim() || null, subject.trim(), message.trim()]);
+    `, [trimmedName, trimmedEmail, trimmedPhone, trimmedSubject, trimmedMessage]);
 
     logger.info(`New contact message received from ${email} (ID: ${result.insertId})`);
 
