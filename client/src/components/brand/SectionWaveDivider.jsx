@@ -32,7 +32,7 @@ export function SectionWaveDivider({
         height,
         pointerEvents: 'none',
         userSelect: 'none',
-        zIndex: 4,
+        zIndex: position === 'above' ? 3 : 1,
         overflow: 'hidden',
         lineHeight: 0,
         ...getPositionStyle(),

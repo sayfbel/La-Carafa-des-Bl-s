@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   MapPin,
   Navigation,
@@ -37,75 +38,99 @@ export function BakeryMap({ settings = {} }) {
     }).catch(() => {});
   };
 
+  // Lock body scroll and listen for Escape key when in fullscreen mode
+  useEffect(() => {
+    if (isFullscreen) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+          setIsFullscreen(false);
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isFullscreen]);
+
+  const renderMapFrame = (isModal = false) => (
+    <div className={`google-map-frame ${isModal ? 'map-modal-frame' : ''}`}>
+      {/* Map Top Bar */}
+      <div className="google-map-topbar">
+        <div className="topbar-location">
+          <MapPin size={15} color="var(--color-gold)" style={{ flexShrink: 0 }} />
+          <span className="topbar-address">15 Rue Pasteur · Épinay-sur-Orge</span>
+          <span className="topbar-badge">Google Maps</span>
+        </div>
+
+        <div className="topbar-actions">
+          <a
+            href={googleMapsExternalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="topbar-btn"
+            title="Ouvrir dans l'application Google Maps"
+          >
+            <ExternalLink size={13} />
+            <span>Ouvrir dans l'App</span>
+          </a>
+
+          <button
+            onClick={() => setIsFullscreen(prev => !prev)}
+            type="button"
+            className="topbar-btn"
+            title={isModal ? 'Quitter le mode plein écran (Échap)' : 'Agrandir la carte'}
+          >
+            {isModal ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+            <span>{isModal ? 'Réduire' : 'Plein écran'}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Standard Official Google Maps Iframe */}
+      <div className="google-map-viewport" style={{ flex: 1, minHeight: isModal ? '550px' : '480px' }}>
+        <iframe
+          title="Localisation Google Maps — La Carafa des Blés à Épinay-sur-Orge"
+          src={googleMapsEmbedUrl}
+          width="100%"
+          height="100%"
+          style={{ border: 0, display: 'block', width: '100%', height: '100%', minHeight: isModal ? '550px' : '480px' }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+
+      {/* Bottom Bar: Live Transport Notice */}
+      <div className="google-map-footer-bar">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Train size={14} color="var(--color-gold)" />
+          <span>Gare RER C Épinay-sur-Orge à 200m</span>
+        </div>
+        <a
+          href={googleMapsExternalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--color-gold-light)', textDecoration: 'underline', fontSize: '0.74rem' }}
+        >
+          Calculer l'itinéraire →
+        </a>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="google-map-hub-root" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
+    <div className="google-map-hub-root" style={{ position: 'relative', zIndex: 1 }}>
       <div className="google-map-grid">
         
-        {/* COLUMN 1: Official Standard Google Maps with Architectural Header */}
-        <div className={`google-map-frame ${isFullscreen ? 'map-fullscreen-mode' : ''}`}>
-          
-          {/* Map Top Bar */}
-          <div className="google-map-topbar">
-            <div className="topbar-location">
-              <MapPin size={15} color="var(--color-gold)" style={{ flexShrink: 0 }} />
-              <span className="topbar-address">15 Rue Pasteur · Épinay-sur-Orge</span>
-              <span className="topbar-badge">Google Maps</span>
-            </div>
-
-            <div className="topbar-actions">
-              <a
-                href={googleMapsExternalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="topbar-btn"
-                title="Ouvrir dans l'application Google Maps"
-              >
-                <ExternalLink size={13} />
-                <span>Ouvrir dans l'App</span>
-              </a>
-
-              <button
-                onClick={() => setIsFullscreen(prev => !prev)}
-                type="button"
-                className="topbar-btn"
-                title={isFullscreen ? 'Quitter le mode agrandi' : 'Agrandir la carte'}
-              >
-                {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
-                <span>{isFullscreen ? 'Réduire' : 'Plein écran'}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Standard Official Google Maps Iframe */}
-          <div className="google-map-viewport">
-            <iframe
-              title="Localisation Google Maps — La Carafa des Blés à Épinay-sur-Orge"
-              src={googleMapsEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0, display: 'block', minHeight: isFullscreen ? '100%' : '480px' }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-
-          {/* Bottom Bar: Live Transport Notice */}
-          <div className="google-map-footer-bar">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Train size={14} color="var(--color-gold)" />
-              <span>Gare RER C Épinay-sur-Orge à 200m</span>
-            </div>
-            <a
-              href={googleMapsExternalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: 'var(--color-gold-light)', textDecoration: 'underline', fontSize: '0.74rem' }}
-            >
-              Calculer l'itinéraire →
-            </a>
-          </div>
-        </div>
+        {/* COLUMN 1: Official Standard Google Maps */}
+        {renderMapFrame(false)}
 
         {/* COLUMN 2: Fournil Visitor Panel with Dynamic Live Status & Horaires */}
         <div className="visitor-panel">
@@ -204,6 +229,24 @@ export function BakeryMap({ settings = {} }) {
         </div>
       </div>
 
+      {/* Fullscreen Map Portal (Isolated at document.body level) */}
+      {isFullscreen && typeof document !== 'undefined' && createPortal(
+        <div
+          className="map-fullscreen-overlay"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsFullscreen(false);
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Google Maps plein écran"
+        >
+          <div className="map-fullscreen-dialog">
+            {renderMapFrame(true)}
+          </div>
+        </div>,
+        document.body
+      )}
+
       {/* Scoped CSS for Google Map Hub */}
       <style>{`
         .google-map-hub-root {
@@ -229,11 +272,45 @@ export function BakeryMap({ settings = {} }) {
           min-height: 520px;
         }
 
-        .google-map-frame.map-fullscreen-mode {
+        /* Fullscreen Modal Overlay (Bypasses any section waves or containers) */
+        .map-fullscreen-overlay {
           position: fixed !important;
-          inset: 4rem 2rem 2rem 2rem !important;
-          z-index: 9999 !important;
-          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5) !important;
+          inset: 0 !important;
+          background-color: rgba(20, 2, 5, 0.88) !important;
+          backdrop-filter: blur(8px) !important;
+          -webkit-backdrop-filter: blur(8px) !important;
+          z-index: 999999 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          padding: clamp(1rem, 3vw, 2.5rem) !important;
+          animation: mapFadeIn 0.2s ease-out;
+        }
+
+        .map-fullscreen-dialog {
+          width: 100% !important;
+          max-width: 1300px !important;
+          height: 90vh !important;
+          max-height: 850px !important;
+          background-color: #FAF5EA !important;
+          box-shadow: 0 30px 100px rgba(0, 0, 0, 0.85) !important;
+          border: 1px solid var(--color-gold) !important;
+          border-radius: 0 !important;
+          display: flex !important;
+          flex-direction: column !important;
+          overflow: hidden !important;
+        }
+
+        .map-modal-frame {
+          height: 100% !important;
+          min-height: 100% !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+
+        @keyframes mapFadeIn {
+          from { opacity: 0; transform: scale(0.98); }
+          to { opacity: 1; transform: scale(1); }
         }
 
         /* Top Bar */
