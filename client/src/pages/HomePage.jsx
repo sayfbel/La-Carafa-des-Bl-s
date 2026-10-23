@@ -493,124 +493,177 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 3. "NOTRE HISTOIRE" ELEVATED ARTISAN SHOWCASE */}
+      {/* 3. "NOTRE HISTOIRE & SAVOIR-FAIRE" EDITORIAL ARTISAN SHOWCASE */}
       <section
         id="notre-histoire"
         style={{
-          padding: '5rem 0',
-          backgroundColor: '#FAF5EC',
-          borderTop: '1px solid var(--color-border-subtle)',
-          borderBottom: '1px solid var(--color-border-subtle)',
-          position: 'relative'
+          padding: '6rem 0',
+          backgroundColor: '#FAF5EA',
+          borderTop: '1px solid rgba(183, 138, 61, 0.22)',
+          borderBottom: '1px solid rgba(183, 138, 61, 0.22)',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div className="container">
-          {/* Section Header */}
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem' }}>
+        {/* Subtle Background Watermark Accent */}
+        <WheatDecoration
+          style={{
+            top: '-40px',
+            right: '-20px',
+            transform: 'rotate(22deg)',
+            pointerEvents: 'none'
+          }}
+          opacity={0.12}
+          width={220}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          {/* Section Header with Haute Artisan Styling */}
+          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 4rem' }}>
             <div
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.75rem',
                 color: 'var(--color-gold)',
                 fontFamily: 'var(--font-sans)',
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 fontWeight: 700,
-                letterSpacing: '0.22em',
+                letterSpacing: '0.24em',
                 textTransform: 'uppercase',
-                marginBottom: '0.75rem'
+                marginBottom: '1rem'
               }}
             >
-              {settings.story_kicker || 'NOTRE HISTOIRE & SAVOIR-FAIRE'}
+              <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--color-gold)' }} />
+              <span>{settings.story_kicker || 'NOTRE HISTOIRE & SAVOIR-FAIRE'}</span>
+              <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--color-gold)' }} />
             </div>
             <h2
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2.3rem, 4vw, 3.2rem)',
+                fontSize: 'clamp(2.4rem, 4.2vw, 3.4rem)',
                 fontWeight: 600,
                 color: 'var(--color-burgundy)',
                 lineHeight: 1.15,
-                marginBottom: '1rem'
+                marginBottom: '1.25rem',
+                letterSpacing: '-0.01em'
               }}
             >
               {settings.story_title || 'Le Savoir-Faire, Chaque Jour.'}
             </h2>
             <p
               style={{
-                fontSize: '1.05rem',
-                lineHeight: 1.7,
-                color: 'var(--color-text-main)',
-                margin: 0
+                fontSize: '1.08rem',
+                lineHeight: 1.8,
+                color: '#554840',
+                margin: 0,
+                fontWeight: 400
               }}
             >
               {settings.story_text_1}
             </p>
           </div>
 
-          {/* 2-Column Story Content */}
+          {/* 2-Column Creative Editorial Story Layout (NO BOXES, NO RADIUS) */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '3.5rem',
-              alignItems: 'center'
+              gridTemplateColumns: 'minmax(320px, 1fr) minmax(360px, 1.25fr)',
+              gap: '4.5rem',
+              alignItems: 'start'
             }}
-            className="story-split-grid"
+            className="savoir-faire-grid"
           >
-            {/* Left: Authentic Storefront Photo with Golden Floating Badge & Artisan Quote */}
-            <div>
-              <div
-                style={{
-                  position: 'relative',
-                  overflow: 'hidden',
-                  borderRadius: 'var(--radius-md)',
-                  boxShadow: '0 20px 45px rgba(45, 4, 9, 0.12)',
-                  border: '1px solid rgba(212, 171, 101, 0.35)'
-                }}
-              >
-                <img
-                  src="/assets/images/storefront.webp"
-                  alt="Devanture authentique et artisans de la boulangerie La Carafa des Blés à Épinay-sur-Orge"
-                  style={{
-                    width: '100%',
-                    height: '360px',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
-                {/* Floating Artisan Badge */}
+            {/* Left Column: Authentic Atelier Gallery Frame & Free-Flowing Quote */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+              {/* Gallery Print Presentation (Zero border-radius, clean architectural lines) */}
+              <div style={{ position: 'relative' }}>
+                {/* Vintage Offset Fine Line Accent */}
                 <div
                   style={{
                     position: 'absolute',
-                    top: '1.25rem',
-                    left: '1.25rem',
-                    backgroundColor: 'rgba(37, 3, 7, 0.88)',
-                    backdropFilter: 'blur(8px)',
-                    border: '1px solid var(--color-gold)',
-                    color: '#FFF',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '999px',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+                    top: '-10px',
+                    left: '-10px',
+                    right: '10px',
+                    bottom: '10px',
+                    border: '1px solid rgba(183, 138, 61, 0.45)',
+                    pointerEvents: 'none'
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Main Photo: Sharp clean corners, authentic look */}
+                <div
+                  style={{
+                    position: 'relative',
+                    zIndex: 2,
+                    boxShadow: '0 25px 50px -12px rgba(45, 4, 9, 0.18)',
+                    backgroundColor: '#EFE7DA'
                   }}
                 >
-                  <Wheat size={14} color="var(--color-gold)" />
-                  <span>Fournil 100% Artisanal</span>
+                  <img
+                    src="/assets/images/storefront.webp"
+                    alt="Devanture authentique et artisans de la boulangerie La Carafa des Blés à Épinay-sur-Orge"
+                    style={{
+                      width: '100%',
+                      height: '380px',
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+
+                  {/* Refined Brass Plate Atelier Label */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      backgroundColor: 'rgba(42, 6, 11, 0.92)',
+                      backdropFilter: 'blur(6px)',
+                      padding: '0.65rem 1.25rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      borderTop: '1px solid rgba(212, 171, 101, 0.35)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <Wheat size={14} color="var(--color-gold)" />
+                      <span
+                        style={{
+                          color: '#FFFFFF',
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.14em',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        Fournil 100% Artisanal
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        color: 'var(--color-gold-light)',
+                        fontSize: '0.72rem',
+                        letterSpacing: '0.1em',
+                        fontFamily: 'var(--font-serif)',
+                        fontStyle: 'italic'
+                      }}
+                    >
+                      Épinay-sur-Orge
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Artisan Quote Box underneath */}
+              {/* Artisan Quote (Pure Typography, No Box, No Border, No Radius) */}
               <div
                 style={{
-                  marginTop: '1.25rem',
-                  padding: '1.25rem 1.5rem',
-                  backgroundColor: '#FFFFFF',
-                  borderLeft: '3px solid var(--color-gold)',
-                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.04)',
-                  borderRadius: '0 var(--radius-sm) var(--radius-sm) 0'
+                  position: 'relative',
+                  paddingLeft: '1.75rem',
+                  borderLeft: '2px solid var(--color-gold)',
+                  marginTop: '0.5rem'
                 }}
               >
                 <p
@@ -618,205 +671,154 @@ export function HomePage() {
                     margin: 0,
                     fontStyle: 'italic',
                     fontFamily: 'var(--font-serif)',
-                    fontSize: '1.02rem',
+                    fontSize: '1.22rem',
                     color: 'var(--color-burgundy)',
-                    lineHeight: 1.5
+                    lineHeight: 1.6,
+                    fontWeight: 500
                   }}
                 >
                   « {settings.story_text_2} »
                 </p>
                 <div
                   style={{
-                    marginTop: '0.5rem',
-                    fontSize: '0.82rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-gold)'
+                    marginTop: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem'
                   }}
                 >
-                  — Artisan Boulanger d’Épinay-sur-Orge
+                  <span style={{ width: '24px', height: '1px', backgroundColor: 'var(--color-gold)' }} />
+                  <span
+                    style={{
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      color: 'var(--color-gold)'
+                    }}
+                  >
+                    Artisan Boulanger · Maison Fondée sur la Tradition
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Right: 3 Core Commitments & Signature */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {/* Feature 1 */}
+            {/* Right Column: Les 3 Rituels du Fournil (Editorial List, Zero Box Cards, Zero Radius) */}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {/* Column Eyebrow */}
               <div
                 style={{
+                  paddingBottom: '1rem',
+                  borderBottom: '1px solid rgba(183, 138, 61, 0.35)',
+                  marginBottom: '1.5rem',
                   display: 'flex',
-                  gap: '1.25rem',
-                  alignItems: 'flex-start',
-                  backgroundColor: '#FFFFFF',
-                  padding: '1.25rem 1.4rem',
-                  borderRadius: 'var(--radius-md)',
-                  boxShadow: '0 4px 18px rgba(0,0,0,0.04)',
-                  border: '1px solid rgba(212, 171, 101, 0.2)'
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
                 }}
               >
-                <div
+                <span
                   style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(212, 171, 101, 0.15)',
-                    border: '1px solid var(--color-gold)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
                     color: 'var(--color-burgundy)'
                   }}
                 >
-                  <Wheat size={22} color="var(--color-gold)" />
-                </div>
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: '1.15rem',
-                      color: 'var(--color-burgundy)',
-                      marginBottom: '0.35rem'
-                    }}
-                  >
-                    Farines 100% Françaises Sélectionnées
-                  </h3>
-                  <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.55 }}>
-                    Issus de minoteries régionales responsables, nos blés sont moulus sans additifs chimiques afin de préserver tous leurs bienfaits.
+                  Les Rituels du Fournil
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontStyle: 'italic',
+                    fontSize: '0.92rem',
+                    color: 'var(--color-gold)'
+                  }}
+                >
+                  Excellence & Gestes Purs
+                </span>
+              </div>
+
+              {/* Pillar 01 */}
+              <div className="savoir-pillar-item">
+                <div className="pillar-numeral">01</div>
+                <div className="pillar-body">
+                  <div className="pillar-badge">LE TERROIR & LA FARINE</div>
+                  <h3 className="pillar-title">Farines 100% Françaises Sélectionnées</h3>
+                  <p className="pillar-desc">
+                    Issus de minoteries régionales responsables, nos blés sont moulus sans additifs chimiques afin de préserver l'intégrité nutritionnelle, la saveur originelle et le respect des terres françaises.
                   </p>
                 </div>
               </div>
 
-              {/* Feature 2 */}
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '1.25rem',
-                  alignItems: 'flex-start',
-                  backgroundColor: '#FFFFFF',
-                  padding: '1.25rem 1.4rem',
-                  borderRadius: 'var(--radius-md)',
-                  boxShadow: '0 4px 18px rgba(0,0,0,0.04)',
-                  border: '1px solid rgba(212, 171, 101, 0.2)'
-                }}
-              >
-                <div
-                  style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(212, 171, 101, 0.15)',
-                    border: '1px solid var(--color-gold)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    color: 'var(--color-burgundy)'
-                  }}
-                >
-                  <ArtisanSeal size={28} />
-                </div>
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: '1.15rem',
-                      color: 'var(--color-burgundy)',
-                      marginBottom: '0.35rem'
-                    }}
-                  >
-                    Levain Naturel & Fermentation Lente
-                  </h3>
-                  <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.55 }}>
-                    Une pousse lente de 18 à 24 heures pour révéler des arômes subtils de noisette, une mie alvéolée et une conservation prolongée.
+              {/* Pillar 02 */}
+              <div className="savoir-pillar-item">
+                <div className="pillar-numeral">02</div>
+                <div className="pillar-body">
+                  <div className="pillar-badge">LE TEMPS & L'ALCHIMIE</div>
+                  <h3 className="pillar-title">Levain Naturel & Fermentation Lente</h3>
+                  <p className="pillar-desc">
+                    Une pousse lente et patiente de 18 à 24 heures en chambre pour développer une mie alvéolée nacrée, des notes délicates de noisette et une digestibilité incomparable au fil des jours.
                   </p>
                 </div>
               </div>
 
-              {/* Feature 3 */}
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '1.25rem',
-                  alignItems: 'flex-start',
-                  backgroundColor: '#FFFFFF',
-                  padding: '1.25rem 1.4rem',
-                  borderRadius: 'var(--radius-md)',
-                  boxShadow: '0 4px 18px rgba(0,0,0,0.04)',
-                  border: '1px solid rgba(212, 171, 101, 0.2)'
-                }}
-              >
-                <div
-                  style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(212, 171, 101, 0.15)',
-                    border: '1px solid var(--color-gold)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    color: 'var(--color-burgundy)'
-                  }}
-                >
-                  <CroissantIcon size={22} color="var(--color-gold)" />
-                </div>
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: '1.15rem',
-                      color: 'var(--color-burgundy)',
-                      marginBottom: '0.35rem'
-                    }}
-                  >
-                    Façonnage Manuel & Pur Beurre
-                  </h3>
-                  <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--color-text-muted)', lineHeight: 1.55 }}>
-                    Aucune pâte congelée : viennoiseries pur beurre faites maison, pains façonnés à la main et cuits sur place au quotidien.
+              {/* Pillar 03 */}
+              <div className="savoir-pillar-item" style={{ borderBottom: '1px solid rgba(183, 138, 61, 0.35)' }}>
+                <div className="pillar-numeral">03</div>
+                <div className="pillar-body">
+                  <div className="pillar-badge">LE TOUR DE MAIN</div>
+                  <h3 className="pillar-title">Façonnage Manuel & Pur Beurre AOP</h3>
+                  <p className="pillar-desc">
+                    Zéro produit industriel, zéro surgélation. Chaque viennoiserie est façonnée à la main au pur beurre, chaque baguette incisée d'un coup de lame précis et cuite sur sole au quotidien.
                   </p>
                 </div>
               </div>
 
-              {/* Signature Row */}
+              {/* Signature & Editorial Navigation Link */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  paddingTop: '0.5rem',
+                  paddingTop: '2rem',
                   flexWrap: 'wrap',
-                  gap: '1rem'
+                  gap: '1.5rem'
                 }}
               >
-                <div
-                  style={{
-                    fontFamily: 'var(--font-serif)',
-                    fontSize: '2.5rem',
-                    fontStyle: 'italic',
-                    color: 'var(--color-burgundy)',
-                    lineHeight: 1
-                  }}
-                >
-                  {settings.story_signature || 'La Carafa des Blés'}
+                <div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '2.8rem',
+                      fontStyle: 'italic',
+                      color: 'var(--color-burgundy)',
+                      lineHeight: 1,
+                      letterSpacing: '-0.02em'
+                    }}
+                  >
+                    {settings.story_signature || 'La Carafa des Blés'}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.75rem',
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      color: '#8A7A70',
+                      marginTop: '0.35rem'
+                    }}
+                  >
+                    Boulangerie & Pâtisserie Fine d'Épinay-sur-Orge
+                  </div>
                 </div>
+
                 <a
                   href="#localisation"
-                  style={{
-                    fontSize: '0.84rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-burgundy)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.45rem'
-                  }}
+                  className="savoir-cta-link"
                 >
-                  <span>Venir au fournil</span>
-                  <ArrowRight size={14} />
+                  <span>Venir au Fournil</span>
+                  <ArrowRight size={16} className="cta-arrow" />
                 </a>
               </div>
             </div>
@@ -867,8 +869,113 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Responsive adjustments */}
+      {/* Responsive adjustments & Savoir-Faire Editorial Styles */}
       <style>{`
+        /* Savoir-Faire Editorial Pillar - Pure Craftsmanship (Zero Box, Zero Radius) */
+        .savoir-pillar-item {
+          display: flex;
+          gap: 1.6rem;
+          align-items: flex-start;
+          padding: 1.45rem 0;
+          border-top: 1px solid rgba(183, 138, 61, 0.24);
+          transition: transform 0.3s ease;
+          background: transparent;
+        }
+
+        .savoir-pillar-item:hover .pillar-numeral {
+          color: var(--color-burgundy);
+          transform: translateX(4px);
+        }
+
+        .savoir-pillar-item:hover .pillar-title {
+          color: var(--color-gold);
+        }
+
+        .pillar-numeral {
+          font-family: var(--font-serif);
+          font-size: 2.3rem;
+          font-weight: 500;
+          font-style: italic;
+          color: var(--color-gold);
+          line-height: 1;
+          min-width: 44px;
+          transition: all 0.3s ease;
+          user-select: none;
+        }
+
+        .pillar-body {
+          flex: 1;
+        }
+
+        .pillar-badge {
+          font-family: var(--font-sans);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--color-gold);
+          margin-bottom: 0.3rem;
+        }
+
+        .pillar-title {
+          font-family: var(--font-serif);
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: var(--color-burgundy);
+          margin-bottom: 0.45rem;
+          line-height: 1.25;
+          transition: color 0.25s ease;
+        }
+
+        .pillar-desc {
+          margin: 0;
+          font-size: 0.92rem;
+          color: #63554D;
+          line-height: 1.68;
+        }
+
+        .savoir-cta-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.65rem;
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--color-burgundy);
+          padding: 0.5rem 0;
+          position: relative;
+          text-decoration: none;
+          transition: color 0.25s ease;
+        }
+
+        .savoir-cta-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--color-gold);
+          transition: background-color 0.3s ease;
+        }
+
+        .savoir-cta-link:hover {
+          color: var(--color-gold);
+        }
+
+        .savoir-cta-link:hover::after {
+          background-color: var(--color-burgundy);
+        }
+
+        .savoir-cta-link:hover .cta-arrow {
+          transform: translateX(5px);
+        }
+
+        .cta-arrow {
+          transition: transform 0.25s ease;
+        }
+
         @media (max-width: 900px) {
           .hero-right-bg {
             width: 100% !important;
@@ -878,6 +985,10 @@ export function HomePage() {
           }
           .hero-content-col {
             padding: 3rem 0 2.5rem !important;
+          }
+          .savoir-faire-grid {
+            grid-template-columns: 1fr !important;
+            gap: 3.5rem !important;
           }
           .story-split-grid {
             grid-template-columns: 1fr !important;
