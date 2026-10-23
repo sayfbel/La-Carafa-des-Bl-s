@@ -99,7 +99,7 @@ export function ProductsPage() {
             gap: '1.5rem',
             backgroundColor: '#FAF5EC',
             padding: '1.25rem 1.75rem',
-            borderRadius: 'var(--radius-lg)',
+            borderRadius: 0,
             border: '1px solid var(--color-border)',
             marginBottom: '3rem'
           }}
@@ -134,7 +134,7 @@ export function ProductsPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="form-input"
-                style={{ paddingLeft: '2.5rem', borderRadius: 'var(--radius-full)' }}
+                style={{ paddingLeft: '2.5rem', borderRadius: 0 }}
               />
               <Search
                 size={16}
@@ -168,7 +168,7 @@ export function ProductsPage() {
               textAlign: 'center',
               padding: '4rem 2rem',
               backgroundColor: '#FAF5EC',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 0,
               border: '1px dashed var(--color-border)'
             }}
           >
@@ -197,7 +197,7 @@ export function ProductsPage() {
                 key={product.id}
                 style={{
                   backgroundColor: '#FFFFFF',
-                  borderRadius: 'var(--radius-lg)',
+                  borderRadius: 0,
                   overflow: 'hidden',
                   border: '1px solid var(--color-border)',
                   boxShadow: 'var(--shadow-sm)',
@@ -223,7 +223,7 @@ export function ProductsPage() {
                       left: '0.85rem',
                       backgroundColor: 'rgba(248, 243, 232, 0.95)',
                       padding: '0.35rem 0.75rem',
-                      borderRadius: 'var(--radius-full)',
+                      borderRadius: 0,
                       fontSize: '0.75rem',
                       fontWeight: 600,
                       color: 'var(--color-burgundy)',
@@ -242,7 +242,7 @@ export function ProductsPage() {
                         backgroundColor: 'rgba(56, 7, 14, 0.9)',
                         color: '#FFF',
                         padding: '0.35rem 0.75rem',
-                        borderRadius: 'var(--radius-full)',
+                        borderRadius: 0,
                         fontSize: '0.75rem',
                         fontWeight: 600
                       }}

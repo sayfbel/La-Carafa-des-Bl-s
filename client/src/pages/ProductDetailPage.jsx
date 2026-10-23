@@ -88,7 +88,7 @@ export function ProductDetailPage() {
           <div>
             <div
               style={{
-                borderRadius: 'var(--radius-lg)',
+                borderRadius: 0,
                 overflow: 'hidden',
                 boxShadow: 'var(--shadow-lg)',
                 border: '1px solid var(--color-border)',
@@ -111,7 +111,7 @@ export function ProductDetailPage() {
                 backgroundColor: 'var(--color-badge-bg)',
                 color: 'var(--color-burgundy)',
                 padding: '0.35rem 0.85rem',
-                borderRadius: 'var(--radius-full)',
+                borderRadius: 0,
                 fontSize: '0.82rem',
                 fontWeight: 700,
                 letterSpacing: '0.08em',
@@ -152,7 +152,7 @@ export function ProductDetailPage() {
                 gap: '1rem',
                 padding: '1.5rem',
                 backgroundColor: '#FAF5EC',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 0,
                 border: '1px solid var(--color-border)',
                 marginBottom: '2rem'
               }}
@@ -219,7 +219,7 @@ export function ProductDetailPage() {
                   to={`/produits/${rel.slug}`}
                   style={{
                     backgroundColor: '#FFFFFF',
-                    borderRadius: 'var(--radius-md)',
+                    borderRadius: 0,
                     overflow: 'hidden',
                     border: '1px solid var(--color-border)',
                     boxShadow: 'var(--shadow-sm)',
