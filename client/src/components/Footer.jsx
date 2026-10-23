@@ -3,22 +3,28 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, Compass, Lock, ArrowRight, Wheat, Clock, Award } from 'lucide-react';
 import { WheatLogo } from './brand/WheatLogo';
 import { WheatEarWatermark } from './brand/WheatEarWatermark';
+import { SectionWaveDivider } from './brand/SectionWaveDivider';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer style={{ marginTop: 'auto', backgroundColor: '#240408', color: '#F8F3E8', position: 'relative', overflow: 'hidden' }}>
-      {/* Background Watermark Accent */}
-      <WheatEarWatermark
-        size={380}
-        opacity={0.04}
-        color="var(--color-gold)"
-        style={{ bottom: '-60px', right: '-40px', transform: 'rotate(12deg)', pointerEvents: 'none' }}
-      />
+    <footer style={{ marginTop: 'auto', backgroundColor: '#240408', color: '#F8F3E8', position: 'relative' }}>
+      {/* Top Organic Wave Transition (active across ALL site pages) */}
+      <SectionWaveDivider fill="#1A0205" position="above" variant="primary" />
 
-      {/* 1. Monumental Brand Header Banner */}
-      <div style={{ backgroundColor: '#1A0205', padding: '3.5rem 0 3rem' }}>
+      {/* Main Footer Body with overflow hidden to clip bottom-right watermark */}
+      <div style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Background Watermark Accent */}
+        <WheatEarWatermark
+          size={380}
+          opacity={0.04}
+          color="var(--color-gold)"
+          style={{ bottom: '-60px', right: '-40px', transform: 'rotate(12deg)', pointerEvents: 'none' }}
+        />
+
+        {/* 1. Monumental Brand Header Banner */}
+        <div style={{ backgroundColor: '#1A0205', padding: '3.5rem 0 3rem' }}>
         <div className="container">
           <div className="footer-monument-row">
             <div>
@@ -441,6 +447,7 @@ export function Footer() {
           }
         }
       `}</style>
+      </div>
     </footer>
   );
 }

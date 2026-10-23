@@ -638,7 +638,7 @@ export function HomePage() {
       <section
         id="localisation"
         style={{
-          padding: '6rem 0 6.5rem',
+          padding: '6rem 0',
           backgroundColor: '#FFFFFF',
           position: 'relative',
           overflow: 'hidden'
@@ -688,9 +688,6 @@ export function HomePage() {
           {/* Official Google Maps & Visitor Hub */}
           <BakeryMap settings={settings} />
         </div>
-
-        {/* Organic Wave Divider transitioning into Footer (#1A0205) */}
-        <SectionWaveDivider fill="#1A0205" position="bottom" variant="primary" />
       </section>
 
       {/* Tasteskill Pure CSS Stylesheet */}

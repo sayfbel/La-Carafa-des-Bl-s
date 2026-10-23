@@ -12,7 +12,15 @@ export function SectionWaveDivider({
   height = 'clamp(28px, 3.8vw, 54px)',
   style = {}
 }) {
-  const isTop = position === 'top';
+  const getPositionStyle = () => {
+    if (position === 'top') {
+      return { top: 0, transform: 'rotate(180deg)' };
+    }
+    if (position === 'above') {
+      return { bottom: '100%', marginBottom: '-1px' };
+    }
+    return { bottom: '-1px' };
+  };
 
   return (
     <div
@@ -24,10 +32,10 @@ export function SectionWaveDivider({
         height,
         pointerEvents: 'none',
         userSelect: 'none',
-        zIndex: 3,
+        zIndex: 4,
         overflow: 'hidden',
         lineHeight: 0,
-        ...(isTop ? { top: 0, transform: 'rotate(180deg)' } : { bottom: '-1px' }),
+        ...getPositionStyle(),
         ...style
       }}
       aria-hidden="true"
