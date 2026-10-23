@@ -10,10 +10,12 @@ export function AuthProvider({ children }) {
   // Check existing session on load only if on admin path or admin flag is set
   useEffect(() => {
     async function checkAuth() {
+      const isLoginPage = typeof window !== 'undefined' && window.location.pathname === '/admin/login';
       const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
       const hasSessionFlag = typeof localStorage !== 'undefined' && localStorage.getItem('admin_session') === '1';
 
-      if (!isAdminRoute && !hasSessionFlag) {
+      // Don't poll /auth/me on initial /admin/login visit if no stored session flag
+      if ((isLoginPage && !hasSessionFlag) || (!isAdminRoute && !hasSessionFlag)) {
         setLoading(false);
         return;
       }

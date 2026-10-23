@@ -14,7 +14,7 @@ describe('Frontend Components Test Suite', () => {
 
   it('Header renders brand logo and navigation links', () => {
     render(
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Header />
       </BrowserRouter>
     );
@@ -30,7 +30,7 @@ describe('Frontend Components Test Suite', () => {
 
   it('Footer renders verified business location and phone details', () => {
     render(
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Footer />
       </BrowserRouter>
     );
@@ -45,7 +45,7 @@ describe('Frontend Components Test Suite', () => {
 
   it('CookieBanner renders and can be accepted', () => {
     render(
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <CookieBanner />
       </BrowserRouter>
     );
@@ -60,7 +60,7 @@ describe('Frontend Components Test Suite', () => {
 
   it('App renders homepage with hero heading', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={['/']}>
         <App />
       </MemoryRouter>
     );
@@ -72,7 +72,7 @@ describe('Frontend Components Test Suite', () => {
 
   it('Navigating to invalid route renders 404 page', () => {
     render(
-      <MemoryRouter initialEntries={['/une-fournee-qui-nexiste-pas']}>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={['/une-fournee-qui-nexiste-pas']}>
         <App />
       </MemoryRouter>
     );
