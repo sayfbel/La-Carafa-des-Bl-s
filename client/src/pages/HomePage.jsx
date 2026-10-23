@@ -830,41 +830,60 @@ export function HomePage() {
       <section
         id="localisation"
         style={{
-          padding: '4.5rem 0 5rem',
-          backgroundColor: 'var(--color-ivory)'
+          padding: '6rem 0',
+          backgroundColor: '#FAF5EA',
+          borderTop: '1px solid rgba(183, 138, 61, 0.22)',
+          borderBottom: '1px solid rgba(183, 138, 61, 0.22)',
+          position: 'relative'
         }}
       >
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.5rem' }}>
+          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 4rem' }}>
             <div
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.75rem',
                 color: 'var(--color-gold)',
                 fontFamily: 'var(--font-sans)',
-                fontSize: '0.85rem',
+                fontSize: '0.8rem',
                 fontWeight: 700,
-                letterSpacing: '0.2em',
+                letterSpacing: '0.24em',
                 textTransform: 'uppercase',
-                marginBottom: '0.75rem'
+                marginBottom: '1rem'
               }}
             >
-              Plan d'accès & Localisation
+              <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--color-gold)' }} />
+              <span>PLAN D'ACCÈS & LOCALISATION</span>
+              <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--color-gold)' }} />
             </div>
             <h2
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+                fontSize: 'clamp(2.4rem, 4.2vw, 3.4rem)',
+                fontWeight: 600,
                 color: 'var(--color-burgundy)',
-                marginBottom: '1rem'
+                lineHeight: 1.15,
+                marginBottom: '1.25rem',
+                letterSpacing: '-0.01em'
               }}
             >
-              Venez nous rendre visite au fournil
+              Venez Nous Rendre Visite au Fournil
             </h2>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6 }}>
-              Située au <strong>15 Rue Pasteur à Épinay-sur-Orge</strong>, notre boulangerie artisanale vous accueille chaque jour pour savourer nos pains au levain et douceurs maison.
+            <p
+              style={{
+                fontSize: '1.08rem',
+                lineHeight: 1.8,
+                color: '#554840',
+                margin: 0,
+                fontWeight: 400
+              }}
+            >
+              Située au <strong>15 Rue Pasteur à Épinay-sur-Orge</strong>, notre boulangerie artisanale vous accueille chaque jour pour savourer nos créations au levain naturel et nos spécialités de tradition.
             </p>
           </div>
 
-          {/* Dedicated react-simple-maps Component */}
+          {/* Dedicated react-simple-maps Component (Editorial & Container-Free) */}
           <BakerySimpleMap />
         </div>
       </section>
