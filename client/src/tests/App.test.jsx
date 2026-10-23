@@ -83,6 +83,19 @@ describe('Frontend Components Test Suite', () => {
     expect(screen.getByText(/24 Heures dans le Secret du Fournil/i)).toBeInTheDocument();
   });
 
+  it('App renders Contact page with artisanal atelier details and contact form', () => {
+    render(
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={['/contact']}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText(/Le Lien Direct avec Votre Boulanger/i)).toBeInTheDocument();
+    expect(screen.getByText(/Écrire à Notre Fournil/i)).toBeInTheDocument();
+    expect(screen.getByText(/Foire Aux Questions Artisanales/i)).toBeInTheDocument();
+    expect(screen.getByText(/Transmettre ma demande à l'artisan/i)).toBeInTheDocument();
+  });
+
   it('Navigating to invalid route renders 404 page', () => {
     render(
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={['/une-fournee-qui-nexiste-pas']}>
