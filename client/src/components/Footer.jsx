@@ -52,7 +52,7 @@ export function Footer() {
             {/* Col 1: L'Artisanat & Engagements */}
             <div className="footer-col">
               <div style={{ marginBottom: '1.25rem' }}>
-                <WheatLogo size="medium" />
+                <WheatLogo size="medium" variant="gold" />
               </div>
               <p className="footer-col-text">
                 Artisans boulangers et pâtissiers passionnés à Épinay-sur-Orge. Nous pétrissons chaque jour avec des farines françaises sélectionnées, un levain naturel vivant et un respect absolu du temps de fermentation.
