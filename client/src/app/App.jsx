@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { PublicLayout } from '../layouts/PublicLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 import { AuthProvider } from '../features/auth/AuthContext';
@@ -34,6 +34,8 @@ export function App() {
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/accueil" element={<Navigate to="/" replace />} />
+          <Route path="/Accueil" element={<Navigate to="/" replace />} />
           <Route path="/produits" element={<ProductsPage />} />
           <Route path="/produits/:slug" element={<ProductDetailPage />} />
           <Route path="/notre-histoire" element={<StoryPage />} />

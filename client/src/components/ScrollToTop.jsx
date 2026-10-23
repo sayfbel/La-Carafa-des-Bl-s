@@ -12,11 +12,30 @@ export function ScrollToTop() {
   useEffect(() => {
     // If navigating to an in-page anchor hash (#section), smooth scroll to the target element
     if (hash) {
-      const targetElement = document.querySelector(hash);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-        return;
+      const scrollToHash = () => {
+        try {
+          const targetElement = document.querySelector(hash);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            return true;
+          }
+        } catch {
+          // ignore selector errors
+        }
+        return false;
+      };
+
+      if (!scrollToHash()) {
+        const timer1 = setTimeout(scrollToHash, 60);
+        const timer2 = setTimeout(scrollToHash, 200);
+        const timer3 = setTimeout(scrollToHash, 500);
+        return () => {
+          clearTimeout(timer1);
+          clearTimeout(timer2);
+          clearTimeout(timer3);
+        };
       }
+      return;
     }
 
     // Smoothly scroll window viewport to top (y = 0)

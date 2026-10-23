@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { MapPin, Menu, X } from 'lucide-react';
 import { WheatLogo } from './brand/WheatLogo';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNousTrouver = (e) => {
+    const isHomePage = location.pathname === '/' || location.pathname.toLowerCase() === '/accueil';
+    if (isHomePage) {
+      const el = document.getElementById('localisation');
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth' });
+        window.history.replaceState(null, '', '/#localisation');
+      }
+    } else {
+      e.preventDefault();
+      navigate('/#localisation');
+    }
+  };
 
   const navLinks = [
     { to: '/', label: 'Accueil' },
@@ -58,15 +75,9 @@ export function Header() {
 
         {/* Right CTA : "NOUS TROUVER" */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a
-            href="#localisation"
-            onClick={(e) => {
-              const el = document.getElementById('localisation');
-              if (el) {
-                e.preventDefault();
-                el.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+          <Link
+            to="/#localisation"
+            onClick={handleNousTrouver}
             className="find-us-btn"
             style={{
               display: 'inline-flex',
@@ -86,7 +97,7 @@ export function Header() {
           >
             <MapPin size={14} />
             <span>Nous trouver</span>
-          </a>
+          </Link>
 
           {/* Mobile Hamburger Button */}
           <button
@@ -136,16 +147,25 @@ export function Header() {
               {link.label}
             </NavLink>
           ))}
-          <a
-            href="https://maps.google.com/?q=15+Rue+Pasteur+91360+Épinay-sur-Orge+France"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/#localisation"
+            onClick={(e) => {
+              setMobileOpen(false);
+              handleNousTrouver(e);
+            }}
             className="btn btn-primary"
-            style={{ marginTop: '0.5rem' }}
+            style={{
+              marginTop: '0.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              borderRadius: 0
+            }}
           >
             <MapPin size={18} />
-            <span>Nous trouver sur Google Maps</span>
-          </a>
+            <span>Nous trouver au fournil</span>
+          </Link>
         </div>
       )}
 
