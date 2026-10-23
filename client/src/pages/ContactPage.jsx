@@ -124,11 +124,11 @@ export function ContactPage() {
           overflow: 'hidden'
         }}
       >
-        {/* Botanical Wheat Stalk in bottom corner */}
+        {/* Botanical Wheat Sheaf in bottom corner */}
         <WheatDecoration
-          style={{ bottom: '-25px', left: '-15px' }}
-          opacity={0.35}
-          width={150}
+          style={{ bottom: 0, left: 0 }}
+          opacity={0.3}
+          width={240}
         />
 
         {/* Subtle Bread Watermark */}

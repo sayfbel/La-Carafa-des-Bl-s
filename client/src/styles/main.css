@@ -202,6 +202,36 @@ input[type="reset"] {
   outline-offset: 2px;
 }
 
+/* Artisanal Brand Animations */
+@keyframes artisanSealSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wheatBreezeSway {
+  0% {
+    transform: rotate(0deg) skewX(0deg);
+  }
+  50% {
+    transform: rotate(1.8deg) skewX(0.8deg);
+  }
+  100% {
+    transform: rotate(-0.8deg) skewX(-0.4deg);
+  }
+}
+
+.hero-seal-wrapper {
+  transition: transform var(--transition-normal);
+}
+
+.hero-seal-wrapper:hover {
+  transform: rotate(0deg) scale(1.05) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -210,3 +240,4 @@ input[type="reset"] {
     scroll-behavior: auto !important;
   }
 }
+

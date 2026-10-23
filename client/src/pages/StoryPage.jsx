@@ -87,11 +87,11 @@ export function StoryPage() {
           overflow: 'hidden'
         }}
       >
-        {/* Botanical Wheat Stalk climbing from bottom-left corner */}
+        {/* Botanical Wheat Sheaf climbing from bottom-left corner */}
         <WheatDecoration
-          style={{ bottom: '-25px', left: '-15px' }}
-          opacity={0.35}
-          width={150}
+          style={{ bottom: 0, left: 0 }}
+          opacity={0.3}
+          width={240}
         />
 
         {/* Delicate background bread watermark */}
@@ -134,7 +134,7 @@ export function StoryPage() {
                 margin: '0 0 1.5rem'
               }}
             >
-              « Le temps ne respecte rien de ce qui se fait sans lui. »
+              Le temps ne respecte rien de ce qui se fait sans lui.
             </h1>
             <p
               style={{

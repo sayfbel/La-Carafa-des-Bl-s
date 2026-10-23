@@ -98,11 +98,11 @@ export function HomePage() {
           overflow: 'hidden'
         }}
       >
-        {/* Subtle Botanical Wheat Stalk climbing from bottom-left corner */}
+        {/* Elegant Botanical Wheat Sheaf climbing in the background */}
         <WheatDecoration
-          style={{ bottom: '-20px', left: '-15px' }}
-          opacity={0.35}
-          width={140}
+          style={{ bottom: 0, left: 0 }}
+          opacity={0.32}
+          width={260}
         />
 
         {/* Delicate background bread watermark */}
@@ -225,8 +225,8 @@ export function HomePage() {
                 <ArrowRight size={16} />
               </Link>
 
-              <div style={{ transform: 'rotate(-4deg)' }} className="hero-seal-wrapper">
-                <ArtisanSeal size={105} />
+              <div style={{ transform: 'rotate(-3deg)' }} className="hero-seal-wrapper">
+                <ArtisanSeal size={118} />
               </div>
             </div>
           </div>
