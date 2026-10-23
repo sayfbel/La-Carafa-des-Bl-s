@@ -12,12 +12,16 @@ dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 const isTest = process.env.NODE_ENV === 'test';
 const dbName = isTest ? (process.env.DB_TEST_NAME || 'la_carafa_test') : (process.env.DB_NAME || 'la_carafa_db');
 
+const isRemoteDb = process.env.DB_SSL === 'true' || 
+  (process.env.DB_HOST && !process.env.DB_HOST.includes('127.0.0.1') && !process.env.DB_HOST.includes('localhost'));
+
 export const pool = mysql.createPool({
   host: process.env.DB_HOST || '127.0.0.1',
   port: Number(process.env.DB_PORT) || 3306,
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: dbName,
+  ssl: isRemoteDb ? { rejectUnauthorized: false } : undefined,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
