@@ -124,7 +124,7 @@ export async function getDashboardStats(req, res, next) {
     const totalProdRows = await query('SELECT COUNT(*) AS total_products FROM products');
     const pubProdRows = await query('SELECT COUNT(*) AS published_products FROM products WHERE is_published = TRUE');
     const catRows = await query('SELECT COUNT(*) AS total_categories FROM categories WHERE is_active = TRUE');
-    const msgRows = await query('SELECT COUNT(*) AS unread_messages FROM contact_messages WHERE status = "unread"');
+    const msgRows = await query('SELECT COUNT(*) AS unread_messages FROM contact_messages WHERE status = ?', ['unread']);
 
     const total_products = totalProdRows[0]?.total_products || 0;
     const published_products = pubProdRows[0]?.published_products || 0;
