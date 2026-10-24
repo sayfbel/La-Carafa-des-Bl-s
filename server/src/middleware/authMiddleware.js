@@ -4,7 +4,9 @@ import { query } from '../database/db.js';
 
 export async function requireAdminAuth(req, res, next) {
   try {
-    const token = req.cookies?.lacarafa_session;
+    const authHeader = req.headers.authorization;
+    const bearerToken = authHeader && authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+    const token = req.cookies?.lacarafa_session || bearerToken;
 
     if (!token) {
       return res.status(401).json({

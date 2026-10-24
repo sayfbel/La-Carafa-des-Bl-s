@@ -27,10 +27,12 @@ export function AuthProvider({ children }) {
           localStorage.setItem('admin_session', '1');
         } else {
           localStorage.removeItem('admin_session');
+          localStorage.removeItem('admin_token');
         }
       } catch (err) {
         setAdmin(null);
         localStorage.removeItem('admin_session');
+        localStorage.removeItem('admin_token');
       } finally {
         setLoading(false);
       }
@@ -43,6 +45,9 @@ export function AuthProvider({ children }) {
     if (res?.success && res.admin) {
       setAdmin(res.admin);
       localStorage.setItem('admin_session', '1');
+      if (res.token) {
+        localStorage.setItem('admin_token', res.token);
+      }
     }
     return res;
   };
@@ -53,6 +58,7 @@ export function AuthProvider({ children }) {
     } finally {
       setAdmin(null);
       localStorage.removeItem('admin_session');
+      localStorage.removeItem('admin_token');
     }
   };
 

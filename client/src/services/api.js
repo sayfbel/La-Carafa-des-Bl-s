@@ -1,8 +1,10 @@
 const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 async function fetchJson(endpoint, options = {}) {
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('admin_token') : null;
   const defaultHeaders = {
     'Content-Type': 'application/json',
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
     ...(options.headers || {})
   };
 
@@ -55,8 +57,10 @@ export const api = {
     uploadImage: async (file) => {
       const formData = new FormData();
       formData.append('image', file);
+      const token = typeof localStorage !== 'undefined' ? localStorage.getItem('admin_token') : null;
       const response = await fetch(`${API_BASE}/admin/upload`, {
         method: 'POST',
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         body: formData,
         credentials: 'include'
       });

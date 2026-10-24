@@ -58,11 +58,14 @@ export async function login(req, res, next) {
       { expiresIn: '12h' }
     );
 
-    // Set secure HTTP-only cookie
+    const isCrossDomain = config.env === 'production' || process.env.NODE_ENV === 'production' || (config.clientOrigin && !config.clientOrigin.includes('localhost'));
+    const isSecureCookie = isCrossDomain || config.session.cookieSecure;
+
+    // Set secure HTTP-only cookie with sameSite 'none' for cross-domain Vercel <-> Render
     res.cookie('lacarafa_session', token, {
       httpOnly: true,
-      secure: config.session.cookieSecure,
-      sameSite: 'lax',
+      secure: isSecureCookie,
+      sameSite: isCrossDomain ? 'none' : 'lax',
       maxAge: 12 * 60 * 60 * 1000
     });
 
@@ -70,6 +73,7 @@ export async function login(req, res, next) {
 
     res.json({
       success: true,
+      token,
       message: 'Connexion réussie.',
       admin: {
         id: admin.id,
@@ -89,10 +93,11 @@ export async function logout(req, res, next) {
     if (req.admin) {
       await recordAudit(req.admin.id, 'AUTH_LOGOUT', 'admin', req.admin.id);
     }
+    const isCrossDomain = config.env === 'production' || process.env.NODE_ENV === 'production' || (config.clientOrigin && !config.clientOrigin.includes('localhost'));
     res.clearCookie('lacarafa_session', {
       httpOnly: true,
-      sameSite: 'lax',
-      secure: config.session.cookieSecure
+      sameSite: isCrossDomain ? 'none' : 'lax',
+      secure: isCrossDomain || config.session.cookieSecure
     });
     res.json({ success: true, message: 'Déconnexion effectuée avec succès.' });
   } catch (err) {
